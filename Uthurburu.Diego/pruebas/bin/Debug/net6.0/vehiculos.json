@@ -1,0 +1,32 @@
+[
+  {
+    "CantidadPasajeros": 4,
+    "CantidadPuertas": 5,
+    "Marca": 4,
+    "Modelo": "Camaro",
+    "NumeroChasis": "1234567",
+    "Color": 8,
+    "TipoVehiculo": 1,
+    "Costo": 500000.0
+  },
+  {
+    "Cilindrada": 150,
+    "FrenosABS": 1,
+    "Marca": 3,
+    "Modelo": "Fz",
+    "NumeroChasis": "1234567",
+    "Color": 4,
+    "TipoVehiculo": 2,
+    "Costo": 4000.0
+  },
+  {
+    "Tara": 2500,
+    "CantidadEjes": 5,
+    "Marca": 2,
+    "Modelo": "Camion",
+    "NumeroChasis": "1234567",
+    "Color": 3,
+    "TipoVehiculo": 3,
+    "Costo": 500000.0
+  }
+]

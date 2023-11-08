@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ArrayOfVehiculo xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Vehiculo xsi:type="Auto">
+    <Modelo>Camaro</Modelo>
+    <NumeroChasis>1234567</NumeroChasis>
+    <Color>Amarillo</Color>
+    <TipoVehiculo>Auto</TipoVehiculo>
+    <Costo>500000</Costo>
+    <CantidadPasajeros>4</CantidadPasajeros>
+    <CantidadPuertas>5</CantidadPuertas>
+    <Marca>Chevrolet</Marca>
+  </Vehiculo>
+  <Vehiculo xsi:type="Moto">
+    <Modelo>Fz</Modelo>
+    <NumeroChasis>1234567</NumeroChasis>
+    <Color>Azul</Color>
+    <TipoVehiculo>Moto</TipoVehiculo>
+    <Costo>4000</Costo>
+    <Cilindrada>150</Cilindrada>
+    <FrenosABS>Si</FrenosABS>
+    <Marca>Yamaha</Marca>
+  </Vehiculo>
+  <Vehiculo xsi:type="Camion">
+    <Modelo>Camion</Modelo>
+    <NumeroChasis>1234567</NumeroChasis>
+    <Color>Rojo</Color>
+    <TipoVehiculo>Camion</TipoVehiculo>
+    <Costo>500000</Costo>
+    <Tara>2500</Tara>
+    <CantidadEjes>5</CantidadEjes>
+    <Marca>Scania</Marca>
+  </Vehiculo>
+</ArrayOfVehiculo>
