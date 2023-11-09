@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace WheelsHub.Logica
 {
-    [Serializable]
+    
     public class Moto : Vehiculo
     {
         #region Atributos
@@ -18,13 +18,8 @@ namespace WheelsHub.Logica
         #endregion
 
         #region Constructores
-        public Moto() : base()
-        {
-            this.cilindrada = 0;
-            this.frenosABS = eTipoDeFrenos.Seleccionar;
-            this.marca = eMarcasMotos.Seleccionar;
-
-        }
+        public Moto()
+        { }
 
         public Moto(string modelo, string numeroChasis, eColores color, eTipoVehiculo tipoVehiculo, double costo) :base(modelo, numeroChasis, color, tipoVehiculo, costo)
         { 
@@ -55,7 +50,7 @@ namespace WheelsHub.Logica
             get { return this.cilindrada; }
             set 
             {
-                if (Vehiculo.validarRango(value,"Ingreso un valor de cilindrada fuera de rango.(50 - 3000)", 50, 3000))
+                if (Validaciones.ValidarRango(value,"Ingreso un valor de cilindrada fuera de rango.(50 - 3000)", 50, 3000))
                 {
                     this.cilindrada = value;
                 }
@@ -74,11 +69,22 @@ namespace WheelsHub.Logica
         #endregion
 
         #region Metodos
-        public override string ObtenerDescripcion()
+        /// <summary>
+        /// Obtiene una descripción basada en el texto proporcionado.
+        /// </summary>
+        /// <param name="texto">El texto que se utilizará para la descripción.</param>
+        /// <returns>Una cadena que representa la descripción basada en el texto proporcionado.</returns>
+        public override string ObtenerDescripcion(string texto)
         {
-            return $"{this.tipoVehiculo} - Marca: {marca} - Modelo: {modelo} - Color: {color} - Cilindrada: {cilindrada} - Frenos ABS: {frenosABS} - Costo: US${costo}";
+            return texto;
         }
-
+        /// <summary>
+        /// Calcula el costo de mantenimiento específico para este Camión.
+        /// </summary>
+        /// <remarks>
+        /// Este método calcula el costo de mantenimiento del Camión, que es un 30% del costo total del Camión.
+        /// </remarks>
+        /// <returns>El costo de mantenimiento del Camión.</returns>
         public override double CalcularCostoMantenimiento()
         {
             return Costo * 0.3;

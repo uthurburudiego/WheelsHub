@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace WheelsHub.Logica
 {
-    [Serializable]
+    
     public class Camion : Vehiculo
     {
         #region Atributos
@@ -18,11 +18,8 @@ namespace WheelsHub.Logica
 
         #region Constructores
 
-        public Camion() : base()
+        public Camion()
         {
-            this.tara = 0;
-            this.cantidadEjes = 0;
-            this.marca = eMarcasCamiones.Scania;
 
         }
 
@@ -50,7 +47,6 @@ namespace WheelsHub.Logica
         }
         #endregion
 
-
         #region Propiedades
         public int Tara
         {
@@ -68,7 +64,7 @@ namespace WheelsHub.Logica
             get { return this.cantidadEjes; }
             set
             {
-                if (Vehiculo.validarRango(value,"Ingreso un valor erroneo para la cantidad de ejes.(2 - 10)", 2, 10))
+                if (Validaciones.ValidarRango(value,"Ingreso un valor erroneo para la cantidad de ejes.(2 - 10)", 2, 10))
                 {
                     this.tara = value;
                 }
@@ -82,19 +78,35 @@ namespace WheelsHub.Logica
         }
         #endregion
 
-
         #region Metodos
+        /// <summary>
+        /// Obtiene una descripción basada en el texto proporcionado.
+        /// </summary>
+        /// <param name="texto">El texto que se utilizará para la descripción.</param>
+        /// <returns>Una cadena que representa la descripción basada en el texto proporcionado.</returns>
+        public override string ObtenerDescripcion(string texto)
+        {
+            return texto;
+        }
+        /// <summary>
+        /// Calcula el costo de mantenimiento del vehículo.
+        /// </summary>
+        /// <remarks>
+        /// Este método calcula el costo de mantenimiento del vehículo basado en el costo del vehículo.
+        /// </remarks>
+        /// <returns>El costo de mantenimiento calculado.</returns>
         public override double CalcularCostoMantenimiento()
         {
             return Costo * 0.3;
         }
-        public override string ObtenerDescripcion()
-        {
-            return $"{this.tipoVehiculo} - Marca: {this.marca} - Modelo: {this.modelo} - Color: {this.color} -" +
-                $" Tara: {this.tara} - Cantidad Ejes: {this.cantidadEjes} - Costo: US${this.costo} ";
-        }
-
-
+        /// <summary>
+        /// Devuelve una representación en forma de cadena del objeto Camion.
+        /// </summary>
+        /// <remarks>
+        /// Este método devuelve una cadena que representa el objeto Camion y contiene información sobre su marca,
+        /// modelo, tara y cantidad de ejes.
+        /// </remarks>
+        /// <returns>Una cadena que representa el objeto Camion.</returns>
         public override string ToString()
         {
             return base.ToString() + $"- Marca: {Marca} - Tara: {Modelo} - Cantidad Ejes: {CantidadEjes}"  ;

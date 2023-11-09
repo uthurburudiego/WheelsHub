@@ -7,7 +7,7 @@ using System.Xml.Serialization;
 
 namespace WheelsHub.Logica
 {
-    [Serializable]
+    
     
     public class Auto : Vehiculo
     {
@@ -18,13 +18,9 @@ namespace WheelsHub.Logica
         #endregion
 
         #region Constructores
-        public Auto() : base() 
-        {
-            cantidadPasajeros = 0;
-            cantidadPuertas = 0;
-            marca = eMarcasAutos.Seleccionar;
-        
-        }
+        public Auto() 
+        { }
+
         public Auto(string modelo, string numeroChasis, eColores color, eTipoVehiculo tipoVehiculo, double costo) : base(modelo, numeroChasis, color, tipoVehiculo, costo)
         {
             cantidadPasajeros = 0;
@@ -54,7 +50,7 @@ namespace WheelsHub.Logica
             get { return this.cantidadPasajeros; }
             set 
             {
-                if (Vehiculo.validarRango(value,"Ingrese una cantidad de pasajeros valida (1-10)", 1, 10)) 
+                if (Validaciones.ValidarRango(value,"Ingrese una cantidad de pasajeros valida (1-10)", 1, 10)) 
                 { 
                     this.cantidadPasajeros = value;
                 }
@@ -67,7 +63,7 @@ namespace WheelsHub.Logica
             get { return this.cantidadPuertas; }
             set
             {
-                if (Vehiculo.validarRango(value, "Ingrese una cantidad de puertas valida (2-5)", 2, 5))
+                if (Validaciones.ValidarRango(value, "Ingrese una cantidad de puertas valida (2-5)", 2, 5))
                 {
                     this.cantidadPasajeros = value;
                 }
@@ -83,24 +79,32 @@ namespace WheelsHub.Logica
         #endregion
 
         #region Metodos
-        public override string ObtenerDescripcion()
+        /// <summary>
+        /// Obtiene una descripción basada en el texto proporcionado.
+        /// </summary>
+        /// <param name="texto">El texto que se utilizará para la descripción.</param>
+        /// <returns>Una cadena que representa la descripción basada en el texto proporcionado.</returns>
+        public override string ObtenerDescripcion(string texto)
         {
-            return $"{this.tipoVehiculo} - Marca: {this.marca} - Modelo: {this.modelo} - Color: {this.color} " +
-                $"- Cantidad Puertas: {this.cantidadPuertas} - Capacidad de pasajeros: {this.cantidadPasajeros}" +
-                $" - Costo: US${this.costo} ";
+            return texto;
         }
+        /// <summary>
+        /// Calcula el costo estimado de mantenimiento del vehículo.
+        /// </summary>
+        /// <returns>El costo estimado de mantenimiento del vehículo como un valor decimal.</returns>
         public override double CalcularCostoMantenimiento()
         {
             return this.Costo * 0.15;
         }
-
+        /// <summary>
+        /// Convierte el objeto Auto en una representación de cadena que incluye detalles específicos del Auto.
+        /// </summary>
+        /// <returns>Una cadena que representa el objeto Auto, incluyendo la marca, cantidad de puertas y capacidad de pasajeros.</returns>
         public override string ToString()
         {
             return base.ToString() + $"- Marca: {Marca} - Cantidad Puertas: {CantidadPuertas} - Capacidad de pasajeros: {CantidadPasajeros}";
         }
         #endregion
-
-
 
     }
 }

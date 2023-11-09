@@ -11,11 +11,12 @@ using System.Xml.Serialization;
 
 namespace WheelsHub
 {
-    [Serializable]
+    
     [XmlInclude(typeof(Camion))]
     [XmlInclude(typeof(Moto))]
     [XmlInclude(typeof(Auto))]
-    public class Vehiculo
+    [XmlRoot("Vehiculos")]
+    public abstract class Vehiculo
     {
         #region Atributos
         protected string modelo;
@@ -29,12 +30,7 @@ namespace WheelsHub
         #region Constructores
         public Vehiculo()
         {
-            this.numeroChasis = "";
-            this.modelo = "Sin detalles";
-            this.color = eColores.Seleccionar;
-            this.tipoVehiculo = eTipoVehiculo.Seleccionar;
-            this.costo = 0;
-           // this.vehiculoList = new List<Vehiculo>();
+          
         }
         public Vehiculo(string  modelo):this() 
         {
@@ -94,7 +90,7 @@ namespace WheelsHub
             get { return this.costo; }
             set
             {
-                if (value >= 0)
+                if (Validaciones.ValidarRango(value, "El Costo no puede ser menor que 0", 0,9999999))
                 {
                     this.costo = value;
                 }
@@ -103,57 +99,83 @@ namespace WheelsHub
         #endregion
 
         #region Metodos
-        public static bool validarRango(double valorIngresado,string mensajeError, int valorMinimo, int valorMaximo)
-        { 
-            bool retorno = false ;
-            if (valorIngresado >= valorMinimo && valorIngresado <= valorMaximo)
-            {
-                retorno = true;
-            }
-            else { MessageBox.Show(mensajeError); }
-            return retorno;
-        }
-        public static bool validarRango(int valorIngresado, string mensajeError, int valorMinimo, int valorMaximo)
-        {
-            bool retorno = false;
-            if (valorIngresado >= valorMinimo && valorIngresado <= valorMaximo)
-            {
-                retorno = true;
-            }
-            else { MessageBox.Show(mensajeError); }
-            return retorno;
-        }
-        public static bool validarRango(short valorIngresado, string mensajeError, int valorMinimo, int valorMaximo)
-        {
-            bool retorno = false;
-            if (valorIngresado >= valorMinimo && valorIngresado <= valorMaximo)
-            {
-                retorno = true;
-            }
-            else { MessageBox.Show(mensajeError); }
-            return retorno;
-        }
+        /// <summary>
+        /// Calcula el costo de mantenimiento del vehículo.
+        /// </summary>
+        /// <remarks>
+        /// El costo de mantenimiento se calcula como un porcentaje del costo del vehículo.
+        /// </remarks>
+        /// <returns>El costo de mantenimiento del vehículo.</returns>
         public virtual double CalcularCostoMantenimiento()
         {
             return Costo * 0.1; 
         }
-        public virtual string ObtenerDescripcion() 
-        {
-            return "";
-        
-        }
-
-
+        /// <summary>
+        /// Obtiene una descripción basada en el texto proporcionado.
+        /// </summary>
+        /// <param name="texto">El texto que se utilizará para la descripción.</param>
+        /// <returns>Una cadena que representa la descripción basada en el texto proporcionado.</returns>
+        public abstract string ObtenerDescripcion(string texto);
+        /// <summary>
+        /// Compara dos vehículos para verificar si tienen el mismo número de chasis.
+        /// </summary>
+        /// <param name="vehiculo1">El primer vehículo a comparar.</param>
+        /// <param name="vehiculo2">El segundo vehículo a comparar.</param>
+        /// <returns>
+        ///   <c>true</c> si los vehículos tienen el mismo número de chasis; de lo contrario, <c>false</c>.
+        /// </returns>
         public static bool operator ==(Vehiculo vehiculo1, Vehiculo vehiculo2)
         {
             return vehiculo1.numeroChasis == vehiculo2.numeroChasis;
         }
-
+        /// <summary>
+        /// Compara dos vehículos para verificar si tienen números de chasis diferentes.
+        /// </summary>
+        /// <param name="vehiculo1">El primer vehículo a comparar.</param>
+        /// <param name="vehiculo2">El segundo vehículo a comparar.</param>
+        /// <returns>
+        ///   <c>true</c> si los vehículos tienen números de chasis diferentes; de lo contrario, <c>false</c>.
+        /// </returns>
         public static bool operator !=(Vehiculo vehiculo1, Vehiculo vehiculo2)
         {
             return !(vehiculo1 == vehiculo2);
         }
-
+        /// <summary>
+        /// Sobrecarga del operador + para agregar un vehículo a una lista de vehículos, verificando su existencia en la lista.
+        /// </summary>
+        /// <param name="lista">La lista de vehículos a la que se desea agregar el vehículo.</param>
+        /// <param name="unVehiculo">El vehículo que se desea agregar a la lista.</param>
+        /// <returns>True si el vehículo se agregó exitosamente a la lista, false si el vehículo ya existe en la lista.</returns>
+        public static bool operator +(List<Vehiculo> lista, Vehiculo unVehiculo)
+        {
+            bool retorno = false;
+            if (!lista.Contains(unVehiculo))
+            {
+                lista.Add(unVehiculo);
+                retorno = true;
+            }
+            return retorno;
+        }
+        /// <summary>
+        /// Sobrecarga del operador - para eliminar un vehículo de una lista de vehículos, si existe en la lista.
+        /// </summary>
+        /// <param name="lista">La lista de vehículos de la que se desea eliminar el vehículo.</param>
+        /// <param name="unVehiculo">El vehículo que se desea eliminar de la lista.</param>
+        /// <returns>True si el vehículo se eliminó exitosamente de la lista, false si el vehículo no se encontraba en la lista.</returns>
+        public static bool operator -(List<Vehiculo> lista, Vehiculo unVehiculo)
+        {
+            bool retorno = false;
+            if (lista.Contains(unVehiculo))
+            {
+                lista.Remove(unVehiculo);
+                retorno = true;
+            }
+            return retorno;
+        }
+        /// <summary>
+        /// Devuelve una representación en forma de cadena del vehículo.
+        /// </summary>
+        /// <returns>Una cadena que contiene información sobre el tipo de vehículo,
         public override string ToString()
         {
             return $"{TipoVehiculo} - Modelo: {Modelo} - Color: {Color} " + $" - Costo: US${Costo} ";
