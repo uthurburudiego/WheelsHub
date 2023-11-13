@@ -52,40 +52,34 @@
     <Compile Include="Logica\ManejadorDeArchivos.cs" />
     <Compile Include="Logica\Serializadora.cs" />
     <Compile Include="Logica\Validaciones.cs" />
-    <Compile Include="Presentacion\Form_Login.cs">
+    <Compile Include="Form_Login.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Presentacion\Form_Login.Designer.cs">
+    <Compile Include="Form_Login.Designer.cs">
       <DependentUpon>Form_Login.cs</DependentUpon>
     </Compile>
-    <Compile Include="Presentacion\FormCargarStock.cs">
+    <Compile Include="FormCargarStock.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Presentacion\FormCargarStock.Designer.cs">
+    <Compile Include="FormCargarStock.Designer.cs">
       <DependentUpon>FormCargarStock.cs</DependentUpon>
     </Compile>
-    <Compile Include="Presentacion\FormInicio.cs">
+    <Compile Include="FormInicio.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Presentacion\FormInicio.Designer.cs">
+    <Compile Include="FormInicio.Designer.cs">
       <DependentUpon>FormInicio.cs</DependentUpon>
     </Compile>
-    <Compile Include="Logica\Auto.cs" />
-    <Compile Include="Logica\Camion.cs" />
-    <Compile Include="Logica\CaracteristicasVehiculos.cs" />
-    <Compile Include="Logica\Moto.cs" />
     <Compile Include="Logica\Perfiles.cs" />
-    <Compile Include="Logica\Vehiculo.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Logica\Usuarios.cs" />
-    <EmbeddedResource Include="Presentacion\Form_Login.resx">
+    <EmbeddedResource Include="Form_Login.resx">
       <DependentUpon>Form_Login.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Presentacion\FormCargarStock.resx">
+    <EmbeddedResource Include="FormCargarStock.resx">
       <DependentUpon>FormCargarStock.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Presentacion\FormInicio.resx">
+    <EmbeddedResource Include="FormInicio.resx">
       <DependentUpon>FormInicio.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -114,6 +108,12 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Datos\MisVehiculos.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Entidades\Entidades.csproj">
+      <Project>{93f83603-e269-44ca-9f2c-73474d53b5d8}</Project>
+      <Name>Entidades</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

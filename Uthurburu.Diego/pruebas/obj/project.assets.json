@@ -15,13 +15,14 @@
           }
         }
       },
-      "WheelsHub/1.0.0": {
+      "Entidades/1.0.0": {
         "type": "project",
+        "framework": ".NETCoreApp,Version=v6.0",
         "compile": {
-          "bin/placeholder/WheelsHub.dll": {}
+          "bin/placeholder/Entidades.dll": {}
         },
         "runtime": {
-          "bin/placeholder/WheelsHub.dll": {}
+          "bin/placeholder/Entidades.dll": {}
         }
       }
     }
@@ -57,16 +58,16 @@
         "packageIcon.png"
       ]
     },
-    "WheelsHub/1.0.0": {
+    "Entidades/1.0.0": {
       "type": "project",
-      "path": "../WheelsHub/WheelsHub.csproj",
-      "msbuildProject": "../WheelsHub/WheelsHub.csproj"
+      "path": "../Entidades/Entidades.csproj",
+      "msbuildProject": "../Entidades/Entidades.csproj"
     }
   },
   "projectFileDependencyGroups": {
     "net6.0": [
-      "Newtonsoft.Json >= 13.0.3",
-      "WheelsHub >= 1.0.0"
+      "Entidades >= 1.0.0",
+      "Newtonsoft.Json >= 13.0.3"
     ]
   },
   "packageFolders": {
@@ -75,11 +76,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\diego\\OneDrive\\Escritorio\\Uthurburu.Diego.PrimerParcial\\Uthurburu.Diego\\pruebas\\pruebas.csproj",
+      "projectUniqueName": "C:\\Users\\diego\\OneDrive\\Escritorio\\Uthurburu.Diego.SegundoParcial\\Uthurburu.Diego\\pruebas\\pruebas.csproj",
       "projectName": "pruebas",
-      "projectPath": "C:\\Users\\diego\\OneDrive\\Escritorio\\Uthurburu.Diego.PrimerParcial\\Uthurburu.Diego\\pruebas\\pruebas.csproj",
+      "projectPath": "C:\\Users\\diego\\OneDrive\\Escritorio\\Uthurburu.Diego.SegundoParcial\\Uthurburu.Diego\\pruebas\\pruebas.csproj",
       "packagesPath": "C:\\Users\\diego\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\diego\\OneDrive\\Escritorio\\Uthurburu.Diego.PrimerParcial\\Uthurburu.Diego\\pruebas\\obj\\",
+      "outputPath": "C:\\Users\\diego\\OneDrive\\Escritorio\\Uthurburu.Diego.SegundoParcial\\Uthurburu.Diego\\pruebas\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\diego\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -96,8 +97,8 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "projectReferences": {
-            "C:\\Users\\diego\\OneDrive\\Escritorio\\Uthurburu.Diego.PrimerParcial\\Uthurburu.Diego\\WheelsHub\\WheelsHub.csproj": {
-              "projectPath": "C:\\Users\\diego\\OneDrive\\Escritorio\\Uthurburu.Diego.PrimerParcial\\Uthurburu.Diego\\WheelsHub\\WheelsHub.csproj"
+            "C:\\Users\\diego\\OneDrive\\Escritorio\\Uthurburu.Diego.SegundoParcial\\Uthurburu.Diego\\Entidades\\Entidades.csproj": {
+              "projectPath": "C:\\Users\\diego\\OneDrive\\Escritorio\\Uthurburu.Diego.SegundoParcial\\Uthurburu.Diego\\Entidades\\Entidades.csproj"
             }
           }
         }

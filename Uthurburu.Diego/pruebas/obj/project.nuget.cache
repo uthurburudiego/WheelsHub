@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "qC+ayUaJC3NpjMaz3r3w+6TFxwT7zxme7zBeuwdwDzb8mGF+4q5+fENy33FAXnVZ36OCelu9mX+KNtQNBzZcfA==",
+  "dgSpecHash": "F8dFq7gt+LKTpqwyvEpobN1F2gYI1wEyPJ5rV05hMDqb2SgVbcNUCONqLfqGlcYVxPgd+59pIXm3qly+t2wJlQ==",
   "success": true,
-  "projectFilePath": "C:\\Users\\diego\\OneDrive\\Escritorio\\Uthurburu.Diego.PrimerParcial\\Uthurburu.Diego\\pruebas\\pruebas.csproj",
+  "projectFilePath": "C:\\Users\\diego\\OneDrive\\Escritorio\\Uthurburu.Diego.SegundoParcial\\Uthurburu.Diego\\pruebas\\pruebas.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\diego\\.nuget\\packages\\newtonsoft.json\\13.0.3\\newtonsoft.json.13.0.3.nupkg.sha512"
   ],

@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\diego\\OneDrive\\Escritorio\\Uthurburu.Diego.PrimerParcial\\Uthurburu.Diego\\Entidades\\Entidades.csproj": {}
+    "C:\\Users\\diego\\OneDrive\\Escritorio\\Uthurburu.Diego.SegundoParcial\\Uthurburu.Diego\\Entidades\\Entidades.csproj": {}
   },
   "projects": {
-    "C:\\Users\\diego\\OneDrive\\Escritorio\\Uthurburu.Diego.PrimerParcial\\Uthurburu.Diego\\Entidades\\Entidades.csproj": {
+    "C:\\Users\\diego\\OneDrive\\Escritorio\\Uthurburu.Diego.SegundoParcial\\Uthurburu.Diego\\Entidades\\Entidades.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\diego\\OneDrive\\Escritorio\\Uthurburu.Diego.PrimerParcial\\Uthurburu.Diego\\Entidades\\Entidades.csproj",
+        "projectUniqueName": "C:\\Users\\diego\\OneDrive\\Escritorio\\Uthurburu.Diego.SegundoParcial\\Uthurburu.Diego\\Entidades\\Entidades.csproj",
         "projectName": "Entidades",
-        "projectPath": "C:\\Users\\diego\\OneDrive\\Escritorio\\Uthurburu.Diego.PrimerParcial\\Uthurburu.Diego\\Entidades\\Entidades.csproj",
+        "projectPath": "C:\\Users\\diego\\OneDrive\\Escritorio\\Uthurburu.Diego.SegundoParcial\\Uthurburu.Diego\\Entidades\\Entidades.csproj",
         "packagesPath": "C:\\Users\\diego\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\diego\\OneDrive\\Escritorio\\Uthurburu.Diego.PrimerParcial\\Uthurburu.Diego\\Entidades\\obj\\",
+        "outputPath": "C:\\Users\\diego\\OneDrive\\Escritorio\\Uthurburu.Diego.SegundoParcial\\Uthurburu.Diego\\Entidades\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\diego\\AppData\\Roaming\\NuGet\\NuGet.Config",

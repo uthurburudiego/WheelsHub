@@ -12,6 +12,7 @@ namespace WheelsHub
 
 
         /// <summary>
+        /// 
         /// Punto de entrada principal para la aplicación.
         /// </summary>
         [STAThread]

@@ -23,42 +23,10 @@ internal class Program
         vehiculos.Add(moto);
         vehiculos.Add(camion);
 
-        //List<Vehiculo> lista;
-
-        //try
-        //{
-        //    Serializadora.EscribirJson(path, vehiculos);
-        //    Serializadora.EscribirXML(path, vehiculos);
-        //    lista = Serializadora.LeerXML(@"C:\Users\diego\OneDrive\Escritorio\MisVehiculos.xml");
-
-        //    foreach (Vehiculo vehiculo in lista)
-        //    {
-        //        Console.WriteLine(vehiculo.ToString());
-        //    }
-
-
-        //}
-        //catch (Exception ex)
-        //{
-
-        //    Console.WriteLine(ex.ToString());
-        //}
-        if (vehiculos + motoDos)
+        foreach (Vehiculo vehiculo in vehiculos)
         {
-            Console.WriteLine("Se agrego");
+            Console.WriteLine(vehiculo.ToString());
         }
-        else { Console.WriteLine("no se agrego"); }
-
-        if (vehiculos.Contains(motoDos))
-        {
-            Console.WriteLine("si");
-        }
-        else { Console.WriteLine("no"); }
-        ////////////////////////////////////////
-       
-
-
-
 
     }
 }
