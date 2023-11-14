@@ -120,10 +120,9 @@
             radAuto.BackColor = Color.Transparent;
             radAuto.Location = new Point(393, 251);
             radAuto.Name = "radAuto";
-            radAuto.Size = new Size(94, 19);
+            radAuto.Size = new Size(14, 13);
             radAuto.TabIndex = 7;
             radAuto.TabStop = true;
-            radAuto.Text = "radioButton1";
             radAuto.UseVisualStyleBackColor = false;
             radAuto.CheckedChanged += radAuto_CheckedChanged;
             // 
@@ -133,10 +132,9 @@
             radMoto.BackColor = Color.Transparent;
             radMoto.Location = new Point(417, 251);
             radMoto.Name = "radMoto";
-            radMoto.Size = new Size(94, 19);
+            radMoto.Size = new Size(14, 13);
             radMoto.TabIndex = 8;
             radMoto.TabStop = true;
-            radMoto.Text = "radioButton1";
             radMoto.UseVisualStyleBackColor = false;
             radMoto.CheckedChanged += radMoto_CheckedChanged;
             // 
@@ -146,10 +144,9 @@
             radCamion.BackColor = Color.Transparent;
             radCamion.Location = new Point(440, 251);
             radCamion.Name = "radCamion";
-            radCamion.Size = new Size(94, 19);
+            radCamion.Size = new Size(14, 13);
             radCamion.TabIndex = 9;
             radCamion.TabStop = true;
-            radCamion.Text = "radioButton1";
             radCamion.UseVisualStyleBackColor = false;
             radCamion.CheckedChanged += radCamion_CheckedChanged;
             // 

@@ -19,6 +19,9 @@ namespace Interfaces
 
         private void FormInicio_Load(object sender, EventArgs e)
         {
+            FormLogIn logIn = new FormLogIn();
+            logIn.ShowDialog();
+            radMoto.Checked = true;
 
         }
 

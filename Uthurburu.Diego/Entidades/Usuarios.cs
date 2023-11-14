@@ -17,6 +17,9 @@ namespace WheelsHub
         private string clave;
         private string perfil;
 
+        public Usuario()
+        { }
+
         public Usuario(string apellido, string nombre, int legajo, string correo, string clave, string perfil)
         {
             this.apellido = apellido;
@@ -33,6 +36,9 @@ namespace WheelsHub
         public string Correo { get => correo; set => correo = value; }
         public string Clave { get => clave; set => clave = value; }
         public string Perfil { get => perfil; set => perfil = value; }
+
+
+
     }
 
 }
