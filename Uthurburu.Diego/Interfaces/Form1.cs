@@ -1,24 +1,21 @@
 using Entidades;
 using WheelsHub;
 using WheelsHub.Logica;
+using Newtonsoft.Json;
 
 namespace Interfaces
 {
     public partial class FormLogIn : Form
     {
-        private bool acceso;
-        private string usuario;
-        private string contraseña;
+        private Usuario usuario;
         private List<Usuario> listaUsuarios;
-        private AccesoDatos datosUsuarios;
 
-        public bool Acceso { get => acceso; set => acceso = value; }
+        public Usuario Usuario { get => usuario; set => usuario = value; }
 
-        public FormLogIn(bool acceso = false)
+        public FormLogIn()
         {
             InitializeComponent();
-            this.acceso = false;
-            this.acceso = acceso;
+         
         }
 
         private void chkVer_CheckedChanged(object sender, EventArgs e)
@@ -42,21 +39,23 @@ namespace Interfaces
 
         private void btnAceptar_Click(object sender, EventArgs e)
         {
-            this.usuario = this.txtUsuario.Text;
-            this.contraseña = this.txtContraseña.Text;
-            this.datosUsuarios = new AccesoDatos();
+            this.usuario = new Usuario();
+            this.usuario.Nombre = this.txtUsuario.Text;
+            this.usuario.Clave = this.txtContraseña.Text;
 
-            this.listaUsuarios = datosUsuarios.ObtenerListaDatos();
+            string rutaRelativa = ManejadorArchivos.ObtenerPath(@"..\..\..\..\Datos\MOCK_DATA.json");
+            
+            this.listaUsuarios = ManejadorArchivos.DeserilizarUsuarios(rutaRelativa);
 
-
-            if (this.ValidarUsuario())
+            if (ValidarUsuario())
             {
+                
+
                 this.Close();
-
             }
-            else
+            else 
             {
-                MessageBox.Show("El Usuario/Clave incorrecta", "LogIn", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Usuario/Contraseña no existen", "LogIn", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
         }
@@ -64,15 +63,18 @@ namespace Interfaces
         private bool ValidarUsuario()
         {
             bool retorno = false;
+          
 
             foreach (Usuario u in this.listaUsuarios)
             {
-                if (u.Nombre == this.usuario)
+                if (u.Nombre == this.usuario.Nombre && u.Clave == this.usuario.Clave)
                 {
+                    this.usuario = u;
                     retorno = true;
                     break;
                 }
             }
+            
             return retorno;
 
         }

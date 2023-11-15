@@ -1,6 +1,6 @@
 ﻿namespace Interfaces
 {
-    partial class Agregar
+    partial class FormAgregar
     {
         /// <summary>
         /// Required designer variable.

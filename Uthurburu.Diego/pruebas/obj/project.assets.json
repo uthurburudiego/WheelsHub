@@ -729,7 +729,8 @@
         "type": "project",
         "framework": ".NETCoreApp,Version=v6.0",
         "dependencies": {
-          "Microsoft.Data.SqlClient": "5.1.2"
+          "Microsoft.Data.SqlClient": "5.1.2",
+          "Newtonsoft.Json": "13.0.3"
         },
         "compile": {
           "bin/placeholder/Entidades.dll": {}

@@ -7,7 +7,12 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "pruebas", "pruebas\pruebas.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Entidades", "Entidades\Entidades.csproj", "{93F83603-E269-44CA-9F2C-73474D53B5D8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Interfaces", "Interfaces\Interfaces.csproj", "{D97AF37C-29ED-4C00-8EB3-F19345EDF041}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Interfaces", "Interfaces\Interfaces.csproj", "{D97AF37C-29ED-4C00-8EB3-F19345EDF041}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Datos", "Datos", "{B63444B6-1C06-4CA0-878E-EF5637647C12}"
+	ProjectSection(SolutionItems) = preProject
+		Datos\MOCK_DATA.json = Datos\MOCK_DATA.json
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

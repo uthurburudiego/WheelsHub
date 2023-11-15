@@ -28,9 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
+            components = new System.ComponentModel.Container();
             txtBuscador = new TextBox();
             btnBuscar = new Button();
-            btnAgregar = new Button();
             btnModificar = new Button();
             btnBorrar = new Button();
             dataGridView1 = new DataGridView();
@@ -38,12 +38,19 @@
             radAuto = new RadioButton();
             radMoto = new RadioButton();
             radCamion = new RadioButton();
+            lblSaludo = new Label();
+            cmsMenu = new ContextMenuStrip(components);
+            agregarToolStripMenuItem = new ToolStripMenuItem();
+            autoToolStripMenuItem = new ToolStripMenuItem();
+            motoToolStripMenuItem = new ToolStripMenuItem();
+            camionToolStripMenuItem = new ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
+            cmsMenu.SuspendLayout();
             SuspendLayout();
             // 
             // txtBuscador
             // 
-            txtBuscador.Location = new Point(393, 213);
+            txtBuscador.Location = new Point(296, 186);
             txtBuscador.Name = "txtBuscador";
             txtBuscador.PlaceholderText = "Buscar";
             txtBuscador.Size = new Size(586, 23);
@@ -53,29 +60,18 @@
             // 
             btnBuscar.FlatStyle = FlatStyle.Flat;
             btnBuscar.ForeColor = Color.Snow;
-            btnBuscar.Location = new Point(393, 675);
+            btnBuscar.Location = new Point(296, 648);
             btnBuscar.Name = "btnBuscar";
             btnBuscar.Size = new Size(81, 27);
             btnBuscar.TabIndex = 1;
             btnBuscar.Text = "Buscar";
             btnBuscar.UseVisualStyleBackColor = true;
             // 
-            // btnAgregar
-            // 
-            btnAgregar.FlatStyle = FlatStyle.Flat;
-            btnAgregar.ForeColor = Color.Snow;
-            btnAgregar.Location = new Point(544, 675);
-            btnAgregar.Name = "btnAgregar";
-            btnAgregar.Size = new Size(81, 27);
-            btnAgregar.TabIndex = 2;
-            btnAgregar.Text = "Agregar";
-            btnAgregar.UseVisualStyleBackColor = true;
-            // 
             // btnModificar
             // 
             btnModificar.FlatStyle = FlatStyle.Flat;
             btnModificar.ForeColor = Color.Snow;
-            btnModificar.Location = new Point(717, 675);
+            btnModificar.Location = new Point(405, 648);
             btnModificar.Name = "btnModificar";
             btnModificar.Size = new Size(81, 27);
             btnModificar.TabIndex = 3;
@@ -86,7 +82,7 @@
             // 
             btnBorrar.FlatStyle = FlatStyle.Flat;
             btnBorrar.ForeColor = Color.Snow;
-            btnBorrar.Location = new Point(898, 675);
+            btnBorrar.Location = new Point(520, 648);
             btnBorrar.Name = "btnBorrar";
             btnBorrar.Size = new Size(81, 27);
             btnBorrar.TabIndex = 4;
@@ -96,7 +92,7 @@
             // dataGridView1
             // 
             dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView1.Location = new Point(393, 464);
+            dataGridView1.Location = new Point(296, 437);
             dataGridView1.Name = "dataGridView1";
             dataGridView1.RowTemplate.Height = 25;
             dataGridView1.Size = new Size(586, 154);
@@ -108,7 +104,7 @@
             label1.BackColor = Color.Transparent;
             label1.Font = new Font("Segoe UI", 44.25F, FontStyle.Regular, GraphicsUnit.Point);
             label1.ForeColor = Color.Snow;
-            label1.Location = new Point(502, 84);
+            label1.Location = new Point(405, 57);
             label1.Name = "label1";
             label1.Size = new Size(332, 78);
             label1.TabIndex = 6;
@@ -118,7 +114,7 @@
             // 
             radAuto.AutoSize = true;
             radAuto.BackColor = Color.Transparent;
-            radAuto.Location = new Point(393, 251);
+            radAuto.Location = new Point(296, 224);
             radAuto.Name = "radAuto";
             radAuto.Size = new Size(14, 13);
             radAuto.TabIndex = 7;
@@ -130,7 +126,7 @@
             // 
             radMoto.AutoSize = true;
             radMoto.BackColor = Color.Transparent;
-            radMoto.Location = new Point(417, 251);
+            radMoto.Location = new Point(320, 224);
             radMoto.Name = "radMoto";
             radMoto.Size = new Size(14, 13);
             radMoto.TabIndex = 8;
@@ -142,7 +138,7 @@
             // 
             radCamion.AutoSize = true;
             radCamion.BackColor = Color.Transparent;
-            radCamion.Location = new Point(440, 251);
+            radCamion.Location = new Point(343, 224);
             radCamion.Name = "radCamion";
             radCamion.Size = new Size(14, 13);
             radCamion.TabIndex = 9;
@@ -150,13 +146,63 @@
             radCamion.UseVisualStyleBackColor = false;
             radCamion.CheckedChanged += radCamion_CheckedChanged;
             // 
+            // lblSaludo
+            // 
+            lblSaludo.AutoSize = true;
+            lblSaludo.BackColor = Color.Transparent;
+            lblSaludo.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point);
+            lblSaludo.ForeColor = Color.Snow;
+            lblSaludo.Location = new Point(777, 33);
+            lblSaludo.Name = "lblSaludo";
+            lblSaludo.Size = new Size(105, 21);
+            lblSaludo.TabIndex = 10;
+            lblSaludo.Text = "Bienvenido: ";
+            // 
+            // cmsMenu
+            // 
+            cmsMenu.BackColor = SystemColors.ActiveCaptionText;
+            cmsMenu.Items.AddRange(new ToolStripItem[] { agregarToolStripMenuItem });
+            cmsMenu.Name = "cmsMenu";
+            cmsMenu.ShowCheckMargin = true;
+            cmsMenu.Size = new Size(203, 48);
+            // 
+            // agregarToolStripMenuItem
+            // 
+            agregarToolStripMenuItem.BackColor = SystemColors.ButtonHighlight;
+            agregarToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { autoToolStripMenuItem, motoToolStripMenuItem, camionToolStripMenuItem });
+            agregarToolStripMenuItem.Name = "agregarToolStripMenuItem";
+            agregarToolStripMenuItem.Size = new Size(202, 22);
+            agregarToolStripMenuItem.Text = "Agregar";
+            // 
+            // autoToolStripMenuItem
+            // 
+            autoToolStripMenuItem.Checked = true;
+            autoToolStripMenuItem.CheckState = CheckState.Checked;
+            autoToolStripMenuItem.Name = "autoToolStripMenuItem";
+            autoToolStripMenuItem.Size = new Size(180, 22);
+            autoToolStripMenuItem.Text = "Auto";
+            autoToolStripMenuItem.Click += autoToolStripMenuItem_Click;
+            // 
+            // motoToolStripMenuItem
+            // 
+            motoToolStripMenuItem.Name = "motoToolStripMenuItem";
+            motoToolStripMenuItem.Size = new Size(180, 22);
+            motoToolStripMenuItem.Text = "Moto";
+            // 
+            // camionToolStripMenuItem
+            // 
+            camionToolStripMenuItem.Name = "camionToolStripMenuItem";
+            camionToolStripMenuItem.Size = new Size(180, 22);
+            camionToolStripMenuItem.Text = "Camion";
+            // 
             // FormInicio
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.ActiveCaptionText;
             BackgroundImageLayout = ImageLayout.Stretch;
-            ClientSize = new Size(1287, 793);
+            ClientSize = new Size(1185, 742);
+            Controls.Add(lblSaludo);
             Controls.Add(radCamion);
             Controls.Add(radMoto);
             Controls.Add(radAuto);
@@ -164,7 +210,6 @@
             Controls.Add(dataGridView1);
             Controls.Add(btnBorrar);
             Controls.Add(btnModificar);
-            Controls.Add(btnAgregar);
             Controls.Add(btnBuscar);
             Controls.Add(txtBuscador);
             DoubleBuffered = true;
@@ -172,6 +217,7 @@
             Text = "Inicio";
             Load += FormInicio_Load;
             ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
+            cmsMenu.ResumeLayout(false);
             ResumeLayout(false);
             PerformLayout();
         }
@@ -188,5 +234,12 @@
         private RadioButton radAuto;
         private RadioButton radMoto;
         private RadioButton radCamion;
+        private Label lblSaludo;
+        private ToolStripComboBox toolStripComboBox1;
+        private ContextMenuStrip cmsMenu;
+        private ToolStripMenuItem agregarToolStripMenuItem;
+        private ToolStripMenuItem autoToolStripMenuItem;
+        private ToolStripMenuItem motoToolStripMenuItem;
+        private ToolStripMenuItem camionToolStripMenuItem;
     }
 }

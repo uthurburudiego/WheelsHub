@@ -21,6 +21,7 @@ namespace Interfaces
         {
             FormLogIn logIn = new FormLogIn();
             logIn.ShowDialog();
+            lblSaludo.Text = $"Bienvenido, {logIn.Usuario.Perfil}: {logIn.Usuario.Nombre}";
             radMoto.Checked = true;
 
         }
@@ -47,6 +48,11 @@ namespace Interfaces
             {
                 this.BackgroundImage = Properties.Resources.fondoCamion;
             }
+        }
+
+        private void autoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

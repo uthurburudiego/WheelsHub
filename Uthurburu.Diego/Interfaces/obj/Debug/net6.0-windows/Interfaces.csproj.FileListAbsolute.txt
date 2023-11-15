@@ -44,4 +44,5 @@ C:\Users\diego\OneDrive\Escritorio\Uthurburu.Diego.SegundoParcial\Uthurburu.Dieg
 C:\Users\diego\OneDrive\Escritorio\Uthurburu.Diego.SegundoParcial\Uthurburu.Diego\Interfaces\bin\Debug\net6.0-windows\Entidades.pdb
 C:\Users\diego\OneDrive\Escritorio\Uthurburu.Diego.SegundoParcial\Uthurburu.Diego\Interfaces\obj\Debug\net6.0-windows\Interfaces.csproj.AssemblyReference.cache
 C:\Users\diego\OneDrive\Escritorio\Uthurburu.Diego.SegundoParcial\Uthurburu.Diego\Interfaces\obj\Debug\net6.0-windows\Interfaces.csproj.CopyComplete
-C:\Users\diego\OneDrive\Escritorio\Uthurburu.Diego.SegundoParcial\Uthurburu.Diego\Interfaces\obj\Debug\net6.0-windows\Interfaces.Agregar.resources
+C:\Users\diego\OneDrive\Escritorio\Uthurburu.Diego.SegundoParcial\Uthurburu.Diego\Interfaces\bin\Debug\net6.0-windows\Newtonsoft.Json.dll
+C:\Users\diego\OneDrive\Escritorio\Uthurburu.Diego.SegundoParcial\Uthurburu.Diego\Interfaces\obj\Debug\net6.0-windows\Interfaces.FormAgregar.resources

@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace Interfaces
 {
-    public partial class Agregar : Form
+    public partial class FormAgregar : Form
     {
-        public Agregar()
+        public FormAgregar()
         {
             InitializeComponent();
         }
