@@ -7,6 +7,15 @@
     <Compile Update="FormAgregar.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="FormAgregarAuto.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="FormAgregarCamion.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="FormAgregarMoto.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="FormInicio.cs">
       <SubType>Form</SubType>
     </Compile>

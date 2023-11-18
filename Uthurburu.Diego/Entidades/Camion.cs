@@ -12,7 +12,7 @@ namespace WheelsHub.Logica
         #region Atributos
 
         private int tara;
-        private short cantidadEjes;
+        private int cantidadEjes;
         private eMarcasCamiones marca;
         #endregion
 
@@ -36,12 +36,12 @@ namespace WheelsHub.Logica
             this.tara = tara;
         }
         public Camion(string modelo, string numeroChasis, eColores color, eTipoVehiculo tipoVehiculo, double costo,
-            int tara, short cantidadEjes) : this(modelo, numeroChasis, color, tipoVehiculo, costo, tara)
+            int tara, int cantidadEjes) : this(modelo, numeroChasis, color, tipoVehiculo, costo, tara)
         {
             this.cantidadEjes = cantidadEjes;
         }
         public Camion(string modelo, string numeroChasis, eColores color, eTipoVehiculo tipoVehiculo, double costo,
-            int tara, short cantidadEjes, eMarcasCamiones marca) : this(modelo, numeroChasis, color, tipoVehiculo, costo, tara, cantidadEjes)
+            int tara, int cantidadEjes, eMarcasCamiones marca) : this(modelo, numeroChasis, color, tipoVehiculo, costo, tara, cantidadEjes)
         {
             this.marca = marca;
         }
@@ -66,7 +66,7 @@ namespace WheelsHub.Logica
             {
                 if (Validaciones.ValidarRango(value, "Ingreso un valor erroneo para la cantidad de ejes.(2 - 10)", 2, 10))
                 {
-                    this.tara = value;
+                    this.cantidadEjes = value;
                 }
             }
 

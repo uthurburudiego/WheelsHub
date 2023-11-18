@@ -46,3 +46,6 @@ C:\Users\diego\OneDrive\Escritorio\Uthurburu.Diego.SegundoParcial\Uthurburu.Dieg
 C:\Users\diego\OneDrive\Escritorio\Uthurburu.Diego.SegundoParcial\Uthurburu.Diego\Interfaces\obj\Debug\net6.0-windows\Interfaces.csproj.CopyComplete
 C:\Users\diego\OneDrive\Escritorio\Uthurburu.Diego.SegundoParcial\Uthurburu.Diego\Interfaces\bin\Debug\net6.0-windows\Newtonsoft.Json.dll
 C:\Users\diego\OneDrive\Escritorio\Uthurburu.Diego.SegundoParcial\Uthurburu.Diego\Interfaces\obj\Debug\net6.0-windows\Interfaces.FormAgregar.resources
+C:\Users\diego\OneDrive\Escritorio\Uthurburu.Diego.SegundoParcial\Uthurburu.Diego\Interfaces\obj\Debug\net6.0-windows\Interfaces.FormAgregarAuto.resources
+C:\Users\diego\OneDrive\Escritorio\Uthurburu.Diego.SegundoParcial\Uthurburu.Diego\Interfaces\obj\Debug\net6.0-windows\Interfaces.FormAgregarMoto.resources
+C:\Users\diego\OneDrive\Escritorio\Uthurburu.Diego.SegundoParcial\Uthurburu.Diego\Interfaces\obj\Debug\net6.0-windows\Interfaces.FormAgregarCamion.resources

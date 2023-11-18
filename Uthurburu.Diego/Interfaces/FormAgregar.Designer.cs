@@ -1,6 +1,6 @@
 ﻿namespace Interfaces
 {
-    partial class FormAgregar
+    public partial class FormAgregar
     {
         /// <summary>
         /// Required designer variable.
@@ -26,9 +26,9 @@
         /// Required method for Designer support - do not modify
         /// the contents of this method with the code editor.
         /// </summary>
-        private void InitializeComponent()
+        void InitializeComponent()
         {
-            label1 = new Label();
+            lblTitulo = new Label();
             btnGuardar = new Button();
             btnCancelar = new Button();
             txtChasis = new TextBox();
@@ -44,31 +44,31 @@
             txtCantidadPasajeros = new TextBox();
             picImagen = new PictureBox();
             btnExaminar = new Button();
-            label2 = new Label();
-            label3 = new Label();
-            label4 = new Label();
-            label5 = new Label();
-            label6 = new Label();
-            label7 = new Label();
-            label8 = new Label();
-            label9 = new Label();
-            label10 = new Label();
-            label11 = new Label();
-            label12 = new Label();
+            lblChasis = new Label();
+            lblMarca = new Label();
+            lblModelo = new Label();
+            lblCilindrada = new Label();
+            lblABS = new Label();
+            lblPrecio = new Label();
+            lblColor = new Label();
+            lblTara = new Label();
+            lblEjes = new Label();
+            lblPuertas = new Label();
+            lblPasajeros = new Label();
             ((System.ComponentModel.ISupportInitialize)picImagen).BeginInit();
             SuspendLayout();
             // 
-            // label1
+            // lblTitulo
             // 
-            label1.AutoSize = true;
-            label1.BackColor = Color.Transparent;
-            label1.Font = new Font("Segoe UI", 44.25F, FontStyle.Regular, GraphicsUnit.Point);
-            label1.ForeColor = Color.Snow;
-            label1.Location = new Point(325, 23);
-            label1.Name = "label1";
-            label1.Size = new Size(332, 78);
-            label1.TabIndex = 7;
-            label1.Text = "WheelsHub";
+            lblTitulo.AutoSize = true;
+            lblTitulo.BackColor = Color.Transparent;
+            lblTitulo.Font = new Font("Segoe UI", 44.25F, FontStyle.Regular, GraphicsUnit.Point);
+            lblTitulo.ForeColor = Color.Snow;
+            lblTitulo.Location = new Point(325, 23);
+            lblTitulo.Name = "lblTitulo";
+            lblTitulo.Size = new Size(332, 78);
+            lblTitulo.TabIndex = 7;
+            lblTitulo.Text = "WheelsHub";
             // 
             // btnGuardar
             // 
@@ -183,7 +183,8 @@
             // 
             // picImagen
             // 
-            picImagen.Location = new Point(84, 147);
+            picImagen.BackColor = Color.Gray;
+            picImagen.Location = new Point(80, 147);
             picImagen.Name = "picImagen";
             picImagen.Size = new Size(187, 209);
             picImagen.TabIndex = 21;
@@ -193,162 +194,162 @@
             // 
             btnExaminar.FlatStyle = FlatStyle.Flat;
             btnExaminar.ForeColor = Color.Snow;
-            btnExaminar.Location = new Point(84, 383);
+            btnExaminar.Location = new Point(80, 383);
             btnExaminar.Name = "btnExaminar";
             btnExaminar.Size = new Size(187, 27);
             btnExaminar.TabIndex = 22;
             btnExaminar.Text = "Examinar...";
             btnExaminar.UseVisualStyleBackColor = true;
             // 
-            // label2
+            // lblChasis
             // 
-            label2.AutoSize = true;
-            label2.BackColor = Color.Transparent;
-            label2.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Bold, GraphicsUnit.Point);
-            label2.ForeColor = Color.White;
-            label2.Location = new Point(356, 124);
-            label2.Name = "label2";
-            label2.Size = new Size(113, 20);
-            label2.TabIndex = 23;
-            label2.Text = "N° de chasis:";
+            lblChasis.AutoSize = true;
+            lblChasis.BackColor = Color.Transparent;
+            lblChasis.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Bold, GraphicsUnit.Point);
+            lblChasis.ForeColor = Color.White;
+            lblChasis.Location = new Point(356, 124);
+            lblChasis.Name = "lblChasis";
+            lblChasis.Size = new Size(113, 20);
+            lblChasis.TabIndex = 23;
+            lblChasis.Text = "N° de chasis:";
             // 
-            // label3
+            // lblMarca
             // 
-            label3.AutoSize = true;
-            label3.BackColor = Color.Transparent;
-            label3.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Bold, GraphicsUnit.Point);
-            label3.ForeColor = Color.White;
-            label3.Location = new Point(560, 124);
-            label3.Name = "label3";
-            label3.Size = new Size(63, 20);
-            label3.TabIndex = 24;
-            label3.Text = "Marca:";
+            lblMarca.AutoSize = true;
+            lblMarca.BackColor = Color.Transparent;
+            lblMarca.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Bold, GraphicsUnit.Point);
+            lblMarca.ForeColor = Color.White;
+            lblMarca.Location = new Point(560, 124);
+            lblMarca.Name = "lblMarca";
+            lblMarca.Size = new Size(63, 20);
+            lblMarca.TabIndex = 24;
+            lblMarca.Text = "Marca:";
             // 
-            // label4
+            // lblModelo
             // 
-            label4.AutoSize = true;
-            label4.BackColor = Color.Transparent;
-            label4.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Bold, GraphicsUnit.Point);
-            label4.ForeColor = Color.White;
-            label4.Location = new Point(749, 124);
-            label4.Name = "label4";
-            label4.Size = new Size(72, 20);
-            label4.TabIndex = 25;
-            label4.Text = "Modelo:";
+            lblModelo.AutoSize = true;
+            lblModelo.BackColor = Color.Transparent;
+            lblModelo.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Bold, GraphicsUnit.Point);
+            lblModelo.ForeColor = Color.White;
+            lblModelo.Location = new Point(749, 124);
+            lblModelo.Name = "lblModelo";
+            lblModelo.Size = new Size(72, 20);
+            lblModelo.TabIndex = 25;
+            lblModelo.Text = "Modelo:";
             // 
-            // label5
+            // lblCilindrada
             // 
-            label5.AutoSize = true;
-            label5.BackColor = Color.Transparent;
-            label5.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Bold, GraphicsUnit.Point);
-            label5.ForeColor = Color.White;
-            label5.Location = new Point(350, 203);
-            label5.Name = "label5";
-            label5.Size = new Size(94, 20);
-            label5.TabIndex = 26;
-            label5.Text = "Cilindrada:";
+            lblCilindrada.AutoSize = true;
+            lblCilindrada.BackColor = Color.Transparent;
+            lblCilindrada.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Bold, GraphicsUnit.Point);
+            lblCilindrada.ForeColor = Color.White;
+            lblCilindrada.Location = new Point(350, 203);
+            lblCilindrada.Name = "lblCilindrada";
+            lblCilindrada.Size = new Size(94, 20);
+            lblCilindrada.TabIndex = 26;
+            lblCilindrada.Text = "Cilindrada:";
             // 
-            // label6
+            // lblABS
             // 
-            label6.AutoSize = true;
-            label6.BackColor = Color.Transparent;
-            label6.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Bold, GraphicsUnit.Point);
-            label6.ForeColor = Color.White;
-            label6.Location = new Point(502, 203);
-            label6.Name = "label6";
-            label6.Size = new Size(91, 20);
-            label6.TabIndex = 27;
-            label6.Text = "Sist. ABS:";
+            lblABS.AutoSize = true;
+            lblABS.BackColor = Color.Transparent;
+            lblABS.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Bold, GraphicsUnit.Point);
+            lblABS.ForeColor = Color.White;
+            lblABS.Location = new Point(502, 203);
+            lblABS.Name = "lblABS";
+            lblABS.Size = new Size(91, 20);
+            lblABS.TabIndex = 27;
+            lblABS.Text = "Sist. ABS:";
             // 
-            // label7
+            // lblPrecio
             // 
-            label7.AutoSize = true;
-            label7.BackColor = Color.Transparent;
-            label7.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Bold, GraphicsUnit.Point);
-            label7.ForeColor = Color.White;
-            label7.Location = new Point(659, 203);
-            label7.Name = "label7";
-            label7.Size = new Size(64, 20);
-            label7.TabIndex = 28;
-            label7.Text = "Precio:";
+            lblPrecio.AutoSize = true;
+            lblPrecio.BackColor = Color.Transparent;
+            lblPrecio.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Bold, GraphicsUnit.Point);
+            lblPrecio.ForeColor = Color.White;
+            lblPrecio.Location = new Point(659, 203);
+            lblPrecio.Name = "lblPrecio";
+            lblPrecio.Size = new Size(64, 20);
+            lblPrecio.TabIndex = 28;
+            lblPrecio.Text = "Precio:";
             // 
-            // label8
+            // lblColor
             // 
-            label8.AutoSize = true;
-            label8.BackColor = Color.Transparent;
-            label8.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Bold, GraphicsUnit.Point);
-            label8.ForeColor = Color.White;
-            label8.Location = new Point(780, 203);
-            label8.Name = "label8";
-            label8.Size = new Size(56, 20);
-            label8.TabIndex = 29;
-            label8.Text = "Color:";
+            lblColor.AutoSize = true;
+            lblColor.BackColor = Color.Transparent;
+            lblColor.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Bold, GraphicsUnit.Point);
+            lblColor.ForeColor = Color.White;
+            lblColor.Location = new Point(780, 203);
+            lblColor.Name = "lblColor";
+            lblColor.Size = new Size(56, 20);
+            lblColor.TabIndex = 29;
+            lblColor.Text = "Color:";
             // 
-            // label9
+            // lblTara
             // 
-            label9.AutoSize = true;
-            label9.BackColor = Color.Transparent;
-            label9.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Bold, GraphicsUnit.Point);
-            label9.ForeColor = Color.White;
-            label9.Location = new Point(356, 288);
-            label9.Name = "label9";
-            label9.Size = new Size(50, 20);
-            label9.TabIndex = 30;
-            label9.Text = "Tara:";
+            lblTara.AutoSize = true;
+            lblTara.BackColor = Color.Transparent;
+            lblTara.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Bold, GraphicsUnit.Point);
+            lblTara.ForeColor = Color.White;
+            lblTara.Location = new Point(356, 288);
+            lblTara.Name = "lblTara";
+            lblTara.Size = new Size(50, 20);
+            lblTara.TabIndex = 30;
+            lblTara.Text = "Tara:";
             // 
-            // label10
+            // lblEjes
             // 
-            label10.AutoSize = true;
-            label10.BackColor = Color.Transparent;
-            label10.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Bold, GraphicsUnit.Point);
-            label10.ForeColor = Color.White;
-            label10.Location = new Point(498, 288);
-            label10.Name = "label10";
-            label10.Size = new Size(95, 20);
-            label10.TabIndex = 31;
-            label10.Text = "Cant. ejes:";
+            lblEjes.AutoSize = true;
+            lblEjes.BackColor = Color.Transparent;
+            lblEjes.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Bold, GraphicsUnit.Point);
+            lblEjes.ForeColor = Color.White;
+            lblEjes.Location = new Point(498, 288);
+            lblEjes.Name = "lblEjes";
+            lblEjes.Size = new Size(95, 20);
+            lblEjes.TabIndex = 31;
+            lblEjes.Text = "Cant. ejes:";
             // 
-            // label11
+            // lblPuertas
             // 
-            label11.AutoSize = true;
-            label11.BackColor = Color.Transparent;
-            label11.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Bold, GraphicsUnit.Point);
-            label11.ForeColor = Color.White;
-            label11.Location = new Point(624, 288);
-            label11.Name = "label11";
-            label11.Size = new Size(123, 20);
-            label11.TabIndex = 32;
-            label11.Text = "Cant. puertas:";
+            lblPuertas.AutoSize = true;
+            lblPuertas.BackColor = Color.Transparent;
+            lblPuertas.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Bold, GraphicsUnit.Point);
+            lblPuertas.ForeColor = Color.White;
+            lblPuertas.Location = new Point(624, 288);
+            lblPuertas.Name = "lblPuertas";
+            lblPuertas.Size = new Size(123, 20);
+            lblPuertas.TabIndex = 32;
+            lblPuertas.Text = "Cant. puertas:";
             // 
-            // label12
+            // lblPasajeros
             // 
-            label12.AutoSize = true;
-            label12.BackColor = Color.Transparent;
-            label12.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Bold, GraphicsUnit.Point);
-            label12.ForeColor = Color.White;
-            label12.Location = new Point(778, 288);
-            label12.Name = "label12";
-            label12.Size = new Size(140, 20);
-            label12.TabIndex = 33;
-            label12.Text = "Cant. pasajeros:";
+            lblPasajeros.AutoSize = true;
+            lblPasajeros.BackColor = Color.Transparent;
+            lblPasajeros.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Bold, GraphicsUnit.Point);
+            lblPasajeros.ForeColor = Color.White;
+            lblPasajeros.Location = new Point(778, 288);
+            lblPasajeros.Name = "lblPasajeros";
+            lblPasajeros.Size = new Size(140, 20);
+            lblPasajeros.TabIndex = 33;
+            lblPasajeros.Text = "Cant. pasajeros:";
             // 
-            // Agregar
+            // FormAgregar
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.Black;
             ClientSize = new Size(953, 483);
-            Controls.Add(label12);
-            Controls.Add(label11);
-            Controls.Add(label10);
-            Controls.Add(label9);
-            Controls.Add(label8);
-            Controls.Add(label7);
-            Controls.Add(label6);
-            Controls.Add(label5);
-            Controls.Add(label4);
-            Controls.Add(label3);
-            Controls.Add(label2);
+            Controls.Add(lblPasajeros);
+            Controls.Add(lblPuertas);
+            Controls.Add(lblEjes);
+            Controls.Add(lblTara);
+            Controls.Add(lblColor);
+            Controls.Add(lblPrecio);
+            Controls.Add(lblABS);
+            Controls.Add(lblCilindrada);
+            Controls.Add(lblModelo);
+            Controls.Add(lblMarca);
+            Controls.Add(lblChasis);
             Controls.Add(btnExaminar);
             Controls.Add(picImagen);
             Controls.Add(txtCantidadPasajeros);
@@ -364,8 +365,8 @@
             Controls.Add(txtChasis);
             Controls.Add(btnCancelar);
             Controls.Add(btnGuardar);
-            Controls.Add(label1);
-            Name = "Agregar";
+            Controls.Add(lblTitulo);
+            Name = "FormAgregar";
             Text = "FormAgregar";
             ((System.ComponentModel.ISupportInitialize)picImagen).EndInit();
             ResumeLayout(false);
@@ -374,32 +375,32 @@
 
         #endregion
 
-        private Label label1;
-        private Button btnGuardar;
-        private Button btnCancelar;
-        private TextBox txtChasis;
-        private ComboBox cboMarca;
-        private TextBox txtModelo;
-        private TextBox txtCilindrada;
-        private ComboBox cboABS;
-        private TextBox txtCosto;
-        private ComboBox cboColor;
-        private TextBox txtTara;
-        private TextBox txtCantidadEjes;
-        private TextBox txtCantidadPuertas;
-        private TextBox txtCantidadPasajeros;
-        private PictureBox picImagen;
-        private Button btnExaminar;
-        private Label label2;
-        private Label label3;
-        private Label label4;
-        private Label label5;
-        private Label label6;
-        private Label label7;
-        private Label label8;
-        private Label label9;
-        private Label label10;
-        private Label label11;
-        private Label label12;
+        protected Label lblTitulo;
+        protected Button btnGuardar;
+        protected Button btnCancelar;
+        protected TextBox txtChasis;
+        protected ComboBox cboMarca;
+        protected TextBox txtModelo;
+        protected TextBox txtCilindrada;
+        protected ComboBox cboABS;
+        protected TextBox txtCosto;
+        protected ComboBox cboColor;
+        protected TextBox txtTara;
+        protected TextBox txtCantidadEjes;
+        protected TextBox txtCantidadPuertas;
+        protected TextBox txtCantidadPasajeros;
+        protected PictureBox picImagen;
+        protected Button btnExaminar;
+        protected Label lblChasis;
+        protected Label lblMarca;
+        protected Label lblModelo;
+        protected Label lblCilindrada;
+        protected Label lblABS;
+        protected Label lblPrecio;
+        protected Label lblColor;
+        protected Label lblTara;
+        protected Label lblEjes;
+        protected Label lblPuertas;
+        protected Label lblPasajeros;
     }
 }

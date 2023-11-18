@@ -17,7 +17,6 @@ namespace WheelsHub
         protected eColores color;
         protected eTipoVehiculo tipoVehiculo;
         protected double costo;
-        //protected List<Vehiculo> vehiculoList;
         #endregion
 
         #region Constructores

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Entidades;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -7,52 +8,77 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using WheelsHub;
+using WheelsHub.Logica;
 
 namespace Interfaces
 {
     public partial class FormInicio : Form
     {
+        List<Moto> listaMotos;
+        List<Auto> listaAutos;
+        List<Camion> listaCamion;
+
+        AccesoDatos datos;
         public FormInicio()
         {
             InitializeComponent();
+            datos = new AccesoDatos();
         }
 
         private void FormInicio_Load(object sender, EventArgs e)
         {
             FormLogIn logIn = new FormLogIn();
             logIn.ShowDialog();
+
             lblSaludo.Text = $"Bienvenido, {logIn.Usuario.Perfil}: {logIn.Usuario.Nombre}";
-            radMoto.Checked = true;
+
 
         }
 
-        private void radAuto_CheckedChanged(object sender, EventArgs e)
+        //Botones ToolStrip
+
+        //VER
+        private void autosToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (radAuto.Checked)
-            {
-                this.BackgroundImage = Properties.Resources.fondoAuto1;
-            }
+            this.listaAutos = this.datos.ObtenerListaAuto();
+            dtgVehiculos.DataSource = listaAutos;
         }
 
-        private void radMoto_CheckedChanged(object sender, EventArgs e)
+        private void camionesToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (radMoto.Checked)
-            {
-                this.BackgroundImage = Properties.Resources.fondoMoto;
-            }
+            this.listaCamion = this.datos.ObtenerListaCamion();
+            dtgVehiculos.DataSource = listaCamion;
         }
 
-        private void radCamion_CheckedChanged(object sender, EventArgs e)
+        private void motosToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (radCamion.Checked)
-            {
-                this.BackgroundImage = Properties.Resources.fondoCamion;
-            }
+            this.listaMotos = this.datos.ObtenerListaMoto();
+            dtgVehiculos.DataSource = listaMotos;
         }
 
+        //AGREGAR
         private void autoToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            FormAgregarAuto nuevoAuto = new FormAgregarAuto();
+            nuevoAuto.ShowDialog();
+        }
 
+        private void motoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FormAgregarMoto nuevaMoto = new FormAgregarMoto();
+            nuevaMoto.ShowDialog();
+        }
+
+        private void salirToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void camionToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FormAgregarCamion nuevoCamion = new FormAgregarCamion();
+            nuevoCamion.ShowDialog();
         }
     }
 }
