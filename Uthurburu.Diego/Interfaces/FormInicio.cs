@@ -18,12 +18,15 @@ namespace Interfaces
         List<Moto> listaMotos;
         List<Auto> listaAutos;
         List<Camion> listaCamion;
+        List<Vehiculo> vehiculos;
+        string numeroChasis;
 
         AccesoDatos datos;
         public FormInicio()
         {
             InitializeComponent();
             datos = new AccesoDatos();
+
         }
 
         private void FormInicio_Load(object sender, EventArgs e)
@@ -33,6 +36,10 @@ namespace Interfaces
 
             lblSaludo.Text = $"Bienvenido, {logIn.Usuario.Perfil}: {logIn.Usuario.Nombre}";
 
+            this.vehiculos = datos.ObtenerListaVehiculos();
+            dtgVehiculos.DataSource = vehiculos;
+            dtgVehiculos.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
+            dtgVehiculos.AutoSize = true;
 
         }
 
@@ -79,6 +86,21 @@ namespace Interfaces
         {
             FormAgregarCamion nuevoCamion = new FormAgregarCamion();
             nuevoCamion.ShowDialog();
+        }
+
+
+        private void btnBorrar_Click(object sender, EventArgs e)
+        {
+            if (!string.IsNullOrEmpty(this.numeroChasis))
+            {
+                datos.BorrarVehiculo(this.numeroChasis);
+            }
+        }
+
+        private void dtgVehiculos_CellMouseClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            int selectedRowIndex = dtgVehiculos.SelectedCells[0].RowIndex;
+            this.numeroChasis = dtgVehiculos.Rows[selectedRowIndex].Cells["NumeroChasis"].Value.ToString();
         }
     }
 }

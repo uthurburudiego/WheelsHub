@@ -272,50 +272,42 @@ namespace Entidades
                 }
             }
         }
-        public void AgregarCamion(Camion camion)
+        public bool AgregarCamion(Camion nuevoCamion)
         {
+
             try
             {
-                using (SqlConnection conexion = new SqlConnection(cadena_conexion))
-                {
-                    conexion.Open();
+                this.comando = new SqlCommand();
+                this.comando.CommandType = System.Data.CommandType.Text;
+                this.comando.CommandText = "INSERT INTO Vehiculos (Chasis, Modelo, Color, TipoVehiculo, Costo, CantidadEjes, Marca, Marca) " +
+                                           "VALUES (@Chasis, @Modelo, @Color, @TipoVehiculo, @Costo, @Tara, @CantidadEjes, @Marca)";
+                this.comando.Connection = this.conexion;
 
-                    using (SqlCommand comando = new SqlCommand())
-                    {
-                        comando.Connection = conexion;
-                        comando.CommandType = CommandType.Text;
+                this.comando.Parameters.AddWithValue("@Chasis", nuevoCamion.NumeroChasis);
+                this.comando.Parameters.AddWithValue("@Modelo", nuevoCamion.Modelo);
+                this.comando.Parameters.AddWithValue("@Color", nuevoCamion.Color);
+                this.comando.Parameters.AddWithValue("@TipoVehiculo", (int)nuevoCamion.TipoVehiculo);
+                this.comando.Parameters.AddWithValue("@Costo", nuevoCamion.Costo);
+                this.comando.Parameters.AddWithValue("@Tara", nuevoCamion.Tara);
+                this.comando.Parameters.AddWithValue("@CantidadEjes", nuevoCamion.CantidadEjes);
+                this.comando.Parameters.AddWithValue("@Marca", (int)nuevoCamion.Marca);
 
-                        // Utiliza una instrucción INSERT para agregar un nuevo camión a la base de datos
-                        comando.CommandText = "INSERT INTO Vehiculos (Chasis, Modelo, Color, TipoVehiculo, Costo, CapacidadCarga, CantidadEjes, Marca) " +
-                                              "VALUES (@Chasis, @Modelo, @Color, @TipoVehiculo, @Costo, @CapacidadCarga, @CantidadEjes, @Marca)";
+                this.conexion.Open();
+                int rowsAffected = this.comando.ExecuteNonQuery();
 
-                        // Agrega parámetros para evitar problemas de SQL Injection
-                        comando.Parameters.AddWithValue("@Chasis", camion.NumeroChasis);
-                        comando.Parameters.AddWithValue("@Modelo", camion.Modelo);
-                        comando.Parameters.AddWithValue("@Color", (int)camion.Color);
-                        comando.Parameters.AddWithValue("@TipoVehiculo", (int)camion.TipoVehiculo);
-                        comando.Parameters.AddWithValue("@Costo", camion.Costo);
-                        comando.Parameters.AddWithValue("@Tara", camion.Tara);
-                        comando.Parameters.AddWithValue("@CantidadEjes", camion.CantidadEjes);
-                        comando.Parameters.AddWithValue("@Marca", (int)camion.Marca);
-
-                        // Ejecuta la consulta
-                        int filasAfectadas = comando.ExecuteNonQuery();
-
-                        if (filasAfectadas > 0)
-                        {
-                            Console.WriteLine("Se agregó un nuevo camión a la base de datos.");
-                        }
-                        else
-                        {
-                            Console.WriteLine("No se pudo agregar el camión a la base de datos.");
-                        }
-                    }
-                }
+                return rowsAffected > 0;
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"Error al agregar camión a la base de datos: {ex.Message}");
+                // Manejar la excepción, por ejemplo, loguearla o mostrar un mensaje al usuario.
+                return false;
+            }
+            finally
+            {
+                if (this.conexion.State == System.Data.ConnectionState.Open)
+                {
+                    this.conexion.Close();
+                }
             }
         }
         public List<Camion> ObtenerListaCamion()
@@ -366,8 +358,123 @@ namespace Entidades
             }
             return lista;
         }
+        public void BorrarVehiculo(string numeroChasis)
+        {
+            try
+            {
+                using (SqlConnection conexion = new SqlConnection(cadena_conexion))
+                {
+                    conexion.Open();
+
+                    using (SqlCommand comando = new SqlCommand())
+                    {
+                        comando.Connection = conexion;
+                        comando.CommandType = CommandType.Text;
+
+                        // Utiliza una instrucción DELETE para borrar un camión de la base de datos
+                        comando.CommandText = "DELETE FROM Vehiculos WHERE Chasis = @Chasis";
+
+                        // Agrega parámetro para evitar problemas de SQL Injection
+                        comando.Parameters.AddWithValue("@Chasis", numeroChasis);
+
+                        // Ejecuta la consulta
+                        int filasAfectadas = comando.ExecuteNonQuery();
+
+                        if (filasAfectadas > 0)
+                        {
+                            Console.WriteLine("Se borró el camión de la base de datos.");
+                        }
+                        else
+                        {
+                            Console.WriteLine("No se encontró el camión con el número de chasis especificado.");
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error al borrar camión de la base de datos: {ex.Message}");
+            }
+        }
+
+        public List<Vehiculo> ObtenerListaVehiculos()
+        {
+            List<Vehiculo> lista = new List<Vehiculo>();
+
+            try
+            {
+                
+
+                this.comando = new SqlCommand();
+                this.comando.CommandType = System.Data.CommandType.Text;
+                this.comando.CommandText = "select Chasis, Modelo, Color, TipoVehiculo, Costo, CantidadEjes, Tara,CantidadPasajeros, Marca, CantidadPuertas, Cilindrada, FrenoABS from Vehiculos";
+                this.comando.Connection = this.conexion;
+
+                this.conexion.Open();
+                this.lector = this.comando.ExecuteReader();
+
+                while (this.lector.Read())
+                {
+                    if ((int)this.lector["TipoVehiculo"] == 3)
+                    {
+                        Camion camion = new Camion();
+                        camion.NumeroChasis = this.lector["Chasis"].ToString();
+                        camion.Modelo = this.lector["Modelo"].ToString();
+                        camion.Color = (eColores)this.lector["Color"];
+                        camion.TipoVehiculo = (eTipoVehiculo)this.lector["TipoVehiculo"];
+                        camion.Costo = (double)this.lector["Costo"];
+                        camion.CantidadEjes = (int)this.lector["CantidadEjes"];
+                        camion.Tara = (int)this.lector["Tara"];
+                        camion.Marca = (eMarcasCamiones)this.lector["Marca"];
+
+                        lista.Add(camion);
+                    }
+                    if ((int)this.lector["TipoVehiculo"] == 2)
+                    {
+                        Moto moto = new Moto();
+                        moto.NumeroChasis = this.lector["Chasis"].ToString();
+                        moto.Modelo = this.lector["Modelo"].ToString();
+                        moto.Color = (eColores)this.lector["Color"];
+                        moto.TipoVehiculo = (eTipoVehiculo)this.lector["TipoVehiculo"];
+                        moto.Costo = (double)this.lector["Costo"];
+                        moto.Cilindrada = (int)this.lector["Cilindrada"];
+                        moto.FrenosABS = (eTipoDeFrenos)this.lector["FrenoABS"];
+                        moto.Marca = (eMarcasMotos)this.lector["Marca"];
+
+                        lista.Add(moto);
+                    }
+                    if ((int)this.lector["TipoVehiculo"] == 1)
+                    {
+                        Auto auto = new Auto();
+                        auto.NumeroChasis = this.lector["Chasis"].ToString();
+                        auto.Modelo = this.lector["Modelo"].ToString();
+                        auto.Color = (eColores)this.lector["Color"];
+                        auto.TipoVehiculo = (eTipoVehiculo)this.lector["TipoVehiculo"];
+                        auto.Costo = (double)this.lector["Costo"];
+                        auto.CantidadPuertas = (int)this.lector["CantidadPuertas"];
+                        auto.CantidadPasajeros = (int)this.lector["CantidadPasajeros"];
+                        auto.Marca = (eMarcasAutos)this.lector["Marca"];
+
+                        lista.Add(auto);
+                    }
+                }
+                this.lector.Close();
+
+            }
+            catch (Exception ex)
+            {
 
 
+            }
+            finally
+            {
+                if (this.conexion.State == System.Data.ConnectionState.Open)
+                {
+                    this.conexion.Close();
+                }
+            }
+            return lista;
+        }
 
     }
 }

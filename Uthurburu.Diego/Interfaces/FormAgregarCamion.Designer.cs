@@ -41,6 +41,10 @@
             btnCancelar.Location = new Point(505, 337);
             btnCancelar.Click += btnCancelar_Click;
             // 
+            // cboMarca
+            // 
+            cboMarca.Size = new Size(163, 23);
+            // 
             // txtCilindrada
             // 
             txtCilindrada.Location = new Point(1074, 509);

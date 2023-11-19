@@ -54,7 +54,7 @@
             txtBuscador.Location = new Point(164, 186);
             txtBuscador.Name = "txtBuscador";
             txtBuscador.PlaceholderText = "Buscar";
-            txtBuscador.Size = new Size(759, 23);
+            txtBuscador.Size = new Size(651, 23);
             txtBuscador.TabIndex = 0;
             // 
             // btnBuscar
@@ -63,7 +63,7 @@
             btnBuscar.FlatStyle = FlatStyle.Flat;
             btnBuscar.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
             btnBuscar.ForeColor = Color.White;
-            btnBuscar.Location = new Point(952, 183);
+            btnBuscar.Location = new Point(842, 182);
             btnBuscar.Name = "btnBuscar";
             btnBuscar.Size = new Size(81, 27);
             btnBuscar.TabIndex = 1;
@@ -91,15 +91,18 @@
             btnBorrar.TabIndex = 4;
             btnBorrar.Text = "Borrar";
             btnBorrar.UseVisualStyleBackColor = true;
+            btnBorrar.Click += btnBorrar_Click;
             // 
             // dtgVehiculos
             // 
+            dtgVehiculos.BackgroundColor = Color.Black;
             dtgVehiculos.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dtgVehiculos.Location = new Point(164, 288);
             dtgVehiculos.Name = "dtgVehiculos";
             dtgVehiculos.RowTemplate.Height = 25;
-            dtgVehiculos.Size = new Size(857, 196);
+            dtgVehiculos.Size = new Size(381, 189);
             dtgVehiculos.TabIndex = 5;
+            dtgVehiculos.CellMouseClick += dtgVehiculos_CellMouseClick;
             // 
             // label1
             // 
@@ -148,21 +151,21 @@
             // autoToolStripMenuItem
             // 
             autoToolStripMenuItem.Name = "autoToolStripMenuItem";
-            autoToolStripMenuItem.Size = new Size(180, 26);
+            autoToolStripMenuItem.Size = new Size(139, 26);
             autoToolStripMenuItem.Text = "Auto";
             autoToolStripMenuItem.Click += autoToolStripMenuItem_Click;
             // 
             // motoToolStripMenuItem
             // 
             motoToolStripMenuItem.Name = "motoToolStripMenuItem";
-            motoToolStripMenuItem.Size = new Size(180, 26);
+            motoToolStripMenuItem.Size = new Size(139, 26);
             motoToolStripMenuItem.Text = "Moto";
             motoToolStripMenuItem.Click += motoToolStripMenuItem_Click;
             // 
             // camionToolStripMenuItem
             // 
             camionToolStripMenuItem.Name = "camionToolStripMenuItem";
-            camionToolStripMenuItem.Size = new Size(180, 26);
+            camionToolStripMenuItem.Size = new Size(139, 26);
             camionToolStripMenuItem.Text = "Camion";
             camionToolStripMenuItem.Click += camionToolStripMenuItem_Click;
             // 
