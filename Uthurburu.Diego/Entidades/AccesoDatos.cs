@@ -93,154 +93,6 @@ namespace Entidades
             }
             return lista;
         }
-        public List<Camion> ObtenerListaCamion()
-        {
-            List<Camion> lista = new List<Camion>();
-
-            try
-            {
-                this.comando = new SqlCommand();
-                this.comando.CommandType = System.Data.CommandType.Text;
-                this.comando.CommandText = "select Chasis, Modelo, Color, TipoVehiculo, Costo, CantidadEjes, Tara, Marca from Vehiculos";
-                this.comando.Connection = this.conexion;
-
-                this.conexion.Open();
-                this.lector = this.comando.ExecuteReader();
-
-                while (this.lector.Read())
-                {
-                    if ((int)this.lector["TipoVehiculo"] == 3)
-                    {
-                        Camion camion = new Camion();
-                        camion.NumeroChasis = this.lector["Chasis"].ToString();
-                        camion.Modelo = this.lector["Modelo"].ToString();
-                        camion.Color = (eColores)this.lector["Color"];
-                        camion.TipoVehiculo = (eTipoVehiculo)this.lector["TipoVehiculo"];
-                        camion.Costo = (double)this.lector["Costo"];
-                        camion.CantidadEjes = (int)this.lector["CantidadEjes"];
-                        camion.Tara = (int)this.lector["Tara"];
-                        camion.Marca = (eMarcasCamiones)this.lector["Marca"];
-
-                        lista.Add(camion);
-                    }
-                }
-                this.lector.Close();
-
-            }
-            catch (Exception ex)
-            {
-
-
-            }
-            finally
-            {
-                if (this.conexion.State == System.Data.ConnectionState.Open)
-                {
-                    this.conexion.Close();
-                }
-            }
-            return lista;
-        }
-        public List<Moto> ObtenerListaMoto()
-        {
-            List<Moto> lista = new List<Moto>();
-
-            try
-            {
-                this.comando = new SqlCommand();
-                this.comando.CommandType = System.Data.CommandType.Text;
-                this.comando.CommandText = "select Chasis, Modelo, Color, TipoVehiculo, Costo, Cilindrada, FrenoABS, Marca from Vehiculos";
-                this.comando.Connection = this.conexion;
-
-                this.conexion.Open();
-                this.lector = this.comando.ExecuteReader();
-
-                while (this.lector.Read())
-                {
-                    if ((int)this.lector["TipoVehiculo"] == 2)
-                    {
-                        Moto moto = new Moto();
-                        moto.NumeroChasis = this.lector["Chasis"].ToString();
-                        moto.Modelo = this.lector["Modelo"].ToString();
-                        moto.Color = (eColores)this.lector["Color"];
-                        moto.TipoVehiculo = (eTipoVehiculo)this.lector["TipoVehiculo"];
-                        moto.Costo = (double)this.lector["Costo"];
-                        moto.Cilindrada = (int)this.lector["Cilindrada"];
-                        moto.FrenosABS = (eTipoDeFrenos)this.lector["FrenoABS"];
-                        moto.Marca = (eMarcasMotos)this.lector["Marca"];
-
-                        lista.Add(moto);
-                    }
-                }
-                this.lector.Close();
-
-            }
-            catch (Exception ex)
-            {
-
-
-            }
-            finally
-            {
-                if (this.conexion.State == System.Data.ConnectionState.Open)
-                {
-                    this.conexion.Close();
-                }
-
-            }
-            return lista;
-
-        }
-        public List<Auto> ObtenerListaAuto()
-        {
-            List<Auto> lista = new List<Auto>();
-
-            try
-            {
-                this.comando = new SqlCommand();
-                this.comando.CommandType = System.Data.CommandType.Text;
-                this.comando.CommandText = "select Chasis, Modelo, Color, TipoVehiculo, Costo, CantidadPasajeros, Marca, CantidadPuertas from Vehiculos";
-                this.comando.Connection = this.conexion;
-
-                this.conexion.Open();
-                this.lector = this.comando.ExecuteReader();
-
-                while (this.lector.Read())
-                {
-                    if ((int)this.lector["TipoVehiculo"] == 1)
-                    {
-                        Auto auto = new Auto();
-                        auto.NumeroChasis = this.lector["Chasis"].ToString();
-                        auto.Modelo = this.lector["Modelo"].ToString();
-                        auto.Color = (eColores)this.lector["Color"];
-                        auto.TipoVehiculo = (eTipoVehiculo)this.lector["TipoVehiculo"];
-                        auto.Costo = (double)this.lector["Costo"];
-                        auto.CantidadPuertas = (int)this.lector["CantidadPuertas"];
-                        auto.CantidadPasajeros = (int)this.lector["CantidadPasajeros"];
-                        auto.Marca = (eMarcasAutos)this.lector["Marca"];
-
-                        lista.Add(auto);
-                    }
-                }
-                this.lector.Close();
-
-            }
-            catch (Exception ex)
-            {
-
-
-            }
-            finally
-            {
-                if (this.conexion.State == System.Data.ConnectionState.Open)
-                {
-                    this.conexion.Close();
-                }
-
-            }
-            return lista;
-
-        }
         public List<Vehiculo> ObtenerListaVehiculos()
         {
             List<Vehiculo> lista = new List<Vehiculo>();
@@ -632,7 +484,62 @@ namespace Entidades
                 Console.WriteLine($"Error al borrar camión de la base de datos: {ex.Message}");
             }
         }
+        public bool ObtenerLista( out List<Moto> listaMotos)
+        {
+            List<Vehiculo> lista;
+            bool retorno = false;
+            listaMotos = new List<Moto>();
 
+            lista = ObtenerListaVehiculos();
 
+            foreach (Vehiculo vehiculo in lista)
+            {
+                if (vehiculo is Moto)
+                {
+                    listaMotos.Add((Moto)vehiculo);
+                    retorno = true;
+                }
+            }
+            
+            return retorno;
+        }
+        public bool ObtenerLista(out List<Auto> listaAutos)
+        {
+            List<Vehiculo> lista;
+            bool retorno = false;
+            listaAutos = new List<Auto>();
+
+            lista = ObtenerListaVehiculos();
+
+            foreach (Vehiculo vehiculo in lista)
+            {
+                if (vehiculo is Auto)
+                {
+                    listaAutos.Add((Auto)vehiculo);
+                    retorno = true;
+                }
+            }
+
+            return retorno;
+        }
+        public bool ObtenerLista(out List<Camion> listaCamion)
+        {
+            List<Vehiculo> lista;
+            bool retorno = false;
+            listaCamion = new List<Camion>();
+
+            lista = ObtenerListaVehiculos();
+
+            foreach (Vehiculo vehiculo in lista)
+            {
+                if (vehiculo is Camion)
+                {
+                    listaCamion.Add((Camion)vehiculo);
+                    retorno = true;
+                }
+            }
+
+            return retorno;
+        }
     }
 }

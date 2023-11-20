@@ -51,21 +51,21 @@ namespace Interfaces
         private void autosToolStripMenuItem_Click(object sender, EventArgs e)
         {
 
-            this.listaAutos = this.datos.ObtenerListaAuto();
+            this.datos.ObtenerLista(out listaAutos);
             dtgVehiculos.DataSource = listaAutos;
         }
 
         private void camionesToolStripMenuItem_Click(object sender, EventArgs e)
         {
 
-            this.listaCamion = this.datos.ObtenerListaCamion();
+            this.datos.ObtenerLista(out this.listaCamion);
             dtgVehiculos.DataSource = listaCamion;
         }
 
         private void motosToolStripMenuItem_Click(object sender, EventArgs e)
         {
 
-            this.listaMotos = this.datos.ObtenerListaMoto();
+            this.datos.ObtenerLista(out this.listaMotos);
             dtgVehiculos.DataSource = listaMotos;
         }
 
