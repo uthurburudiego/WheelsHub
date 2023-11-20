@@ -34,7 +34,7 @@ namespace Interfaces
             Controls.Remove(this.lblEjes);
             lblTitulo.Text = "Agregar Auto";
             cboMarca.DataSource = Enum.GetValues(typeof(eMarcasAutos));
-      
+
 
         }
 
@@ -46,35 +46,35 @@ namespace Interfaces
 
         private void btnGuardar_Click(object sender, EventArgs e)
         {
-            datos.AgregarAuto(RecuperarInformacion(this.nuevoAuto));
+            datos.AgregarAuto(RecuperarInformacion());
             this.Close();
 
         }
-        private Auto RecuperarInformacion(Auto auto)
+        protected Auto RecuperarInformacion()
         {
             double costo = 0;
             int cantidadPasajeros = 0;
             int cantidadPuertas = 0;
 
-            auto.Modelo = txtModelo.Text;
-            auto.NumeroChasis = txtChasis.Text;
-            auto.Marca = (eMarcasAutos)cboMarca.SelectedItem;
-            auto.Color = (eColores)cboColor.SelectedItem;
-            auto.TipoVehiculo = eTipoVehiculo.Auto;
+            nuevoAuto.Modelo = txtModelo.Text;
+            nuevoAuto.NumeroChasis = txtChasis.Text;
+            nuevoAuto.Marca = (eMarcasAutos)cboMarca.SelectedItem;
+            nuevoAuto.Color = (eColores)cboColor.SelectedItem;
+            nuevoAuto.TipoVehiculo = eTipoVehiculo.Auto;
 
             if (validarNumero(txtCosto.Text, out costo))
             {
-                auto.Costo = costo;
+                nuevoAuto.Costo = costo;
             }
             if (validarNumero(txtCantidadPasajeros.Text, out cantidadPasajeros))
             {
-                auto.CantidadPasajeros = cantidadPasajeros;
+                nuevoAuto.CantidadPasajeros = cantidadPasajeros;
             }
             if (validarNumero(txtCantidadPuertas.Text, out cantidadPuertas))
             {
-                auto.CantidadPuertas = cantidadPuertas;
+                nuevoAuto.CantidadPuertas = cantidadPuertas;
             }
-            return auto;
+            return nuevoAuto;
         }
 
     }

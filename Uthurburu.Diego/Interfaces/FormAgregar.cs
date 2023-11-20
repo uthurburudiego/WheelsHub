@@ -21,10 +21,10 @@ namespace Interfaces
         {
             InitializeComponent();
 
-            cboColor.DataSource = Enum.GetValues(typeof(eColores));
+            //cboColor.DataSource = Enum.GetValues(typeof(eColores)); 
         }
 
-       protected static bool validarNumero(string valorIngresado, out double valorSalida)
+        protected static bool validarNumero(string valorIngresado, out double valorSalida)
         {
             bool retorno = false;
             if (double.TryParse(valorIngresado, out valorSalida))
@@ -37,7 +37,7 @@ namespace Interfaces
             }
             return retorno;
         }
-       protected static bool validarNumero(string valorIngresado, out int valorSalida)
+        protected static bool validarNumero(string valorIngresado, out int valorSalida)
         {
             bool retorno = false;
             if (int.TryParse(valorIngresado, out valorSalida))
@@ -51,6 +51,6 @@ namespace Interfaces
             return retorno;
         }
 
-   
+
     }
 }

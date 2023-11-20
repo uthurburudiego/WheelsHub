@@ -19,5 +19,14 @@
     <Compile Update="FormInicio.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="FormModificarAuto.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="FormModificarCamion.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="FormModificarMoto.cs">
+      <SubType>Form</SubType>
+    </Compile>
   </ItemGroup>
 </Project>

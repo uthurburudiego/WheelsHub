@@ -31,15 +31,15 @@
             ((System.ComponentModel.ISupportInitialize)picImagen).BeginInit();
             SuspendLayout();
             // 
-            // btnCancelar
-            // 
-            btnCancelar.Location = new Point(496, 340);
-            btnCancelar.Click += btnCancelar_Click;
-            // 
             // btnGuardar
             // 
             btnGuardar.Location = new Point(350, 340);
             btnGuardar.Click += btnGuardar_Click;
+            // 
+            // btnCancelar
+            // 
+            btnCancelar.Location = new Point(496, 340);
+            btnCancelar.Click += btnCancelar_Click;
             // 
             // txtChasis
             // 
@@ -67,6 +67,7 @@
             // 
             // cboColor
             // 
+            cboColor.Items.AddRange(new object[] { eColores.Seleccionar, eColores.Blanco, eColores.Negro, eColores.Rojo, eColores.Azul, eColores.Plata, eColores.Gris, eColores.Verde, eColores.Amarillo, eColores.Marrón, eColores.Naranja });
             cboColor.Location = new Point(774, 232);
             // 
             // txtTara
@@ -141,7 +142,7 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(966, 450);
+            ClientSize = new Size(950, 450);
             ControlBox = false;
             FormBorderStyle = FormBorderStyle.None;
             Name = "FormAgregarMoto";

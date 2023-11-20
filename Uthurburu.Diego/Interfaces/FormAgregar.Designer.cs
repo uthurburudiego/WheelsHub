@@ -338,7 +338,7 @@
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.Black;
-            ClientSize = new Size(953, 483);
+            ClientSize = new Size(1004, 450);
             Controls.Add(lblPasajeros);
             Controls.Add(lblPuertas);
             Controls.Add(lblEjes);

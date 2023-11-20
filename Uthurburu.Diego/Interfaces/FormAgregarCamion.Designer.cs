@@ -53,6 +53,10 @@
             // 
             cboABS.Location = new Point(1220, 509);
             // 
+            // cboColor
+            // 
+            cboColor.Items.AddRange(new object[] { eColores.Seleccionar, eColores.Blanco, eColores.Negro, eColores.Rojo, eColores.Azul, eColores.Plata, eColores.Gris, eColores.Verde, eColores.Amarillo, eColores.Marrón, eColores.Naranja });
+            // 
             // txtTara
             // 
             txtTara.Location = new Point(363, 226);
@@ -106,7 +110,7 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(966, 450);
+            ClientSize = new Size(950, 450);
             ControlBox = false;
             FormBorderStyle = FormBorderStyle.None;
             Name = "FormAgregarCamion";

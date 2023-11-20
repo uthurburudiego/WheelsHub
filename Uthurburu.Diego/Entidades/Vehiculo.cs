@@ -1,6 +1,7 @@
 ﻿using WheelsHub.Logica;
 using System.Xml.Serialization;
 using System.Windows.Forms;
+using Microsoft.Data.SqlClient;
 
 namespace WheelsHub
 {
@@ -17,6 +18,7 @@ namespace WheelsHub
         protected eColores color;
         protected eTipoVehiculo tipoVehiculo;
         protected double costo;
+        
         #endregion
 
         #region Constructores

@@ -44,17 +44,21 @@
             motosToolStripMenuItem = new ToolStripMenuItem();
             autosToolStripMenuItem = new ToolStripMenuItem();
             camionesToolStripMenuItem = new ToolStripMenuItem();
+            todosToolStripMenuItem = new ToolStripMenuItem();
             salirToolStripMenuItem1 = new ToolStripMenuItem();
+            cerrarSesionToolStripMenuItem = new ToolStripMenuItem();
+            cerrarAplicacionToolStripMenuItem = new ToolStripMenuItem();
+            lblFecha = new Label();
             ((System.ComponentModel.ISupportInitialize)dtgVehiculos).BeginInit();
             msMenu.SuspendLayout();
             SuspendLayout();
             // 
             // txtBuscador
             // 
-            txtBuscador.Location = new Point(164, 186);
+            txtBuscador.Location = new Point(199, 286);
             txtBuscador.Name = "txtBuscador";
             txtBuscador.PlaceholderText = "Buscar";
-            txtBuscador.Size = new Size(651, 23);
+            txtBuscador.Size = new Size(717, 23);
             txtBuscador.TabIndex = 0;
             // 
             // btnBuscar
@@ -63,9 +67,9 @@
             btnBuscar.FlatStyle = FlatStyle.Flat;
             btnBuscar.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
             btnBuscar.ForeColor = Color.White;
-            btnBuscar.Location = new Point(842, 182);
+            btnBuscar.Location = new Point(835, 325);
             btnBuscar.Name = "btnBuscar";
-            btnBuscar.Size = new Size(81, 27);
+            btnBuscar.Size = new Size(81, 26);
             btnBuscar.TabIndex = 1;
             btnBuscar.Text = "Buscar";
             btnBuscar.UseVisualStyleBackColor = false;
@@ -74,18 +78,19 @@
             // 
             btnModificar.FlatStyle = FlatStyle.Flat;
             btnModificar.ForeColor = Color.Snow;
-            btnModificar.Location = new Point(164, 505);
+            btnModificar.Location = new Point(199, 595);
             btnModificar.Name = "btnModificar";
             btnModificar.Size = new Size(81, 27);
             btnModificar.TabIndex = 3;
             btnModificar.Text = "Modificar";
             btnModificar.UseVisualStyleBackColor = true;
+            btnModificar.Click += btnModificar_Click;
             // 
             // btnBorrar
             // 
             btnBorrar.FlatStyle = FlatStyle.Flat;
             btnBorrar.ForeColor = Color.Snow;
-            btnBorrar.Location = new Point(292, 505);
+            btnBorrar.Location = new Point(835, 595);
             btnBorrar.Name = "btnBorrar";
             btnBorrar.Size = new Size(81, 27);
             btnBorrar.TabIndex = 4;
@@ -95,12 +100,14 @@
             // 
             // dtgVehiculos
             // 
+            dtgVehiculos.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             dtgVehiculos.BackgroundColor = Color.Black;
             dtgVehiculos.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dtgVehiculos.Location = new Point(164, 288);
+            dtgVehiculos.Location = new Point(199, 413);
             dtgVehiculos.Name = "dtgVehiculos";
             dtgVehiculos.RowTemplate.Height = 25;
-            dtgVehiculos.Size = new Size(381, 189);
+            dtgVehiculos.RowTemplate.ReadOnly = true;
+            dtgVehiculos.Size = new Size(717, 154);
             dtgVehiculos.TabIndex = 5;
             dtgVehiculos.CellMouseClick += dtgVehiculos_CellMouseClick;
             // 
@@ -110,7 +117,7 @@
             label1.BackColor = Color.Transparent;
             label1.Font = new Font("Segoe UI", 44.25F, FontStyle.Regular, GraphicsUnit.Point);
             label1.ForeColor = Color.Snow;
-            label1.Location = new Point(405, 57);
+            label1.Location = new Point(405, 95);
             label1.Name = "label1";
             label1.Size = new Size(332, 78);
             label1.TabIndex = 6;
@@ -122,7 +129,7 @@
             lblSaludo.BackColor = Color.Transparent;
             lblSaludo.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point);
             lblSaludo.ForeColor = Color.Snow;
-            lblSaludo.Location = new Point(782, 9);
+            lblSaludo.Location = new Point(601, 9);
             lblSaludo.Name = "lblSaludo";
             lblSaludo.Size = new Size(105, 21);
             lblSaludo.TabIndex = 10;
@@ -135,7 +142,7 @@
             msMenu.Items.AddRange(new ToolStripItem[] { agregarToolStripMenuItem, salirToolStripMenuItem, salirToolStripMenuItem1 });
             msMenu.Location = new Point(0, 0);
             msMenu.Name = "msMenu";
-            msMenu.Size = new Size(1185, 29);
+            msMenu.Size = new Size(1064, 29);
             msMenu.TabIndex = 11;
             msMenu.Text = "menuStrip1";
             // 
@@ -172,7 +179,7 @@
             // salirToolStripMenuItem
             // 
             salirToolStripMenuItem.BackColor = Color.White;
-            salirToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { motosToolStripMenuItem, autosToolStripMenuItem, camionesToolStripMenuItem });
+            salirToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { motosToolStripMenuItem, autosToolStripMenuItem, camionesToolStripMenuItem, todosToolStripMenuItem });
             salirToolStripMenuItem.Name = "salirToolStripMenuItem";
             salirToolStripMenuItem.Size = new Size(48, 25);
             salirToolStripMenuItem.Text = "Ver";
@@ -198,14 +205,47 @@
             camionesToolStripMenuItem.Text = "Camiones";
             camionesToolStripMenuItem.Click += camionesToolStripMenuItem_Click;
             // 
+            // todosToolStripMenuItem
+            // 
+            todosToolStripMenuItem.Name = "todosToolStripMenuItem";
+            todosToolStripMenuItem.Size = new Size(156, 26);
+            todosToolStripMenuItem.Text = "Todos";
+            todosToolStripMenuItem.Click += todosToolStripMenuItem_Click;
+            // 
             // salirToolStripMenuItem1
             // 
             salirToolStripMenuItem1.BackColor = Color.White;
+            salirToolStripMenuItem1.DropDownItems.AddRange(new ToolStripItem[] { cerrarSesionToolStripMenuItem, cerrarAplicacionToolStripMenuItem });
             salirToolStripMenuItem1.ForeColor = SystemColors.ControlText;
             salirToolStripMenuItem1.Name = "salirToolStripMenuItem1";
             salirToolStripMenuItem1.Size = new Size(54, 25);
             salirToolStripMenuItem1.Text = "Salir";
-            salirToolStripMenuItem1.Click += salirToolStripMenuItem1_Click;
+            // 
+            // cerrarSesionToolStripMenuItem
+            // 
+            cerrarSesionToolStripMenuItem.Name = "cerrarSesionToolStripMenuItem";
+            cerrarSesionToolStripMenuItem.Size = new Size(210, 26);
+            cerrarSesionToolStripMenuItem.Text = "Cerrar Sesion";
+            cerrarSesionToolStripMenuItem.Click += cerrarSesionToolStripMenuItem_Click;
+            // 
+            // cerrarAplicacionToolStripMenuItem
+            // 
+            cerrarAplicacionToolStripMenuItem.Name = "cerrarAplicacionToolStripMenuItem";
+            cerrarAplicacionToolStripMenuItem.Size = new Size(210, 26);
+            cerrarAplicacionToolStripMenuItem.Text = "Cerrar Aplicacion";
+            cerrarAplicacionToolStripMenuItem.Click += cerrarAplicacionToolStripMenuItem_Click;
+            // 
+            // lblFecha
+            // 
+            lblFecha.AutoSize = true;
+            lblFecha.BackColor = Color.Transparent;
+            lblFecha.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point);
+            lblFecha.ForeColor = Color.Snow;
+            lblFecha.Location = new Point(953, 9);
+            lblFecha.Name = "lblFecha";
+            lblFecha.Size = new Size(62, 21);
+            lblFecha.TabIndex = 12;
+            lblFecha.Text = "Fecha: ";
             // 
             // FormInicio
             // 
@@ -214,7 +254,8 @@
             BackColor = Color.Black;
             BackgroundImage = Properties.Resources.fondoMoto;
             BackgroundImageLayout = ImageLayout.Stretch;
-            ClientSize = new Size(1185, 742);
+            ClientSize = new Size(1064, 681);
+            Controls.Add(lblFecha);
             Controls.Add(lblSaludo);
             Controls.Add(label1);
             Controls.Add(dtgVehiculos);
@@ -224,7 +265,9 @@
             Controls.Add(txtBuscador);
             Controls.Add(msMenu);
             DoubleBuffered = true;
+            FormBorderStyle = FormBorderStyle.FixedSingle;
             MainMenuStrip = msMenu;
+            MaximizeBox = false;
             Name = "FormInicio";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Inicio";
@@ -257,5 +300,9 @@
         private ToolStripMenuItem motosToolStripMenuItem;
         private ToolStripMenuItem autosToolStripMenuItem;
         private ToolStripMenuItem camionesToolStripMenuItem;
+        private ToolStripMenuItem todosToolStripMenuItem;
+        private ToolStripMenuItem cerrarSesionToolStripMenuItem;
+        private ToolStripMenuItem cerrarAplicacionToolStripMenuItem;
+        private Label lblFecha;
     }
 }

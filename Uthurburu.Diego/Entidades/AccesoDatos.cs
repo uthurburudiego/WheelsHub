@@ -93,6 +93,54 @@ namespace Entidades
             }
             return lista;
         }
+        public List<Camion> ObtenerListaCamion()
+        {
+            List<Camion> lista = new List<Camion>();
+
+            try
+            {
+                this.comando = new SqlCommand();
+                this.comando.CommandType = System.Data.CommandType.Text;
+                this.comando.CommandText = "select Chasis, Modelo, Color, TipoVehiculo, Costo, CantidadEjes, Tara, Marca from Vehiculos";
+                this.comando.Connection = this.conexion;
+
+                this.conexion.Open();
+                this.lector = this.comando.ExecuteReader();
+
+                while (this.lector.Read())
+                {
+                    if ((int)this.lector["TipoVehiculo"] == 3)
+                    {
+                        Camion camion = new Camion();
+                        camion.NumeroChasis = this.lector["Chasis"].ToString();
+                        camion.Modelo = this.lector["Modelo"].ToString();
+                        camion.Color = (eColores)this.lector["Color"];
+                        camion.TipoVehiculo = (eTipoVehiculo)this.lector["TipoVehiculo"];
+                        camion.Costo = (double)this.lector["Costo"];
+                        camion.CantidadEjes = (int)this.lector["CantidadEjes"];
+                        camion.Tara = (int)this.lector["Tara"];
+                        camion.Marca = (eMarcasCamiones)this.lector["Marca"];
+
+                        lista.Add(camion);
+                    }
+                }
+                this.lector.Close();
+
+            }
+            catch (Exception ex)
+            {
+
+
+            }
+            finally
+            {
+                if (this.conexion.State == System.Data.ConnectionState.Open)
+                {
+                    this.conexion.Close();
+                }
+            }
+            return lista;
+        }
         public List<Moto> ObtenerListaMoto()
         {
             List<Moto> lista = new List<Moto>();
@@ -143,44 +191,6 @@ namespace Entidades
             return lista;
 
         }
-        public bool AgregarMoto(Moto nuevaMoto)
-        {
-            
-            try
-            {
-                this.comando = new SqlCommand();
-                this.comando.CommandType = System.Data.CommandType.Text;
-                this.comando.CommandText = "INSERT INTO Vehiculos (Chasis, Modelo, Color, TipoVehiculo, Costo, Cilindrada, FrenoABS, Marca) " +
-                                           "VALUES (@Chasis, @Modelo, @Color, @TipoVehiculo, @Costo, @Cilindrada, @FrenoABS, @Marca)";
-                this.comando.Connection = this.conexion;
-
-                this.comando.Parameters.AddWithValue("@Chasis", nuevaMoto.NumeroChasis);
-                this.comando.Parameters.AddWithValue("@Modelo", nuevaMoto.Modelo);
-                this.comando.Parameters.AddWithValue("@Color", nuevaMoto.Color);
-                this.comando.Parameters.AddWithValue("@TipoVehiculo", (int)nuevaMoto.TipoVehiculo);
-                this.comando.Parameters.AddWithValue("@Costo", nuevaMoto.Costo);
-                this.comando.Parameters.AddWithValue("@Cilindrada", nuevaMoto.Cilindrada);
-                this.comando.Parameters.AddWithValue("@FrenoABS", (int)nuevaMoto.FrenosABS);
-                this.comando.Parameters.AddWithValue("@Marca", (int)nuevaMoto.Marca);
-
-                this.conexion.Open();
-                int rowsAffected = this.comando.ExecuteNonQuery();
-
-                return rowsAffected > 0;
-            }
-            catch (Exception ex)
-            {
-                // Manejar la excepción, por ejemplo, loguearla o mostrar un mensaje al usuario.
-                return false;
-            }
-            finally
-            {
-                if (this.conexion.State == System.Data.ConnectionState.Open)
-                {
-                    this.conexion.Close();
-                }
-            }
-        }
         public List<Auto> ObtenerListaAuto()
         {
             List<Auto> lista = new List<Auto>();
@@ -230,6 +240,122 @@ namespace Entidades
             }
             return lista;
 
+        }
+        public List<Vehiculo> ObtenerListaVehiculos()
+        {
+            List<Vehiculo> lista = new List<Vehiculo>();
+
+            try
+            {
+                
+
+                this.comando = new SqlCommand();
+                this.comando.CommandType = System.Data.CommandType.Text;
+                this.comando.CommandText = "select Chasis, Modelo, Color, TipoVehiculo, Costo, CantidadEjes, Tara,CantidadPasajeros, Marca, CantidadPuertas, Cilindrada, FrenoABS from Vehiculos";
+                this.comando.Connection = this.conexion;
+
+                this.conexion.Open();
+                this.lector = this.comando.ExecuteReader();
+
+                while (this.lector.Read())
+                {
+                    if ((int)this.lector["TipoVehiculo"] == 3)
+                    {
+                        Camion camion = new Camion();
+                        camion.NumeroChasis = this.lector["Chasis"].ToString();
+                        camion.Modelo = this.lector["Modelo"].ToString();
+                        camion.Color = (eColores)this.lector["Color"];
+                        camion.TipoVehiculo = (eTipoVehiculo)this.lector["TipoVehiculo"];
+                        camion.Costo = (double)this.lector["Costo"];
+                        camion.CantidadEjes = (int)this.lector["CantidadEjes"];
+                        camion.Tara = (int)this.lector["Tara"];
+                        camion.Marca = (eMarcasCamiones)this.lector["Marca"];
+
+                        lista.Add(camion);
+                    }
+                    if ((int)this.lector["TipoVehiculo"] == 2)
+                    {
+                        Moto moto = new Moto();
+                        moto.NumeroChasis = this.lector["Chasis"].ToString();
+                        moto.Modelo = this.lector["Modelo"].ToString();
+                        moto.Color = (eColores)this.lector["Color"];
+                        moto.TipoVehiculo = (eTipoVehiculo)this.lector["TipoVehiculo"];
+                        moto.Costo = (double)this.lector["Costo"];
+                        moto.Cilindrada = (int)this.lector["Cilindrada"];
+                        moto.FrenosABS = (eTipoDeFrenos)this.lector["FrenoABS"];
+                        moto.Marca = (eMarcasMotos)this.lector["Marca"];
+
+                        lista.Add(moto);
+                    }
+                    if ((int)this.lector["TipoVehiculo"] == 1)
+                    {
+                        Auto auto = new Auto();
+                        auto.NumeroChasis = this.lector["Chasis"].ToString();
+                        auto.Modelo = this.lector["Modelo"].ToString();
+                        auto.Color = (eColores)this.lector["Color"];
+                        auto.TipoVehiculo = (eTipoVehiculo)this.lector["TipoVehiculo"];
+                        auto.Costo = (double)this.lector["Costo"];
+                        auto.CantidadPuertas = (int)this.lector["CantidadPuertas"];
+                        auto.CantidadPasajeros = (int)this.lector["CantidadPasajeros"];
+                        auto.Marca = (eMarcasAutos)this.lector["Marca"];
+
+                        lista.Add(auto);
+                    }
+                }
+                this.lector.Close();
+
+            }
+            catch (Exception ex)
+            {
+
+
+            }
+            finally
+            {
+                if (this.conexion.State == System.Data.ConnectionState.Open)
+                {
+                    this.conexion.Close();
+                }
+            }
+            return lista;
+        }
+        public bool AgregarMoto(Moto nuevaMoto)
+        {
+            
+            try
+            {
+                this.comando = new SqlCommand();
+                this.comando.CommandType = System.Data.CommandType.Text;
+                this.comando.CommandText = "INSERT INTO Vehiculos (Chasis, Modelo, Color, TipoVehiculo, Costo, Cilindrada, FrenoABS, Marca) " +
+                                           "VALUES (@Chasis, @Modelo, @Color, @TipoVehiculo, @Costo, @Cilindrada, @FrenoABS, @Marca)";
+                this.comando.Connection = this.conexion;
+
+                this.comando.Parameters.AddWithValue("@Chasis", nuevaMoto.NumeroChasis);
+                this.comando.Parameters.AddWithValue("@Modelo", nuevaMoto.Modelo);
+                this.comando.Parameters.AddWithValue("@Color", nuevaMoto.Color);
+                this.comando.Parameters.AddWithValue("@TipoVehiculo", (int)nuevaMoto.TipoVehiculo);
+                this.comando.Parameters.AddWithValue("@Costo", nuevaMoto.Costo);
+                this.comando.Parameters.AddWithValue("@Cilindrada", nuevaMoto.Cilindrada);
+                this.comando.Parameters.AddWithValue("@FrenoABS", (int)nuevaMoto.FrenosABS);
+                this.comando.Parameters.AddWithValue("@Marca", (int)nuevaMoto.Marca);
+
+                this.conexion.Open();
+                int rowsAffected = this.comando.ExecuteNonQuery();
+
+                return rowsAffected > 0;
+            }
+            catch (Exception ex)
+            {
+                // Manejar la excepción, por ejemplo, loguearla o mostrar un mensaje al usuario.
+                return false;
+            }
+            finally
+            {
+                if (this.conexion.State == System.Data.ConnectionState.Open)
+                {
+                    this.conexion.Close();
+                }
+            }
         }
         public bool AgregarAuto(Auto auto)
         {
@@ -310,44 +436,38 @@ namespace Entidades
                 }
             }
         }
-        public List<Camion> ObtenerListaCamion()
+        public bool ModificarMoto(Moto moto)
         {
-            List<Camion> lista = new List<Camion>();
-
             try
             {
-                this.comando = new SqlCommand();
-                this.comando.CommandType = System.Data.CommandType.Text;
-                this.comando.CommandText = "select Chasis, Modelo, Color, TipoVehiculo, Costo, CantidadEjes, Tara, Marca from Vehiculos";
-                this.comando.Connection = this.conexion;
-
-                this.conexion.Open();
-                this.lector = this.comando.ExecuteReader();
-
-                while (this.lector.Read())
+                using (SqlConnection connection = new SqlConnection(cadena_conexion))
                 {
-                    if ((int)this.lector["TipoVehiculo"] == 3)
-                    {
-                        Camion camion = new Camion();
-                        camion.NumeroChasis = this.lector["Chasis"].ToString();
-                        camion.Modelo = this.lector["Modelo"].ToString();
-                        camion.Color = (eColores)this.lector["Color"];
-                        camion.TipoVehiculo = (eTipoVehiculo)this.lector["TipoVehiculo"];
-                        camion.Costo = (double)this.lector["Costo"];
-                        camion.CantidadEjes = (int)this.lector["CantidadEjes"];
-                        camion.Tara = (int)this.lector["Tara"];
-                        camion.Marca = (eMarcasCamiones)this.lector["Marca"];
+                    connection.Open();
 
-                        lista.Add(camion);
+                    string query = "UPDATE Vehiculos SET Modelo = @Modelo, Color = @Color, TipoVehiculo = @TipoVehiculo, Costo = @Costo, FrenoABS = @FrenoABS, Cilindrada = @Cilindrada, Marca = @Marca WHERE Chasis = @Chasis";
+
+                    using (SqlCommand command = new SqlCommand(query, connection))
+                    {
+                        command.Parameters.AddWithValue("@Modelo", moto.Modelo);
+                        command.Parameters.AddWithValue("@Color", moto.Color);
+                        command.Parameters.AddWithValue("@TipoVehiculo", moto.TipoVehiculo);
+                        command.Parameters.AddWithValue("@Costo", moto.Costo);
+                        command.Parameters.AddWithValue("@Chasis", moto.NumeroChasis);
+                        command.Parameters.AddWithValue("@Cilindrada", moto.Cilindrada);
+                        command.Parameters.AddWithValue("@FrenoABS", moto.FrenosABS);
+                        command.Parameters.AddWithValue("@Marca", moto.Marca);
+
+                        int rowsAffected = command.ExecuteNonQuery();
+
+                        return rowsAffected > 0; // Retorna true si se realizaron cambios en la base de datos.
                     }
                 }
-                this.lector.Close();
-
             }
             catch (Exception ex)
             {
-
-
+              
+              
+                return false;
             }
             finally
             {
@@ -356,7 +476,123 @@ namespace Entidades
                     this.conexion.Close();
                 }
             }
-            return lista;
+        }
+        public bool ModificarAuto(Auto auto)
+        {
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(cadena_conexion))
+                {
+                    connection.Open();
+
+                    string query = "UPDATE Vehiculos SET Modelo = @Modelo, Color = @Color, TipoVehiculo = @TipoVehiculo, Costo = @Costo, CantidadPasajeros = @CantidadPasajeros, CantidadPuertas = @CantidadPuertas, Marca = @Marca WHERE Chasis = @Chasis";
+
+                    using (SqlCommand command = new SqlCommand(query, connection))
+                    {
+                        command.Parameters.AddWithValue("@Modelo", auto.Modelo);
+                        command.Parameters.AddWithValue("@Color", auto.Color);
+                        command.Parameters.AddWithValue("@TipoVehiculo", auto.TipoVehiculo);
+                        command.Parameters.AddWithValue("@Costo", auto.Costo);
+                        command.Parameters.AddWithValue("@Chasis", auto.NumeroChasis);
+                        command.Parameters.AddWithValue("@CantidadPasajeros", auto.CantidadPasajeros);
+                        command.Parameters.AddWithValue("@CantidadPuertas", auto.CantidadPuertas);
+                        command.Parameters.AddWithValue("@Marca", auto.Marca);
+
+                        int rowsAffected = command.ExecuteNonQuery();
+
+                        return rowsAffected > 0; // Retorna true si se realizaron cambios en la base de datos.
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+
+
+                return false;
+            }
+            finally
+            {
+                if (this.conexion.State == System.Data.ConnectionState.Open)
+                {
+                    this.conexion.Close();
+                }
+            }
+        }
+        public bool ModificarCamion(Camion camion)
+        {
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(cadena_conexion))
+                {
+                    connection.Open();
+
+                    string query = "UPDATE Vehiculos SET Modelo = @Modelo, Color = @Color, TipoVehiculo = @TipoVehiculo, Costo = @Costo, CantidadEjes = @CantidadEjes, Tara = @Tara, Marca = @Marca WHERE Chasis = @Chasis";
+
+                    using (SqlCommand command = new SqlCommand(query, connection))
+                    {
+                        command.Parameters.AddWithValue("@Modelo", camion.Modelo);
+                        command.Parameters.AddWithValue("@Color", camion.Color);
+                        command.Parameters.AddWithValue("@TipoVehiculo", camion.TipoVehiculo);
+                        command.Parameters.AddWithValue("@Costo", camion.Costo);
+                        command.Parameters.AddWithValue("@Chasis", camion.NumeroChasis);
+                        command.Parameters.AddWithValue("@CantidadEjes", camion.CantidadEjes);
+                        command.Parameters.AddWithValue("@Tara", camion.Tara);
+                        command.Parameters.AddWithValue("@Marca", camion.Marca);
+
+
+                        int rowsAffected = command.ExecuteNonQuery();
+
+                        return rowsAffected > 0; // Retorna true si se realizaron cambios en la base de datos.
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+
+
+                return false;
+            }
+            finally
+            {
+                if (this.conexion.State == System.Data.ConnectionState.Open)
+                {
+                    this.conexion.Close();
+                }
+            }
+        }
+        public bool VehiculoExiste(string numeroChasis)
+        {
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(cadena_conexion))
+                {
+                    connection.Open();
+
+                    string query = "SELECT COUNT(*) FROM Vehiculos WHERE Chasis = @Chasis";
+
+                    using (SqlCommand command = new SqlCommand(query, connection))
+                    {
+                        command.Parameters.AddWithValue("@Chasis", numeroChasis);
+
+                        int count = (int)command.ExecuteScalar();
+
+                        return count > 0; // Retorna true si ya existe un vehículo con el mismo número de chasis.
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+             
+              
+                return false;
+            }
+            finally
+            {
+                if (this.conexion.State == System.Data.ConnectionState.Open)
+                {
+                    this.conexion.Close();
+                }
+            }
         }
         public void BorrarVehiculo(string numeroChasis)
         {
@@ -397,84 +633,6 @@ namespace Entidades
             }
         }
 
-        public List<Vehiculo> ObtenerListaVehiculos()
-        {
-            List<Vehiculo> lista = new List<Vehiculo>();
-
-            try
-            {
-                
-
-                this.comando = new SqlCommand();
-                this.comando.CommandType = System.Data.CommandType.Text;
-                this.comando.CommandText = "select Chasis, Modelo, Color, TipoVehiculo, Costo, CantidadEjes, Tara,CantidadPasajeros, Marca, CantidadPuertas, Cilindrada, FrenoABS from Vehiculos";
-                this.comando.Connection = this.conexion;
-
-                this.conexion.Open();
-                this.lector = this.comando.ExecuteReader();
-
-                while (this.lector.Read())
-                {
-                    if ((int)this.lector["TipoVehiculo"] == 3)
-                    {
-                        Camion camion = new Camion();
-                        camion.NumeroChasis = this.lector["Chasis"].ToString();
-                        camion.Modelo = this.lector["Modelo"].ToString();
-                        camion.Color = (eColores)this.lector["Color"];
-                        camion.TipoVehiculo = (eTipoVehiculo)this.lector["TipoVehiculo"];
-                        camion.Costo = (double)this.lector["Costo"];
-                        camion.CantidadEjes = (int)this.lector["CantidadEjes"];
-                        camion.Tara = (int)this.lector["Tara"];
-                        camion.Marca = (eMarcasCamiones)this.lector["Marca"];
-
-                        lista.Add(camion);
-                    }
-                    if ((int)this.lector["TipoVehiculo"] == 2)
-                    {
-                        Moto moto = new Moto();
-                        moto.NumeroChasis = this.lector["Chasis"].ToString();
-                        moto.Modelo = this.lector["Modelo"].ToString();
-                        moto.Color = (eColores)this.lector["Color"];
-                        moto.TipoVehiculo = (eTipoVehiculo)this.lector["TipoVehiculo"];
-                        moto.Costo = (double)this.lector["Costo"];
-                        moto.Cilindrada = (int)this.lector["Cilindrada"];
-                        moto.FrenosABS = (eTipoDeFrenos)this.lector["FrenoABS"];
-                        moto.Marca = (eMarcasMotos)this.lector["Marca"];
-
-                        lista.Add(moto);
-                    }
-                    if ((int)this.lector["TipoVehiculo"] == 1)
-                    {
-                        Auto auto = new Auto();
-                        auto.NumeroChasis = this.lector["Chasis"].ToString();
-                        auto.Modelo = this.lector["Modelo"].ToString();
-                        auto.Color = (eColores)this.lector["Color"];
-                        auto.TipoVehiculo = (eTipoVehiculo)this.lector["TipoVehiculo"];
-                        auto.Costo = (double)this.lector["Costo"];
-                        auto.CantidadPuertas = (int)this.lector["CantidadPuertas"];
-                        auto.CantidadPasajeros = (int)this.lector["CantidadPasajeros"];
-                        auto.Marca = (eMarcasAutos)this.lector["Marca"];
-
-                        lista.Add(auto);
-                    }
-                }
-                this.lector.Close();
-
-            }
-            catch (Exception ex)
-            {
-
-
-            }
-            finally
-            {
-                if (this.conexion.State == System.Data.ConnectionState.Open)
-                {
-                    this.conexion.Close();
-                }
-            }
-            return lista;
-        }
 
     }
 }

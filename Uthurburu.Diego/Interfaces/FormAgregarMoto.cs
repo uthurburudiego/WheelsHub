@@ -37,7 +37,7 @@ namespace Interfaces
 
             cboABS.DataSource = Enum.GetValues(typeof(eTipoDeFrenos));
             cboMarca.DataSource = Enum.GetValues(typeof(eMarcasMotos));
-           
+
         }
 
         private void btnCancelar_Click(object sender, EventArgs e)
@@ -47,12 +47,22 @@ namespace Interfaces
 
         private void btnGuardar_Click(object sender, EventArgs e)
         {
-            datos.AgregarMoto(RecuperarInformacion(this.nuevaMoto));
+            this.nuevaMoto = RecuperarInformacion();
+            if (datos.VehiculoExiste(this.nuevaMoto.NumeroChasis))
+            {
+
+            }
+            else
+            {
+                datos.AgregarMoto(this.nuevaMoto);
+            }
             this.Close();
         }
 
-        private Moto RecuperarInformacion(Moto moto)
+
+        protected Moto RecuperarInformacion()
         {
+            Moto moto = new Moto();
             double costo = 0;
             int cilindrada = 0;
             moto.TipoVehiculo = eTipoVehiculo.Moto;

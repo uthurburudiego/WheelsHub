@@ -45,34 +45,34 @@ namespace Interfaces
 
         private void btnGuardar_Click(object sender, EventArgs e)
         {
-            datos.AgregarCamion(RecuperarInformacion(this.nuevoCamion));
+            datos.AgregarCamion(RecuperarInformacion());
             this.Close();
         }
 
-        private Camion RecuperarInformacion(Camion camion)
+        protected Camion RecuperarInformacion()
         {
             double costo = 0;
             int tara = 0;
             int cantidadEjes = 0;
-            camion.TipoVehiculo = eTipoVehiculo.Camion;
-            camion.Modelo = txtModelo.Text;
-            camion.NumeroChasis = txtChasis.Text;
-            camion.Marca = (eMarcasCamiones)cboMarca.SelectedItem;
-            camion.Color = (eColores)cboColor.SelectedItem;
+            nuevoCamion.TipoVehiculo = eTipoVehiculo.Camion;
+            nuevoCamion.Modelo = txtModelo.Text;
+            nuevoCamion.NumeroChasis = txtChasis.Text;
+            nuevoCamion.Marca = (eMarcasCamiones)cboMarca.SelectedItem;
+            nuevoCamion.Color = (eColores)cboColor.SelectedItem;
 
             if (validarNumero(txtCosto.Text, out costo))
             {
-                camion.Costo = costo;
+                nuevoCamion.Costo = costo;
             }
             if (validarNumero(txtTara.Text, out tara))
             {
-                camion.Tara = tara;
+                nuevoCamion.Tara = tara;
             }
             if (validarNumero(txtCantidadEjes.Text, out cantidadEjes))
             {
-                camion.CantidadEjes = cantidadEjes;
+                nuevoCamion.CantidadEjes = cantidadEjes;
             }
-            return camion;
+            return nuevoCamion;
         }
     }
 }
