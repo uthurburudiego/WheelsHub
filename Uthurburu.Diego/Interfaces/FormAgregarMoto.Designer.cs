@@ -28,8 +28,14 @@
         /// </summary>
         private void InitializeComponent()
         {
+            dlgImagen = new OpenFileDialog();
             ((System.ComponentModel.ISupportInitialize)picImagen).BeginInit();
             SuspendLayout();
+            // 
+            // lblTitulo
+            // 
+            lblTitulo.Size = new Size(403, 78);
+            lblTitulo.Text = "Agregar Moto";
             // 
             // btnGuardar
             // 
@@ -89,10 +95,12 @@
             // picImagen
             // 
             picImagen.Size = new Size(187, 175);
+            picImagen.SizeMode = PictureBoxSizeMode.StretchImage;
             // 
             // btnExaminar
             // 
             btnExaminar.Location = new Point(80, 340);
+            btnExaminar.Click += btnExaminar_Click_1;
             // 
             // lblChasis
             // 
@@ -138,6 +146,10 @@
             // 
             lblPasajeros.Location = new Point(1467, 485);
             // 
+            // dlgImagen
+            // 
+            dlgImagen.FileName = "openFileDialog1";
+            // 
             // FormAgregarMoto
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -154,5 +166,7 @@
         }
 
         #endregion
+
+        private OpenFileDialog dlgImagen;
     }
 }

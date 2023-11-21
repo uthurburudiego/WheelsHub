@@ -18,8 +18,12 @@ namespace WheelsHub.Logica
         #endregion
 
         #region Constructores
-        public Moto()
-        { }
+        public Moto(): base()
+        { 
+            this.cilindrada = 0;
+            this.frenosABS = eTipoDeFrenos.Seleccionar;
+            this.marca = eMarcasMotos.Seleccionar;
+        }
 
         public Moto(string modelo, string numeroChasis, eColores color, eTipoVehiculo tipoVehiculo, double costo) :base(modelo, numeroChasis, color, tipoVehiculo, costo)
         { 
@@ -74,9 +78,9 @@ namespace WheelsHub.Logica
         /// </summary>
         /// <param name="texto">El texto que se utilizará para la descripción.</param>
         /// <returns>Una cadena que representa la descripción basada en el texto proporcionado.</returns>
-        public override string ObtenerDescripcion(string texto)
+        public override string ObtenerDescripcion()
         {
-            return texto;
+            return "Experimenta la libertad en su máxima expresión con nuestra excepcional línea de motocicletas. \nDesde el rugido del motor hasta la elegancia en el diseño, nuestras motos están diseñadas para ofrecer \nemociones auténticas en cada viaje. Descubre la perfecta combinación de potencia, estilo y tecnología \nque redefine la experiencia de conducción en dos ruedas. ¡Haz que cada viaje sea una aventura \ninolvidable con nuestras extraordinarias motocicletas!";
         }
         /// <summary>
         /// Calcula el costo de mantenimiento específico para este Camión.
@@ -92,7 +96,7 @@ namespace WheelsHub.Logica
 
         public override string ToString()
         {
-            return base.ToString() + $"- Marca: {Marca} - Cilindrada: {Cilindrada} - Frenos ABS: {FrenosABS}";
+            return base.ToString() + $"\nMarca: {Marca} \nCilindrada: {Cilindrada} \nFrenos ABS: {FrenosABS}";
         }
 
         public override bool Equals(object? obj)

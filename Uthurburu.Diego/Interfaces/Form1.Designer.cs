@@ -44,6 +44,7 @@
             txtUsuario.PlaceholderText = "Ingrese usuario";
             txtUsuario.Size = new Size(182, 33);
             txtUsuario.TabIndex = 2;
+            txtUsuario.KeyDown += txtUsuario_KeyDown;
             // 
             // txtContraseña
             // 
@@ -54,6 +55,7 @@
             txtContraseña.Size = new Size(182, 33);
             txtContraseña.TabIndex = 3;
             txtContraseña.UseSystemPasswordChar = true;
+            txtContraseña.KeyDown += txtContraseña_KeyDown;
             // 
             // btnAceptar
             // 

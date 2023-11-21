@@ -12,25 +12,26 @@ using WheelsHub.Logica;
 
 namespace Interfaces
 {
-    public partial class FormModificarMoto : FormAgregarMoto
+    public partial class FormModificarMoto : FormAgregar
     {
-        Moto nuevaMoto;
+        Moto motoModificada;
         AccesoDatos datos;
         public FormModificarMoto(Moto moto)
         {
             InitializeComponent();
-            nuevaMoto = moto;
+            motoModificada = moto;
             datos = new AccesoDatos();
             MostrarInformacion(moto);
 
             txtChasis.Enabled = false;
-            lblTitulo.Text = "Modificar Moto";
+
+
         }
 
         private void btnGuardar_Click(object sender, EventArgs e)
         {
-            this.nuevaMoto = RecuperarInformacion();
-            if (datos.ModificarMoto(this.nuevaMoto))
+            RecuperarInformacion();
+            if (datos.ModificarMoto(this.motoModificada))
             {
                 MessageBox.Show("Se modifico con EXITO!!!", "Modificacion", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
@@ -40,7 +41,7 @@ namespace Interfaces
             }
             this.Close();
         }
-        private void MostrarInformacion(Moto moto)
+        protected void MostrarInformacion(Moto moto)
         {
             txtChasis.Text = moto.NumeroChasis;
             txtModelo.Text = moto.Modelo;
@@ -49,8 +50,72 @@ namespace Interfaces
             cboABS.SelectedItem = moto.FrenosABS;
             txtCosto.Text = moto.Costo.ToString();
             txtCilindrada.Text = moto.Cilindrada.ToString();
+            CargarImagen(moto);
+        }
+        private void CargarImagen(Moto moto)
+        {
+            try
+            {
+                if (moto.Foto != null && moto.Foto.Length > 0)
+                {
+                    // Convierte el array de bytes a una imagen
+                    using (MemoryStream ms = new MemoryStream(moto.Foto))
+                    {
+                        Image imagen = Image.FromStream(ms);
+                        // Asigna la imagen al PictureBox
+                        picImagen.Image = imagen;
+                    }
+                }
+                else
+                {
+                    // Si no hay imagen, puedes asignar una imagen por defecto o dejar el PictureBox vacío
+                    picImagen.Image = null;
+                }
+            }
+            catch (Exception ex)
+            {
+                // Maneja la excepción según tu lógica
+                MessageBox.Show($"Error al cargar la imagen: {ex.Message}");
+            }
+        }
+        protected void RecuperarInformacion()
+        {
+            double costo = 0;
+            int cilindrada = 0;
+            this.motoModificada.TipoVehiculo = eTipoVehiculo.Moto;
+            this.motoModificada.NumeroChasis = txtChasis.Text;
+            this.motoModificada.Modelo = txtModelo.Text;
+            this.motoModificada.Marca = (eMarcasMotos)cboMarca.SelectedItem;
+            this.motoModificada.Color = (eColores)cboColor.SelectedItem;
+            this.motoModificada.FrenosABS = (eTipoDeFrenos)cboABS.SelectedItem;
+            if (validarNumero(txtCosto.Text, out costo))
+            {
+                this.motoModificada.Costo = costo;
+            }
+            if (validarNumero(txtCilindrada.Text, out cilindrada))
+            {
+                this.motoModificada.Cilindrada = cilindrada;
+            }
 
+        }
+        private void btnExaminar_Click_1(object sender, EventArgs e)
+        {
+            this.motoModificada = GuardarImagen(this.motoModificada);
+        }
+        protected Moto GuardarImagen(Moto moto)
+        {
 
+            OpenFileDialog ofd = new OpenFileDialog();
+            dlgImagen.Filter = "Archivos de imagen|*.png;*.jpg;";
+            if (dlgImagen.ShowDialog() == DialogResult.OK)
+            {
+                string pathImagen = dlgImagen.FileName;
+                picImagen.ImageLocation = pathImagen;
+                moto.Foto = File.ReadAllBytes(pathImagen);
+
+            }
+            return moto;
         }
     }
 }
+

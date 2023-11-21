@@ -12,38 +12,44 @@ using WheelsHub.Logica;
 
 namespace Interfaces
 {
-    public partial class FormModificarAuto : FormAgregarAuto
+    public partial class FormModificarAuto : FormAgregar
     {
-        Auto nuevoAuto;
+        Auto autoModificado;
         AccesoDatos datos;
         public FormModificarAuto(Auto auto)
         {
             InitializeComponent();
+            autoModificado = new Auto();
             datos = new AccesoDatos();
-            MostrarInformacion(auto);
-      
 
+            MostrarInformacion(auto);
 
             txtChasis.Enabled = false;
-            lblTitulo.Text = "Modificar Auto";
+            btnExaminar.Enabled = false;
+
         }
-
-
-
         private void btnGuardar_Click(object sender, EventArgs e)
         {
-            this.nuevoAuto = RecuperarInformacion();
-            if (datos.ModificarAuto(this.nuevoAuto))
+            try
             {
-                MessageBox.Show("Se modifico con EXITO!!!", "Modificacion", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                RecuperarInformacion();
+                if (this.autoModificado.NumeroChasis != null)
+                {
+                    datos.ModificarAuto(this.autoModificado);
+                    this.Close();
+                }
+                else
+                {
+                    MessageBox.Show("El campo N° de chasis es obligatorio ", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
             }
-            else
+            catch (Exception ex)
             {
-                MessageBox.Show("No se realizo la modificacion", "Modificacion", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            this.Close();
-        }
 
+                MessageBox.Show($"Debe completar los campos.", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning); ;
+            }
+
+        }
         private void MostrarInformacion(Auto auto)
         {
             txtChasis.Text = auto.NumeroChasis;
@@ -53,7 +59,80 @@ namespace Interfaces
             txtCantidadPasajeros.Text = auto.CantidadPasajeros.ToString();
             txtCosto.Text = auto.Costo.ToString();
             txtCantidadPuertas.Text = auto.CantidadPuertas.ToString();
+            CargarImagen(auto);
+
+        }
+        private void CargarImagen(Auto auto)
+        {
+            try
+            {
+                if (auto.Foto != null && auto.Foto.Length > 0)
+                {
+                    // Convierte el array de bytes a una imagen
+                    using (MemoryStream ms = new MemoryStream(auto.Foto))
+                    {
+                        Image imagen = Image.FromStream(ms);
+
+                        // Asigna la imagen al PictureBox
+                        picImagen.Image = imagen;
+                    }
+                }
+                else
+                {
+                    // Si no hay imagen, puedes asignar una imagen por defecto o dejar el PictureBox vacío
+                    picImagen.Image = null;
+                }
+            }
+            catch (Exception ex)
+            {
+                // Maneja la excepción según tu lógica
+                MessageBox.Show($"Error al cargar la imagen: {ex.Message}");
+            }
+        }
+        protected void RecuperarInformacion()
+        {
+            double costo = 0;
+            int cantidadPasajeros = 0;
+            int cantidadPuertas = 0;
+
+            this.autoModificado.Modelo = txtModelo.Text;
+            this.autoModificado.NumeroChasis = txtChasis.Text;
+            this.autoModificado.Marca = (eMarcasAutos)cboMarca.SelectedItem;
+            this.autoModificado.Color = (eColores)cboColor.SelectedItem;
+            this.autoModificado.TipoVehiculo = eTipoVehiculo.Auto;
+
+
+            if (validarNumero(txtCosto.Text, out costo))
+            {
+                this.autoModificado.Costo = costo;
+            }
+            if (validarNumero(txtCantidadPasajeros.Text, out cantidadPasajeros))
+            {
+                this.autoModificado.CantidadPasajeros = cantidadPasajeros;
+            }
+            if (validarNumero(txtCantidadPuertas.Text, out cantidadPuertas))
+            {
+                this.autoModificado.CantidadPuertas = cantidadPuertas;
+            }
+
+        }
+
+        private void btnExaminar_Click_1(object sender, EventArgs e)
+        {
+            OpenFileDialog ofd = new OpenFileDialog();
+            dlgImagen.Filter = "Archivos de imagen|*.png;*.jpg;";
+            if (dlgImagen.ShowDialog() == DialogResult.OK)
+            {
+                string pathImagen = dlgImagen.FileName;
+                picImagen.ImageLocation = pathImagen;
+                this.autoModificado.Foto = File.ReadAllBytes(pathImagen);
+
+            }
         }
 
     }
+
+
+
 }
+

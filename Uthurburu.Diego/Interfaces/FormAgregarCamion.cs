@@ -31,11 +31,7 @@ namespace Interfaces
             Controls.Remove(this.lblABS);
             Controls.Remove(this.lblCilindrada);
 
-            lblTitulo.Text = "Agregar Camion";
-
             cboMarca.DataSource = Enum.GetValues(typeof(eMarcasCamiones));
-
-
         }
 
         private void btnCancelar_Click(object sender, EventArgs e)
@@ -45,34 +41,70 @@ namespace Interfaces
 
         private void btnGuardar_Click(object sender, EventArgs e)
         {
-            datos.AgregarCamion(RecuperarInformacion());
-            this.Close();
+            try
+            {
+                RecuperarInformacion();
+                if (this.nuevoCamion.NumeroChasis != null)
+                {
+                    if (this.nuevoCamion.Foto != null)
+                    {
+                        datos.AgregarCamion(this.nuevoCamion);
+                        this.Close();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Debe agregar una imagen ", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("El campo N° de chasis es obligatorio ", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show($"Debe completar los campos.", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning); ;
+            }
         }
 
-        protected Camion RecuperarInformacion()
+        protected void RecuperarInformacion()
         {
             double costo = 0;
             int tara = 0;
             int cantidadEjes = 0;
-            nuevoCamion.TipoVehiculo = eTipoVehiculo.Camion;
-            nuevoCamion.Modelo = txtModelo.Text;
-            nuevoCamion.NumeroChasis = txtChasis.Text;
-            nuevoCamion.Marca = (eMarcasCamiones)cboMarca.SelectedItem;
-            nuevoCamion.Color = (eColores)cboColor.SelectedItem;
+            this.nuevoCamion.TipoVehiculo = eTipoVehiculo.Camion;
+            this.nuevoCamion.Modelo = txtModelo.Text;
+            this.nuevoCamion.NumeroChasis = txtChasis.Text;
+            this.nuevoCamion.Marca = (eMarcasCamiones)cboMarca.SelectedItem;
+            this.nuevoCamion.Color = (eColores)cboColor.SelectedItem;
 
             if (validarNumero(txtCosto.Text, out costo))
             {
-                nuevoCamion.Costo = costo;
+                this.nuevoCamion.Costo = costo;
             }
             if (validarNumero(txtTara.Text, out tara))
             {
-                nuevoCamion.Tara = tara;
+                this.nuevoCamion.Tara = tara;
             }
             if (validarNumero(txtCantidadEjes.Text, out cantidadEjes))
             {
-                nuevoCamion.CantidadEjes = cantidadEjes;
+                this.nuevoCamion.CantidadEjes = cantidadEjes;
             }
-            return nuevoCamion;
+         
+        }
+
+        protected void btnExaminar_Click_1(object sender, EventArgs e)
+        {
+            OpenFileDialog ofd = new OpenFileDialog();
+            dlgImagen.Filter = "Archivos de imagen|*.png;*.jpg;";
+            if (dlgImagen.ShowDialog() == DialogResult.OK)
+            {
+                string pathImagen = dlgImagen.FileName;
+                picImagen.ImageLocation = pathImagen;
+                this.nuevoCamion.Foto = File.ReadAllBytes(pathImagen);
+
+            }
         }
     }
 }

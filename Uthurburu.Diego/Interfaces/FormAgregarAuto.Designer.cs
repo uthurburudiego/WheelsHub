@@ -28,8 +28,14 @@
         /// </summary>
         private void InitializeComponent()
         {
+            dlgImagen = new OpenFileDialog();
             ((System.ComponentModel.ISupportInitialize)picImagen).BeginInit();
             SuspendLayout();
+            // 
+            // lblTitulo
+            // 
+            lblTitulo.Size = new Size(386, 78);
+            lblTitulo.Text = "Agregar Auto";
             // 
             // btnGuardar
             // 
@@ -90,10 +96,12 @@
             // picImagen
             // 
             picImagen.Size = new Size(187, 185);
+            picImagen.SizeMode = PictureBoxSizeMode.StretchImage;
             // 
             // btnExaminar
             // 
             btnExaminar.Location = new Point(80, 351);
+            btnExaminar.Click += btnExaminar_Click_1;
             // 
             // lblChasis
             // 
@@ -139,6 +147,10 @@
             // 
             lblPasajeros.Location = new Point(484, 224);
             // 
+            // dlgImagen
+            // 
+            dlgImagen.FileName = "openFileDialog1";
+            // 
             // FormAgregarAuto
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -148,12 +160,14 @@
             FormBorderStyle = FormBorderStyle.None;
             Name = "FormAgregarAuto";
             StartPosition = FormStartPosition.CenterParent;
-            Text = "FormAgregarAuto";
+            Text = "Agregar Auto";
             ((System.ComponentModel.ISupportInitialize)picImagen).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
 
         #endregion
+
+        private OpenFileDialog dlgImagen;
     }
 }

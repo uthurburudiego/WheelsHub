@@ -28,5 +28,8 @@
     <Compile Update="FormModificarMoto.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="FormMostrar.cs">
+      <SubType>Form</SubType>
+    </Compile>
   </ItemGroup>
 </Project>

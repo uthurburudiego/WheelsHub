@@ -18,9 +18,11 @@ namespace WheelsHub.Logica
 
         #region Constructores
 
-        public Camion()
+        public Camion() : base()
         {
-
+            this.tara = 0;
+            this.cantidadEjes = 0;
+            this.marca = eMarcasCamiones.Seleccionar;
         }
 
 
@@ -84,9 +86,9 @@ namespace WheelsHub.Logica
         /// </summary>
         /// <param name="texto">El texto que se utilizará para la descripción.</param>
         /// <returns>Una cadena que representa la descripción basada en el texto proporcionado.</returns>
-        public override string ObtenerDescripcion(string texto)
+        public override string ObtenerDescripcion()
         {
-            return texto;
+            return "Conquista las carreteras con la potencia y robustez de nuestros camiones. Diseñados para enfrentar \nlos desafíos más exigentes, nuestros camiones combinan rendimiento, durabilidad y versatilidad. Ya \nsea transportando cargas pesadas o enfrentando terrenos difíciles, nuestros camiones están listos para \nel trabajo duro. Descubre la comodidad y la eficiencia en cada viaje, respaldados por la \nconfiabilidad que define a nuestros vehículos industriales. Prepárate para una experiencia de \nconducción que potenciará tu capacidad de carga y rendimiento.";
         }
         /// <summary>
         /// Calcula el costo de mantenimiento del vehículo.
@@ -109,7 +111,7 @@ namespace WheelsHub.Logica
         /// <returns>Una cadena que representa el objeto Camion.</returns>
         public override string ToString()
         {
-            return base.ToString() + $"- Marca: {Marca} - Tara: {Modelo} - Cantidad Ejes: {CantidadEjes}";
+            return base.ToString() + $"\nMarca: {Marca} \nTara: {Modelo} \nCantidad Ejes: {CantidadEjes}";
         }
         public override bool Equals(object? obj)
         {

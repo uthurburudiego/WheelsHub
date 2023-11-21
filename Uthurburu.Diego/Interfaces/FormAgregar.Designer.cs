@@ -55,6 +55,7 @@
             lblEjes = new Label();
             lblPuertas = new Label();
             lblPasajeros = new Label();
+            openFileDialog1 = new OpenFileDialog();
             ((System.ComponentModel.ISupportInitialize)picImagen).BeginInit();
             SuspendLayout();
             // 
@@ -200,6 +201,7 @@
             btnExaminar.TabIndex = 22;
             btnExaminar.Text = "Examinar...";
             btnExaminar.UseVisualStyleBackColor = true;
+
             // 
             // lblChasis
             // 
@@ -333,6 +335,10 @@
             lblPasajeros.TabIndex = 33;
             lblPasajeros.Text = "Cant. pasajeros:";
             // 
+            // openFileDialog1
+            // 
+            openFileDialog1.FileName = "openFileDialog1";
+            // 
             // FormAgregar
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -390,7 +396,7 @@
         protected TextBox txtCantidadPuertas;
         protected TextBox txtCantidadPasajeros;
         protected PictureBox picImagen;
-        protected Button btnExaminar;
+        public Button btnExaminar;
         protected Label lblChasis;
         protected Label lblMarca;
         protected Label lblModelo;
@@ -402,5 +408,6 @@
         protected Label lblEjes;
         protected Label lblPuertas;
         protected Label lblPasajeros;
+        private OpenFileDialog openFileDialog1;
     }
 }

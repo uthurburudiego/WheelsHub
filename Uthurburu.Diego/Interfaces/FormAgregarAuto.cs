@@ -23,7 +23,6 @@ namespace Interfaces
             InitializeComponent();
             this.nuevoAuto = new Auto();
             this.datos = new AccesoDatos();
-
             Controls.Remove(this.txtCilindrada);
             Controls.Remove(this.cboABS);
             Controls.Remove(this.lblABS);
@@ -32,10 +31,7 @@ namespace Interfaces
             Controls.Remove(this.txtCantidadEjes);
             Controls.Remove(this.lblTara);
             Controls.Remove(this.lblEjes);
-            lblTitulo.Text = "Agregar Auto";
             cboMarca.DataSource = Enum.GetValues(typeof(eMarcasAutos));
-
-
         }
 
 
@@ -46,36 +42,73 @@ namespace Interfaces
 
         private void btnGuardar_Click(object sender, EventArgs e)
         {
-            datos.AgregarAuto(RecuperarInformacion());
-            this.Close();
+            try
+            {
+                RecuperarInformacion();
+                if (this.nuevoAuto.NumeroChasis != null)
+                {
+                    if (this.nuevoAuto.Foto != null)
+                    {
+                        datos.AgregarAuto(this.nuevoAuto);
+                        this.Close();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Debe agregar una imagen ", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("El campo N° de chasis es obligatorio ", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show($"Debe completar los campos.", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning); ;
+            }
+            
 
         }
-        protected Auto RecuperarInformacion()
+        protected  void RecuperarInformacion()
         {
             double costo = 0;
             int cantidadPasajeros = 0;
             int cantidadPuertas = 0;
 
-            nuevoAuto.Modelo = txtModelo.Text;
-            nuevoAuto.NumeroChasis = txtChasis.Text;
-            nuevoAuto.Marca = (eMarcasAutos)cboMarca.SelectedItem;
-            nuevoAuto.Color = (eColores)cboColor.SelectedItem;
-            nuevoAuto.TipoVehiculo = eTipoVehiculo.Auto;
+            this.nuevoAuto.Modelo = txtModelo.Text;
+            this.nuevoAuto.NumeroChasis = txtChasis.Text;
+            this.nuevoAuto.Marca = (eMarcasAutos)cboMarca.SelectedItem;
+            this.nuevoAuto.Color = (eColores)cboColor.SelectedItem;
+            this.nuevoAuto.TipoVehiculo = eTipoVehiculo.Auto;
+        
 
             if (validarNumero(txtCosto.Text, out costo))
             {
-                nuevoAuto.Costo = costo;
+                this.nuevoAuto.Costo = costo;
             }
             if (validarNumero(txtCantidadPasajeros.Text, out cantidadPasajeros))
             {
-                nuevoAuto.CantidadPasajeros = cantidadPasajeros;
+                this.nuevoAuto.CantidadPasajeros = cantidadPasajeros;
             }
             if (validarNumero(txtCantidadPuertas.Text, out cantidadPuertas))
             {
-                nuevoAuto.CantidadPuertas = cantidadPuertas;
+                this.nuevoAuto.CantidadPuertas = cantidadPuertas;
             }
-            return nuevoAuto;
+          
         }
 
+        private void btnExaminar_Click_1(object sender, EventArgs e)
+        {
+            OpenFileDialog ofd = new OpenFileDialog();
+            dlgImagen.Filter = "Archivos de imagen|*.png;*.jpg;";
+            if (dlgImagen.ShowDialog() == DialogResult.OK)
+            {
+                string pathImagen = dlgImagen.FileName;
+                picImagen.ImageLocation = pathImagen;
+                this.nuevoAuto.Foto = File.ReadAllBytes(pathImagen);
+
+            }
+        }
     }
 }

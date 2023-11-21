@@ -18,8 +18,13 @@ namespace WheelsHub.Logica
         #endregion
 
         #region Constructores
-        public Auto() 
-        { }
+        public Auto() :base()
+        { 
+           cantidadPasajeros = 0;
+           cantidadPuertas = 0;
+            marca = eMarcasAutos.Seleccionar; 
+        
+        }
 
         public Auto(string modelo, string numeroChasis, eColores color, eTipoVehiculo tipoVehiculo, double costo) : base(modelo, numeroChasis, color, tipoVehiculo, costo)
         {
@@ -85,9 +90,9 @@ namespace WheelsHub.Logica
         /// </summary>
         /// <param name="texto">El texto que se utilizará para la descripción.</param>
         /// <returns>Una cadena que representa la descripción basada en el texto proporcionado.</returns>
-        public override string ObtenerDescripcion(string texto)
+        public override string ObtenerDescripcion()
         {
-            return texto;
+            return "Descubre el confort y la elegancia en cada viaje a bordo de nuestros excepcionales autos. \nDiseñados para ofrecer un equilibrio perfecto entre rendimiento y estilo, nuestros autos te brindan \nuna experiencia de conducción única. Desde la potencia del motor hasta los detalles de lujo en el \ninterior, cada momento al volante se convierte en un placer. Explora la carretera con confianza y \nestilo a través de la combinación perfecta de innovación y rendimiento que define a nuestros autos.";
         }
         /// <summary>
         /// Calcula el costo estimado de mantenimiento del vehículo.
@@ -103,7 +108,7 @@ namespace WheelsHub.Logica
         /// <returns>Una cadena que representa el objeto Auto, incluyendo la marca, cantidad de puertas y capacidad de pasajeros.</returns>
         public override string ToString()
         {
-            return base.ToString() + $"- Marca: {Marca} - Cantidad Puertas: {CantidadPuertas} - Capacidad de pasajeros: {CantidadPasajeros}";
+            return base.ToString() + $"\nMarca: {Marca} \nCantidad Puertas: {CantidadPuertas} \nCapacidad de pasajeros: {CantidadPasajeros}";
         }
 
         public override bool Equals(object? obj)

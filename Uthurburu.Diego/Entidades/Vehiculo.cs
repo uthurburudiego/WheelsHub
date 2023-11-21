@@ -18,12 +18,17 @@ namespace WheelsHub
         protected eColores color;
         protected eTipoVehiculo tipoVehiculo;
         protected double costo;
+        protected byte[] foto;
         
         #endregion
 
         #region Constructores
         public Vehiculo()
         {
+            this.modelo = "";
+            this.color = eColores.Seleccionar;
+            this.tipoVehiculo = eTipoVehiculo.Seleccionar;
+            this.costo = 0;
           
         }
         public Vehiculo(string  modelo):this() 
@@ -45,6 +50,10 @@ namespace WheelsHub
         public Vehiculo(string modelo, string numeroChasis, eColores color, eTipoVehiculo tipoVehiculo, double costo) : this(modelo, numeroChasis, color, tipoVehiculo)
         {
             this.costo = costo;
+        }
+        public Vehiculo(string modelo, string numeroChasis, eColores color, eTipoVehiculo tipoVehiculo, double costo,byte[] foto) : this(modelo, numeroChasis, color, tipoVehiculo, costo)
+        {
+            this.foto = foto;
         }
         #endregion
 
@@ -90,9 +99,17 @@ namespace WheelsHub
                 }
             }
         }
+
+        public byte[] Foto 
+        {
+            get { return this.foto;  }
+            set { this.foto = value; }  
+        }
         #endregion
 
         #region Metodos
+       
+
         /// <summary>
         /// Calcula el costo de mantenimiento del vehículo.
         /// </summary>
@@ -107,9 +124,8 @@ namespace WheelsHub
         /// <summary>
         /// Obtiene una descripción basada en el texto proporcionado.
         /// </summary>
-        /// <param name="texto">El texto que se utilizará para la descripción.</param>
         /// <returns>Una cadena que representa la descripción basada en el texto proporcionado.</returns>
-        public abstract string ObtenerDescripcion(string texto);
+        public abstract string ObtenerDescripcion();
         /// <summary>
         /// Compara dos vehículos para verificar si tienen el mismo número de chasis.
         /// </summary>
@@ -172,7 +188,7 @@ namespace WheelsHub
         /// <returns>Una cadena que contiene información sobre el tipo de vehículo,
         public override string ToString()
         {
-            return $"{TipoVehiculo} - Modelo: {Modelo} - Color: {Color} " + $" - Costo: US${Costo} ";
+            return $"{TipoVehiculo} \nModelo: {Modelo} \nColor: {Color} " + $"\nCosto: US${Costo} ";
         }
         public override bool Equals(object? obj)
         {

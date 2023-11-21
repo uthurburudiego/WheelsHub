@@ -15,7 +15,7 @@ namespace Interfaces
         public FormLogIn()
         {
             InitializeComponent();
-         
+
         }
 
         private void chkVer_CheckedChanged(object sender, EventArgs e)
@@ -44,16 +44,16 @@ namespace Interfaces
             this.usuario.Clave = this.txtContraseña.Text;
 
             string rutaRelativa = ManejadorArchivos.ObtenerPath(@"..\..\..\..\Datos\MOCK_DATA.json");
-            
+
             this.listaUsuarios = ManejadorArchivos.DeserilizarUsuarios(rutaRelativa);
 
             if (ValidarUsuario())
             {
-                
+
 
                 this.Close();
             }
-            else 
+            else
             {
                 MessageBox.Show("Usuario/Contraseña no existen", "LogIn", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
@@ -63,7 +63,7 @@ namespace Interfaces
         private bool ValidarUsuario()
         {
             bool retorno = false;
-          
+
 
             foreach (Usuario u in this.listaUsuarios)
             {
@@ -74,9 +74,29 @@ namespace Interfaces
                     break;
                 }
             }
-            
+
             return retorno;
 
+        }
+
+        private void txtUsuario_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                // El código que deseas ejecutar al presionar Enter
+                btnAceptar_Click(sender, e);
+                e.SuppressKeyPress = true; // Evita que se procese la tecla Enter más de una vez
+            }
+        }
+
+        private void txtContraseña_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                // El código que deseas ejecutar al presionar Enter
+                btnAceptar_Click(sender, e);
+                e.SuppressKeyPress = true; // Evita que se procese la tecla Enter más de una vez
+            }
         }
     }
 }

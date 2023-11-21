@@ -59,7 +59,8 @@
             txtBuscador.Name = "txtBuscador";
             txtBuscador.PlaceholderText = "Buscar";
             txtBuscador.Size = new Size(717, 23);
-            txtBuscador.TabIndex = 0;
+            txtBuscador.TabIndex = 1;
+            txtBuscador.KeyDown += txtBuscador_KeyDown;
             // 
             // btnBuscar
             // 
@@ -70,9 +71,10 @@
             btnBuscar.Location = new Point(835, 325);
             btnBuscar.Name = "btnBuscar";
             btnBuscar.Size = new Size(81, 26);
-            btnBuscar.TabIndex = 1;
+            btnBuscar.TabIndex = 0;
             btnBuscar.Text = "Buscar";
             btnBuscar.UseVisualStyleBackColor = false;
+            btnBuscar.Click += btnBuscar_Click;
             // 
             // btnModificar
             // 
@@ -109,6 +111,7 @@
             dtgVehiculos.RowTemplate.ReadOnly = true;
             dtgVehiculos.Size = new Size(717, 154);
             dtgVehiculos.TabIndex = 5;
+            dtgVehiculos.CellDoubleClick += dtgVehiculos_CellDoubleClick;
             dtgVehiculos.CellMouseClick += dtgVehiculos_CellMouseClick;
             // 
             // label1
@@ -272,6 +275,7 @@
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Inicio";
             Load += FormInicio_Load;
+            Enter += btnBuscar_Click;
             ((System.ComponentModel.ISupportInitialize)dtgVehiculos).EndInit();
             msMenu.ResumeLayout(false);
             msMenu.PerformLayout();

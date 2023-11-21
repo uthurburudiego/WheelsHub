@@ -120,7 +120,7 @@ namespace Interfaces
         private void btnModificar_Click(object sender, EventArgs e)
         {
 
-            Vehiculo vehiculoEncontrado = listaVehiculos.Find(moto => moto.NumeroChasis == numeroChasis);
+            Vehiculo vehiculoEncontrado = listaVehiculos.Find(v => v.NumeroChasis == this.numeroChasis);
             if (vehiculoEncontrado is Moto)
             {
                 FormModificarMoto modificarMoto = new FormModificarMoto((Moto)vehiculoEncontrado);
@@ -133,12 +133,12 @@ namespace Interfaces
                 modificarAuto.ShowDialog();
             }
             else if (vehiculoEncontrado is Camion)
-            { 
-               FormModificarCamion modificarCamion = new FormModificarCamion((Camion)vehiculoEncontrado);   
+            {
+                FormModificarCamion modificarCamion = new FormModificarCamion((Camion)vehiculoEncontrado);
                 modificarCamion.ShowDialog();
-            
+
             }
-                todosToolStripMenuItem_Click(sender, e);
+            todosToolStripMenuItem_Click(sender, e);
 
         }
         /// <summary>
@@ -156,6 +156,32 @@ namespace Interfaces
             lblSaludo.Text = $"Bienvenido, {logIn.Usuario.Perfil}: {logIn.Usuario.Nombre}";
             lblFecha.Text = $"{currentDate.ToString("dd/MM/yyyy")}";
         }
+        private List<Vehiculo> Buscador(string textoBusqueda)
+        {
+            List<Vehiculo> coincidencias = this.listaVehiculos.Where(v => v.Modelo.Contains(textoBusqueda) || v.NumeroChasis.Contains(textoBusqueda) || v.Costo.ToString().Contains(textoBusqueda) || v.Color.ToString().Contains(textoBusqueda) || v.TipoVehiculo.ToString().Contains(textoBusqueda)).ToList();
 
+            return coincidencias;
+        }
+
+        private void btnBuscar_Click(object sender, EventArgs e)
+        {
+            dtgVehiculos.DataSource = Buscador(txtBuscador.Text);
+        }
+
+        private void txtBuscador_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                // El código que deseas ejecutar al presionar Enter
+                btnBuscar_Click(sender, e);
+                e.SuppressKeyPress = true; // Evita que se procese la tecla Enter más de una vez
+            }
+        }
+
+        private void dtgVehiculos_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            FormMostrar mostrar = new FormMostrar(listaVehiculos.Find(v => v.NumeroChasis == this.numeroChasis));
+            mostrar.ShowDialog();
+        }
     }
 }

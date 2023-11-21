@@ -33,7 +33,7 @@ namespace Interfaces
             Controls.Remove(this.lblPasajeros);
             Controls.Remove(this.lblPuertas);
 
-            lblTitulo.Text = "Agregar Moto";
+          
 
             cboABS.DataSource = Enum.GetValues(typeof(eTipoDeFrenos));
             cboMarca.DataSource = Enum.GetValues(typeof(eMarcasMotos));
@@ -44,40 +44,69 @@ namespace Interfaces
         {
             this.Close();
         }
-
         private void btnGuardar_Click(object sender, EventArgs e)
         {
-            this.nuevaMoto = RecuperarInformacion();
-            if (datos.VehiculoExiste(this.nuevaMoto.NumeroChasis))
+            try
+            {
+                RecuperarInformacion();
+                if (this.nuevaMoto.NumeroChasis != null)
+                {
+                    if (this.nuevaMoto.Foto != null)
+                    {
+                        datos.AgregarMoto(this.nuevaMoto);
+                        this.Close();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Debe agregar una imagen ", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("El campo N° de chasis es obligatorio ", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+            }
+            catch (Exception ex)
             {
 
+                MessageBox.Show($"Debe completar los campos.", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning); ;
             }
-            else
-            {
-                datos.AgregarMoto(this.nuevaMoto);
-            }
-            this.Close();
         }
-
-
-        protected Moto RecuperarInformacion()
+        protected void RecuperarInformacion()
         {
-            Moto moto = new Moto();
             double costo = 0;
             int cilindrada = 0;
-            moto.TipoVehiculo = eTipoVehiculo.Moto;
-            moto.NumeroChasis = txtChasis.Text;
-            moto.Modelo = txtModelo.Text;
-            moto.Marca = (eMarcasMotos)cboMarca.SelectedItem;
-            moto.Color = (eColores)cboColor.SelectedItem;
-            moto.FrenosABS = (eTipoDeFrenos)cboABS.SelectedItem;
+            this.nuevaMoto.TipoVehiculo = eTipoVehiculo.Moto;
+            this.nuevaMoto.NumeroChasis = txtChasis.Text;
+            this.nuevaMoto.Modelo = txtModelo.Text;
+            this.nuevaMoto.Marca = (eMarcasMotos)cboMarca.SelectedItem;
+            this.nuevaMoto.Color = (eColores)cboColor.SelectedItem;
+            this.nuevaMoto.FrenosABS = (eTipoDeFrenos)cboABS.SelectedItem;
             if (validarNumero(txtCosto.Text, out costo))
             {
-                moto.Costo = costo;
+                this.nuevaMoto.Costo = costo;
             }
             if (validarNumero(txtCilindrada.Text, out cilindrada))
             {
-                moto.Cilindrada = cilindrada;
+                this.nuevaMoto.Cilindrada = cilindrada;
+            }
+           
+        }
+        private void btnExaminar_Click_1(object sender, EventArgs e)
+        {
+            this.nuevaMoto = GuardarImagen( this.nuevaMoto);
+        }
+        protected Moto GuardarImagen(Moto moto)
+        {
+            
+            OpenFileDialog ofd = new OpenFileDialog();
+            dlgImagen.Filter = "Archivos de imagen|*.png;*.jpg;";
+            if (dlgImagen.ShowDialog() == DialogResult.OK)
+            {
+                string pathImagen = dlgImagen.FileName;
+                picImagen.ImageLocation = pathImagen;
+                moto.Foto = File.ReadAllBytes(pathImagen);
+
             }
             return moto;
         }

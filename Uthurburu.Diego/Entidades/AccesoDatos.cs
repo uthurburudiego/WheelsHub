@@ -8,6 +8,7 @@ using System.Windows.Forms;
 using Microsoft.Data.SqlClient;
 using WheelsHub;
 using WheelsHub.Logica;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace Entidades
 {
@@ -103,7 +104,7 @@ namespace Entidades
 
                 this.comando = new SqlCommand();
                 this.comando.CommandType = System.Data.CommandType.Text;
-                this.comando.CommandText = "select Chasis, Modelo, Color, TipoVehiculo, Costo, CantidadEjes, Tara,CantidadPasajeros, Marca, CantidadPuertas, Cilindrada, FrenoABS from Vehiculos";
+                this.comando.CommandText = "select Chasis, Modelo, Color, TipoVehiculo, Costo, CantidadEjes, Tara,CantidadPasajeros, Marca, CantidadPuertas, Cilindrada, FrenoABS, Foto from Vehiculos";
                 this.comando.Connection = this.conexion;
 
                 this.conexion.Open();
@@ -122,6 +123,8 @@ namespace Entidades
                         camion.CantidadEjes = (int)this.lector["CantidadEjes"];
                         camion.Tara = (int)this.lector["Tara"];
                         camion.Marca = (eMarcasCamiones)this.lector["Marca"];
+                        if (this.lector["Foto"] != DBNull.Value)
+                            camion.Foto = (byte[])this.lector["Foto"];
 
                         lista.Add(camion);
                     }
@@ -136,6 +139,8 @@ namespace Entidades
                         moto.Cilindrada = (int)this.lector["Cilindrada"];
                         moto.FrenosABS = (eTipoDeFrenos)this.lector["FrenoABS"];
                         moto.Marca = (eMarcasMotos)this.lector["Marca"];
+                        if (this.lector["Foto"] != DBNull.Value)
+                            moto.Foto = (byte[])this.lector["Foto"];
 
                         lista.Add(moto);
                     }
@@ -150,6 +155,8 @@ namespace Entidades
                         auto.CantidadPuertas = (int)this.lector["CantidadPuertas"];
                         auto.CantidadPasajeros = (int)this.lector["CantidadPasajeros"];
                         auto.Marca = (eMarcasAutos)this.lector["Marca"];
+                        if (this.lector["Foto"] != DBNull.Value)
+                            auto.Foto = (byte[])this.lector["Foto"];
 
                         lista.Add(auto);
                     }
@@ -178,8 +185,8 @@ namespace Entidades
             {
                 this.comando = new SqlCommand();
                 this.comando.CommandType = System.Data.CommandType.Text;
-                this.comando.CommandText = "INSERT INTO Vehiculos (Chasis, Modelo, Color, TipoVehiculo, Costo, Cilindrada, FrenoABS, Marca) " +
-                                           "VALUES (@Chasis, @Modelo, @Color, @TipoVehiculo, @Costo, @Cilindrada, @FrenoABS, @Marca)";
+                this.comando.CommandText = "INSERT INTO Vehiculos (Chasis, Modelo, Color, TipoVehiculo, Costo, Cilindrada, FrenoABS, Marca, Foto) " +
+                                           "VALUES (@Chasis, @Modelo, @Color, @TipoVehiculo, @Costo, @Cilindrada, @FrenoABS, @Marca,@Foto)";
                 this.comando.Connection = this.conexion;
 
                 this.comando.Parameters.AddWithValue("@Chasis", nuevaMoto.NumeroChasis);
@@ -190,6 +197,9 @@ namespace Entidades
                 this.comando.Parameters.AddWithValue("@Cilindrada", nuevaMoto.Cilindrada);
                 this.comando.Parameters.AddWithValue("@FrenoABS", (int)nuevaMoto.FrenosABS);
                 this.comando.Parameters.AddWithValue("@Marca", (int)nuevaMoto.Marca);
+                if (nuevaMoto.Foto != null)
+                { this.comando.Parameters.AddWithValue("@Foto", nuevaMoto.Foto); }
+              
 
                 this.conexion.Open();
                 int rowsAffected = this.comando.ExecuteNonQuery();
@@ -215,14 +225,12 @@ namespace Entidades
             {
                 this.conexion.Open();
 
-                // Aquí, debes construir tu consulta SQL de inserción. 
-                // Supongamos que la tabla en la base de datos se llama 'Vehiculos' y tiene columnas como 'Chasis', 'Modelo', 'Color', etc.
-                string consulta = "INSERT INTO Vehiculos (Chasis, Modelo, Color, TipoVehiculo, Costo, CantidadPasajeros, Marca, CantidadPuertas) " +
-                                  "VALUES (@Chasis, @Modelo, @Color, @TipoVehiculo, @Costo, @CantidadPasajeros, @Marca, @CantidadPuertas)";
+                // Consulta SQL para insertar un nuevo auto con imagen
+                string consulta = "INSERT INTO Vehiculos (Chasis, Modelo, Color, TipoVehiculo, Costo, CantidadPasajeros, Marca, CantidadPuertas, Foto) " +
+                                  "VALUES (@Chasis, @Modelo, @Color, @TipoVehiculo, @Costo, @CantidadPasajeros, @Marca, @CantidadPuertas, @Foto)";
 
                 using (SqlCommand cmd = new SqlCommand(consulta, this.conexion))
                 {
-                    // Agrega los parámetros a la consulta para evitar la inyección de SQL.
                     cmd.Parameters.AddWithValue("@Chasis", auto.NumeroChasis);
                     cmd.Parameters.AddWithValue("@Modelo", auto.Modelo);
                     cmd.Parameters.AddWithValue("@Color", auto.Color);
@@ -231,9 +239,15 @@ namespace Entidades
                     cmd.Parameters.AddWithValue("@CantidadPasajeros", auto.CantidadPasajeros);
                     cmd.Parameters.AddWithValue("@Marca", (int)auto.Marca);
                     cmd.Parameters.AddWithValue("@CantidadPuertas", auto.CantidadPuertas);
+                    if (auto.Foto != null)
+                        cmd.Parameters.AddWithValue("@Foto", auto.Foto);
+                    else
+                    cmd.Parameters.AddWithValue("@Foto", null);
+
+
 
                     // Ejecuta la consulta de inserción.
-                    int rowsAffected = this.comando.ExecuteNonQuery();
+                    int rowsAffected = cmd.ExecuteNonQuery();
                     return rowsAffected > 0;
                 }
             }
@@ -257,8 +271,8 @@ namespace Entidades
             {
                 this.comando = new SqlCommand();
                 this.comando.CommandType = System.Data.CommandType.Text;
-                this.comando.CommandText = "INSERT INTO Vehiculos (Chasis, Modelo, Color, TipoVehiculo, Costo, CantidadEjes, Marca, Marca) " +
-                                           "VALUES (@Chasis, @Modelo, @Color, @TipoVehiculo, @Costo, @Tara, @CantidadEjes, @Marca)";
+                this.comando.CommandText = "INSERT INTO Vehiculos (Chasis, Modelo, Color, TipoVehiculo, Costo, CantidadEjes, Marca, Marca, Foto) " +
+                                           "VALUES (@Chasis, @Modelo, @Color, @TipoVehiculo, @Costo, @Tara, @CantidadEjes, @Marca, @Foto)";
                 this.comando.Connection = this.conexion;
 
                 this.comando.Parameters.AddWithValue("@Chasis", nuevoCamion.NumeroChasis);
@@ -269,6 +283,8 @@ namespace Entidades
                 this.comando.Parameters.AddWithValue("@Tara", nuevoCamion.Tara);
                 this.comando.Parameters.AddWithValue("@CantidadEjes", nuevoCamion.CantidadEjes);
                 this.comando.Parameters.AddWithValue("@Marca", (int)nuevoCamion.Marca);
+                this.comando.Parameters.AddWithValue("@Foto", nuevoCamion.Foto); 
+
 
                 this.conexion.Open();
                 int rowsAffected = this.comando.ExecuteNonQuery();
@@ -308,6 +324,7 @@ namespace Entidades
                         command.Parameters.AddWithValue("@Cilindrada", moto.Cilindrada);
                         command.Parameters.AddWithValue("@FrenoABS", moto.FrenosABS);
                         command.Parameters.AddWithValue("@Marca", moto.Marca);
+                       
 
                         int rowsAffected = command.ExecuteNonQuery();
 
@@ -349,6 +366,7 @@ namespace Entidades
                         command.Parameters.AddWithValue("@CantidadPasajeros", auto.CantidadPasajeros);
                         command.Parameters.AddWithValue("@CantidadPuertas", auto.CantidadPuertas);
                         command.Parameters.AddWithValue("@Marca", auto.Marca);
+                        
 
                         int rowsAffected = command.ExecuteNonQuery();
 
@@ -390,6 +408,7 @@ namespace Entidades
                         command.Parameters.AddWithValue("@CantidadEjes", camion.CantidadEjes);
                         command.Parameters.AddWithValue("@Tara", camion.Tara);
                         command.Parameters.AddWithValue("@Marca", camion.Marca);
+                       
 
 
                         int rowsAffected = command.ExecuteNonQuery();
@@ -541,5 +560,7 @@ namespace Entidades
 
             return retorno;
         }
+       
+       
     }
 }

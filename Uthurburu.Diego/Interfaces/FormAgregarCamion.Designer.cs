@@ -28,8 +28,14 @@
         /// </summary>
         private void InitializeComponent()
         {
+            dlgImagen = new OpenFileDialog();
             ((System.ComponentModel.ISupportInitialize)picImagen).BeginInit();
             SuspendLayout();
+            // 
+            // lblTitulo
+            // 
+            lblTitulo.Size = new Size(460, 78);
+            lblTitulo.Text = "Agregar Camion";
             // 
             // btnGuardar
             // 
@@ -77,10 +83,12 @@
             // 
             picImagen.Location = new Point(77, 124);
             picImagen.Size = new Size(187, 185);
+            picImagen.SizeMode = PictureBoxSizeMode.StretchImage;
             // 
             // btnExaminar
             // 
             btnExaminar.Location = new Point(79, 337);
+            btnExaminar.Click += btnExaminar_Click_1;
             // 
             // lblCilindrada
             // 
@@ -106,6 +114,10 @@
             // 
             lblPasajeros.Location = new Point(1491, 486);
             // 
+            // dlgImagen
+            // 
+            dlgImagen.FileName = "openFileDialog1";
+            // 
             // FormAgregarCamion
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -122,5 +134,7 @@
         }
 
         #endregion
+
+        private OpenFileDialog dlgImagen;
     }
 }
