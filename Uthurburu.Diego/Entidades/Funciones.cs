@@ -31,7 +31,7 @@ namespace WheelsHub.Logica
             {
                 retorno = true;
             }
-            else { MessageBox.Show(mensajeError,"ERROR", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning); }
+            else { Console.WriteLine(mensajeError); }
             return retorno;
         }
         /// <summary>
@@ -93,6 +93,28 @@ namespace WheelsHub.Logica
             else
             {
                 MessageBox.Show("Para este campo debe ingresar solo numeros.");
+            }
+            return retorno;
+        }
+        /// <summary>
+        /// Valida si la cadena de texto proporcionada es un número entero válido.
+        /// </summary>
+        /// <param name="valorIngresado">Cadena de texto que se intentará convertir a un número double.</param>
+        /// <param name="valorSalida">Variable de salida que contendrá el valor convertido si la validación es exitosa.</param>
+        /// <returns>
+        /// Retorna true si la cadena de texto se puede convertir a un número entero con éxito,
+        /// de lo contrario, retorna false y muestra un mensaje de advertencia.
+        /// </returns>
+        public static bool validarNumero(string valorIngresado, out short valorSalida)
+        {
+            bool retorno = false;
+            if (short.TryParse(valorIngresado, out valorSalida))
+            {
+                retorno = true;
+            }
+            else
+            {
+                Console.WriteLine("Para este campo debe ingresar solo numeros.");
             }
             return retorno;
         }
