@@ -16,6 +16,7 @@
     Tesla,
     Jaguar,
     Ferrari,
+    Fiat,
     Lamborghini,
     Porsche,
     AstonMartin,

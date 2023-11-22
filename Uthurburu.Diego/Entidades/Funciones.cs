@@ -124,13 +124,14 @@ namespace WheelsHub.Logica
         /// <param name="listaMotos">Lista de motos obtenida de la base de datos.</param>
         /// <returns>True si se obtuvo la lista exitosamente, false en caso contrario.</returns>
         /// 
-        public bool ObtenerLista(out List<Moto> listaMotos)
+        public static bool ObtenerLista(out List<Moto> listaMotos)
         {
+            AccesoDatos datos = new AccesoDatos();
             List<Vehiculo> lista;
             bool retorno = false;
             listaMotos = new List<Moto>();
 
-            lista = datos.ObtenerListaVehiculos();
+            lista =datos.ObtenerListaVehiculos();
 
             foreach (Vehiculo vehiculo in lista)
             {
@@ -148,8 +149,9 @@ namespace WheelsHub.Logica
         /// </summary>
         /// <param name="listaAutos">Lista de autos obtenida de la base de datos.</param>
         /// <returns>True si se obtuvo la lista exitosamente, false en caso contrario.</returns>
-        public bool ObtenerLista(out List<Auto> listaAutos)
+        public static bool ObtenerLista(out List<Auto> listaAutos)
         {
+            AccesoDatos datos = new AccesoDatos();
             List<Vehiculo> lista;
             bool retorno = false;
             listaAutos = new List<Auto>();
@@ -172,8 +174,9 @@ namespace WheelsHub.Logica
         /// </summary>
         /// <param name="listaCamion">Lista de camiones obtenida de la base de datos.</param>
         /// <returns>True si se obtuvo la lista exitosamente, false en caso contrario.</returns>
-        public bool ObtenerLista(out List<Camion> listaCamion)
+        public static bool ObtenerLista(out List<Camion> listaCamion)
         {
+            AccesoDatos datos = new AccesoDatos();
             List<Vehiculo> lista;
             bool retorno = false;
             listaCamion = new List<Camion>();

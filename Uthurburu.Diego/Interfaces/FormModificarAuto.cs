@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using WheelsHub;
 using WheelsHub.Logica;
 
 namespace Interfaces
@@ -34,6 +35,12 @@ namespace Interfaces
                 MessageBox.Show($"Debe completar los campos.", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning); ;
             }
 
+        }
+        protected override void MostrarInformacion(Vehiculo vehiculo)
+        {
+            base.MostrarInformacion(vehiculo);
+            txtCantidadPasajeros.Text = this.nuevoAuto.CantidadPasajeros.ToString();
+            txtCantidadPuertas.Text = this.nuevoAuto.CantidadPuertas.ToString();
         }
     }
 }

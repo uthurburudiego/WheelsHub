@@ -42,7 +42,7 @@ namespace Interfaces
         private void btnAceptar_Click(object sender, EventArgs e)
         {
             this.usuario = new Usuario();
-            this.usuario.Nombre = this.txtUsuario.Text;
+            this.usuario.Correo = this.txtUsuario.Text;
             this.usuario.Clave = this.txtContraseña.Text;
 
             string rutaRelativa = ManejadorArchivos.ObtenerPath(@"..\..\..\..\Datos\MOCK_DATA.json");

@@ -46,11 +46,11 @@
             camionesToolStripMenuItem = new ToolStripMenuItem();
             todosToolStripMenuItem = new ToolStripMenuItem();
             usuariosToolStripMenuItem = new ToolStripMenuItem();
+            registrosToolStripMenuItem = new ToolStripMenuItem();
             salirToolStripMenuItem1 = new ToolStripMenuItem();
             cerrarSesionToolStripMenuItem = new ToolStripMenuItem();
             cerrarAplicacionToolStripMenuItem = new ToolStripMenuItem();
             lblFecha = new Label();
-            registrosToolStripMenuItem = new ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)dtgVehiculos).BeginInit();
             msMenu.SuspendLayout();
             SuspendLayout();
@@ -107,11 +107,11 @@
             dtgVehiculos.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             dtgVehiculos.BackgroundColor = Color.Black;
             dtgVehiculos.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dtgVehiculos.Location = new Point(199, 413);
+            dtgVehiculos.Location = new Point(199, 377);
             dtgVehiculos.Name = "dtgVehiculos";
             dtgVehiculos.RowTemplate.Height = 25;
             dtgVehiculos.RowTemplate.ReadOnly = true;
-            dtgVehiculos.Size = new Size(717, 154);
+            dtgVehiculos.Size = new Size(717, 190);
             dtgVehiculos.TabIndex = 5;
             dtgVehiculos.CellDoubleClick += dtgVehiculos_CellDoubleClick;
             dtgVehiculos.CellMouseClick += dtgVehiculos_CellMouseClick;
@@ -163,21 +163,21 @@
             // autoToolStripMenuItem
             // 
             autoToolStripMenuItem.Name = "autoToolStripMenuItem";
-            autoToolStripMenuItem.Size = new Size(180, 26);
+            autoToolStripMenuItem.Size = new Size(139, 26);
             autoToolStripMenuItem.Text = "Auto";
             autoToolStripMenuItem.Click += autoToolStripMenuItem_Click;
             // 
             // motoToolStripMenuItem
             // 
             motoToolStripMenuItem.Name = "motoToolStripMenuItem";
-            motoToolStripMenuItem.Size = new Size(180, 26);
+            motoToolStripMenuItem.Size = new Size(139, 26);
             motoToolStripMenuItem.Text = "Moto";
             motoToolStripMenuItem.Click += motoToolStripMenuItem_Click;
             // 
             // camionToolStripMenuItem
             // 
             camionToolStripMenuItem.Name = "camionToolStripMenuItem";
-            camionToolStripMenuItem.Size = new Size(180, 26);
+            camionToolStripMenuItem.Size = new Size(139, 26);
             camionToolStripMenuItem.Text = "Camion";
             camionToolStripMenuItem.Click += camionToolStripMenuItem_Click;
             // 
@@ -192,37 +192,44 @@
             // motosToolStripMenuItem
             // 
             motosToolStripMenuItem.Name = "motosToolStripMenuItem";
-            motosToolStripMenuItem.Size = new Size(180, 26);
+            motosToolStripMenuItem.Size = new Size(156, 26);
             motosToolStripMenuItem.Text = "Motos";
             motosToolStripMenuItem.Click += motosToolStripMenuItem_Click;
             // 
             // autosToolStripMenuItem
             // 
             autosToolStripMenuItem.Name = "autosToolStripMenuItem";
-            autosToolStripMenuItem.Size = new Size(180, 26);
+            autosToolStripMenuItem.Size = new Size(156, 26);
             autosToolStripMenuItem.Text = "Autos";
             autosToolStripMenuItem.Click += autosToolStripMenuItem_Click;
             // 
             // camionesToolStripMenuItem
             // 
             camionesToolStripMenuItem.Name = "camionesToolStripMenuItem";
-            camionesToolStripMenuItem.Size = new Size(180, 26);
+            camionesToolStripMenuItem.Size = new Size(156, 26);
             camionesToolStripMenuItem.Text = "Camiones";
             camionesToolStripMenuItem.Click += camionesToolStripMenuItem_Click;
             // 
             // todosToolStripMenuItem
             // 
             todosToolStripMenuItem.Name = "todosToolStripMenuItem";
-            todosToolStripMenuItem.Size = new Size(180, 26);
+            todosToolStripMenuItem.Size = new Size(156, 26);
             todosToolStripMenuItem.Text = "Todos";
             todosToolStripMenuItem.Click += todosToolStripMenuItem_Click;
             // 
             // usuariosToolStripMenuItem
             // 
             usuariosToolStripMenuItem.Name = "usuariosToolStripMenuItem";
-            usuariosToolStripMenuItem.Size = new Size(180, 26);
+            usuariosToolStripMenuItem.Size = new Size(156, 26);
             usuariosToolStripMenuItem.Text = "Usuarios";
             usuariosToolStripMenuItem.Click += usuariosToolStripMenuItem_Click;
+            // 
+            // registrosToolStripMenuItem
+            // 
+            registrosToolStripMenuItem.Name = "registrosToolStripMenuItem";
+            registrosToolStripMenuItem.Size = new Size(156, 26);
+            registrosToolStripMenuItem.Text = "Registros";
+            registrosToolStripMenuItem.Click += registrosToolStripMenuItem_Click;
             // 
             // salirToolStripMenuItem1
             // 
@@ -258,13 +265,6 @@
             lblFecha.Size = new Size(62, 21);
             lblFecha.TabIndex = 12;
             lblFecha.Text = "Fecha: ";
-            // 
-            // registrosToolStripMenuItem
-            // 
-            registrosToolStripMenuItem.Name = "registrosToolStripMenuItem";
-            registrosToolStripMenuItem.Size = new Size(180, 26);
-            registrosToolStripMenuItem.Text = "Registros";
-            registrosToolStripMenuItem.Click += registrosToolStripMenuItem_Click;
             // 
             // FormInicio
             // 
