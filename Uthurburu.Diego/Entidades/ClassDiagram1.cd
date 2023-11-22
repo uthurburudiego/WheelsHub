@@ -1,0 +1,130 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1" MembersFormat="FullSignature">
+  <Class Name="WheelsHub.Logica.Auto">
+    <Position X="20.25" Y="10.25" Width="10.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAABAgIAAQAAgEgAAIAAAAAAAAAIgACAAAAAAAAAA=</HashCode>
+      <FileName>Auto.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WheelsHub.Vehiculo">
+    <Position X="5.5" Y="0.75" Width="7.25" />
+    <TypeIdentifier>
+      <HashCode>AAAIQAAAIAAAACAEwAEIAAAAAAAAAACACAgAwAAIAmA=</HashCode>
+      <FileName>Vehiculo.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WheelsHub.Logica.Camion">
+    <Position X="0.5" Y="10.25" Width="9.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAABAAIAAQCAAEgAgAAAAAAAAAAIAAGAAAABAAAAA=</HashCode>
+      <FileName>Camion.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WheelsHub.Logica.Moto">
+    <Position X="10" Y="10.25" Width="10" />
+    <TypeIdentifier>
+      <HashCode>AAAAABAAIAAQSAAEgEgAAAAAAAAAAIAACAAAAAAAAAA=</HashCode>
+      <FileName>Moto.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Entidades.ExcepcionArchivos">
+    <Position X="1.25" Y="2.75" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ExcepcionArchivos.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Entidades.ManejadorArchivos">
+    <Position X="13.25" Y="1" Width="5.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAQABQAAAAAAQAAAAAAAAAAAAAAAAAAAE=</HashCode>
+      <FileName>ManejadorArchivos.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WheelsHub.Logica.Funciones">
+    <Position X="13.25" Y="3.5" Width="7" />
+    <TypeIdentifier>
+      <HashCode>AAAAgAAAAAAAAAAAAAAAAAAAAgAAAACAAAAAAAgAAAA=</HashCode>
+      <FileName>Funciones.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Entidades.ExcepcionDatosInvalidos">
+    <Position X="1.25" Y="1.25" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ExcepcionDatosInvalidos.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Entidades.ExcepcionBaseDatosError">
+    <Position X="1.25" Y="4.25" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ExcepcionBaseDatosError.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Entidades.ExcepcionFueraDeRango">
+    <Position X="1.25" Y="5.75" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ExcepcionFueraDeRango.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Entidades.AccesoDatos">
+    <Position X="20.75" Y="0.5" Width="3.25" />
+    <TypeIdentifier>
+      <HashCode>AAAgEAAEAEAABEAFAAAAABAAAAAAAgEIAAgAAAAAAAE=</HashCode>
+      <FileName>AccesoDatos.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WheelsHub.Usuario">
+    <Position X="20.5" Y="4.75" Width="4.75" />
+    <TypeIdentifier>
+      <HashCode>AAEAAAAAAAQBAACEAQAAhAAAAIQAAACAAAAQAAAAEAA=</HashCode>
+      <FileName>Usuarios.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Enum Name="eMarcasAutos">
+    <Position X="29" Y="1" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAgQAYAMIAgAAIQAQAIAAAAAgAgAABCAAkkAAEI=</HashCode>
+      <FileName>CaracteristicasVehiculos.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="eMarcasMotos">
+    <Position X="27.25" Y="1" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAgAAAQAAAAAABAAAEBIAMAAIEkgGAABAAAgERACA=</HashCode>
+      <FileName>CaracteristicasVehiculos.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="eMarcasCamiones">
+    <Position X="30.75" Y="1" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>RAAGABAIAAAAAABIAMQCEAIAAAAggAEgECAAIAAAAAA=</HashCode>
+      <FileName>CaracteristicasVehiculos.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="eColores">
+    <Position X="25.5" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CAAAABAAAAAAAAEACQQAAAACAAAAgAAQACAAACAAAAA=</HashCode>
+      <FileName>CaracteristicasVehiculos.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="eTipoVehiculo">
+    <Position X="25.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAIAAAAAAAAAAAAAAAAAgAAAQAAAACAAAAA=</HashCode>
+      <FileName>CaracteristicasVehiculos.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="eTipoDeFrenos">
+    <Position X="25.5" Y="1" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAEAAAAACAAgAAAAAAAAAAAAAA=</HashCode>
+      <FileName>CaracteristicasVehiculos.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

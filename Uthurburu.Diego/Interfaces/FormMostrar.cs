@@ -25,6 +25,10 @@ namespace Interfaces
         {
             this.Close();
         }
+        /// <summary>
+        /// Muestra la información detallada de un vehículo en los controles del formulario.
+        /// </summary>
+        /// <param name="vehiculo">Objeto de tipo Vehiculo que contiene la información a mostrar.</param>
         private void Mostrar(Vehiculo vehiculo)
         {
             if (vehiculo is Moto)
@@ -59,6 +63,10 @@ namespace Interfaces
             }
 
         }
+        /// <summary>
+        /// Carga la imagen del vehículo en el control PictureBox.
+        /// </summary>
+        /// <param name="vehiculo">Objeto de tipo Vehiculo que contiene la información de la imagen.</param>
         private void CargarImagen(Vehiculo vehiculo)
         {
             try

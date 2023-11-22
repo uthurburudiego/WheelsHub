@@ -20,12 +20,6 @@ namespace Interfaces
             InitializeComponent();
             this.Enabled = true;    
         }
-
-        private void ltsUsuarios_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-
         private void FormVerUsuarios_Load(object sender, EventArgs e)
         {
             string rutaRelativa = ManejadorArchivos.ObtenerPath(@"..\..\..\..\Datos\MOCK_DATA.json");

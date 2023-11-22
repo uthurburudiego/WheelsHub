@@ -19,8 +19,6 @@ namespace Interfaces
         {
             InitializeComponent();
             listaRegistros = new List<string>();
-
-           
         }
 
         private void FormRegistroConexion_Load(object sender, EventArgs e)

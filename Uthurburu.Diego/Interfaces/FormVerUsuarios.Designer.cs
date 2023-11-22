@@ -42,7 +42,6 @@
             ltsUsuarios.Name = "ltsUsuarios";
             ltsUsuarios.Size = new Size(489, 292);
             ltsUsuarios.TabIndex = 0;
-            ltsUsuarios.SelectedIndexChanged += ltsUsuarios_SelectedIndexChanged;
             // 
             // lblTitulo
             // 
