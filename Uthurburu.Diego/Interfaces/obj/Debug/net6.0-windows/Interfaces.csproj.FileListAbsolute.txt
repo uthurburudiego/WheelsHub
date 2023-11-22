@@ -53,3 +53,5 @@ C:\Users\diego\OneDrive\Escritorio\Uthurburu.Diego.SegundoParcial\Uthurburu.Dieg
 C:\Users\diego\OneDrive\Escritorio\Uthurburu.Diego.SegundoParcial\Uthurburu.Diego\Interfaces\obj\Debug\net6.0-windows\Interfaces.FormModificarAuto.resources
 C:\Users\diego\OneDrive\Escritorio\Uthurburu.Diego.SegundoParcial\Uthurburu.Diego\Interfaces\obj\Debug\net6.0-windows\Interfaces.FormModificarCamion.resources
 C:\Users\diego\OneDrive\Escritorio\Uthurburu.Diego.SegundoParcial\Uthurburu.Diego\Interfaces\obj\Debug\net6.0-windows\Interfaces.FormMostrar.resources
+C:\Users\diego\OneDrive\Escritorio\Uthurburu.Diego.SegundoParcial\Uthurburu.Diego\Interfaces\obj\Debug\net6.0-windows\Interfaces.FormVerUsuarios.resources
+C:\Users\diego\OneDrive\Escritorio\Uthurburu.Diego.SegundoParcial\Uthurburu.Diego\Interfaces\obj\Debug\net6.0-windows\Interfaces.sourcelink.json

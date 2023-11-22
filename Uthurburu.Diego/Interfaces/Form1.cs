@@ -9,6 +9,7 @@ namespace Interfaces
     {
         private Usuario usuario;
         private List<Usuario> listaUsuarios;
+        List<string> registroUsuarios;
 
         public Usuario Usuario { get => usuario; set => usuario = value; }
 
@@ -49,7 +50,9 @@ namespace Interfaces
 
             if (ValidarUsuario())
             {
-
+                this.registroUsuarios.Add(this.usuario.Registro());
+                rutaRelativa = ManejadorArchivos.ObtenerPath(@"..\..\..\..\Datos\usuarios_log.json");
+                ManejadorArchivos.SerializarRegistros(registroUsuarios,rutaRelativa);
 
                 this.Close();
             }

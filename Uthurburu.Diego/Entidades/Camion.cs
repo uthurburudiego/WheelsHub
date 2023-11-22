@@ -66,7 +66,7 @@ namespace WheelsHub.Logica
             get { return this.cantidadEjes; }
             set
             {
-                if (Validaciones.ValidarRango(value, "Ingreso un valor erroneo para la cantidad de ejes.(2 - 10)", 2, 10))
+                if (Funciones.ValidarRango(value, "Ingreso un valor erroneo para la cantidad de ejes.(2 - 10)", 2, 10))
                 {
                     this.cantidadEjes = value;
                 }

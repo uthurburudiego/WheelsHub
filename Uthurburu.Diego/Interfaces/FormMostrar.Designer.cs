@@ -138,6 +138,8 @@
             Controls.Add(lblTitulo);
             Controls.Add(btnSalir);
             Controls.Add(picImagen);
+            FormBorderStyle = FormBorderStyle.FixedSingle;
+            MaximizeBox = false;
             Name = "FormMostrar";
             StartPosition = FormStartPosition.CenterParent;
             Text = "FormMostrar";

@@ -55,7 +55,7 @@ namespace WheelsHub.Logica
             get { return this.cantidadPasajeros; }
             set 
             {
-                if (Validaciones.ValidarRango(value,"Ingrese una cantidad de pasajeros valida (1-10)", 1, 10)) 
+                if (Funciones.ValidarRango(value,"Ingrese una cantidad de pasajeros valida (1-10)", 1, 10)) 
                 { 
                     this.cantidadPasajeros = value;
                 }
@@ -69,7 +69,7 @@ namespace WheelsHub.Logica
             set
             {
 
-                if (Validaciones.ValidarRango(value, "Ingrese una cantidad de puertas valida (2-5)", 2, 7))
+                if (Funciones.ValidarRango(value, "Ingrese una cantidad de puertas valida (2-5)", 2, 7))
                 {
                     this.cantidadPuertas = value;
                 }

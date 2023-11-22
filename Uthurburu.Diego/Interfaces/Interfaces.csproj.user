@@ -31,5 +31,11 @@
     <Compile Update="FormMostrar.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="FormVerRegistros.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="FormVerUsuarios.cs">
+      <SubType>Form</SubType>
+    </Compile>
   </ItemGroup>
 </Project>

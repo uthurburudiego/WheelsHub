@@ -45,7 +45,6 @@
             // btnCancelar
             // 
             btnCancelar.Location = new Point(505, 337);
-            btnCancelar.Click += btnCancelar_Click;
             // 
             // cboMarca
             // 
@@ -123,8 +122,8 @@
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(950, 450);
-            ControlBox = false;
-            FormBorderStyle = FormBorderStyle.None;
+            FormBorderStyle = FormBorderStyle.FixedSingle;
+            MaximizeBox = false;
             Name = "FormAgregarCamion";
             StartPosition = FormStartPosition.CenterParent;
             Text = "FormAgregarCamion";

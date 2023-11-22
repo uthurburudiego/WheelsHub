@@ -54,7 +54,7 @@ namespace WheelsHub.Logica
             get { return this.cilindrada; }
             set 
             {
-                if (Validaciones.ValidarRango(value,"Ingreso un valor de cilindrada fuera de rango.(50 - 3000)", 50, 3000))
+                if (Funciones.ValidarRango(value,"Ingreso un valor de cilindrada fuera de rango.(50 - 3000)", 50, 3000))
                 {
                     this.cilindrada = value;
                 }

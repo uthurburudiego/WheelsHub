@@ -48,5 +48,35 @@ namespace Entidades
                 throw;
             }
         }
+        public static void SerializarRegistros(List<string> usuarios, string rutaRelativa)
+        {
+            try
+            {
+                string registro = JsonConvert.SerializeObject(usuarios, Formatting.Indented);
+                File.WriteAllText(rutaRelativa, registro);
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+        public static List<string> DeserilizarRegistro(string rutaRelativa)
+        {
+            List<string> registro;
+            try
+            {
+                registro = JsonConvert.DeserializeObject<List<string>>(File.ReadAllText(rutaRelativa));
+
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+
+            return registro;
+
+        }
     }
 }

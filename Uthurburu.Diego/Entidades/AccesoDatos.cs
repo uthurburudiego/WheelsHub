@@ -271,7 +271,7 @@ namespace Entidades
             {
                 this.comando = new SqlCommand();
                 this.comando.CommandType = System.Data.CommandType.Text;
-                this.comando.CommandText = "INSERT INTO Vehiculos (Chasis, Modelo, Color, TipoVehiculo, Costo, CantidadEjes, Marca, Marca, Foto) " +
+                this.comando.CommandText = "INSERT INTO Vehiculos (Chasis, Modelo, Color, TipoVehiculo, Costo, Tara,CantidadEjes, Marca, Foto) " +
                                            "VALUES (@Chasis, @Modelo, @Color, @TipoVehiculo, @Costo, @Tara, @CantidadEjes, @Marca, @Foto)";
                 this.comando.Connection = this.conexion;
 
@@ -354,7 +354,7 @@ namespace Entidades
                 {
                     connection.Open();
 
-                    string query = "UPDATE Vehiculos SET Modelo = @Modelo, Color = @Color, TipoVehiculo = @TipoVehiculo, Costo = @Costo, CantidadPasajeros = @CantidadPasajeros, CantidadPuertas = @CantidadPuertas, Marca = @Marca WHERE Chasis = @Chasis";
+                    string query = "UPDATE Vehiculos SET Modelo = @Modelo, Color = @Color, TipoVehiculo = @TipoVehiculo, Costo = @Costo, CantidadPasajeros = @CantidadPasajeros, CantidadPuertas = @CantidadPuertas, Marca = @Marca, Foto = @Foto WHERE Chasis = @Chasis";
 
                     using (SqlCommand command = new SqlCommand(query, connection))
                     {
@@ -366,6 +366,7 @@ namespace Entidades
                         command.Parameters.AddWithValue("@CantidadPasajeros", auto.CantidadPasajeros);
                         command.Parameters.AddWithValue("@CantidadPuertas", auto.CantidadPuertas);
                         command.Parameters.AddWithValue("@Marca", auto.Marca);
+                        command.Parameters.AddWithValue("@Foto", auto.Foto);
                         
 
                         int rowsAffected = command.ExecuteNonQuery();
@@ -396,7 +397,7 @@ namespace Entidades
                 {
                     connection.Open();
 
-                    string query = "UPDATE Vehiculos SET Modelo = @Modelo, Color = @Color, TipoVehiculo = @TipoVehiculo, Costo = @Costo, CantidadEjes = @CantidadEjes, Tara = @Tara, Marca = @Marca WHERE Chasis = @Chasis";
+                    string query = "UPDATE Vehiculos SET Modelo = @Modelo, Color = @Color, TipoVehiculo = @TipoVehiculo, Costo = @Costo, CantidadEjes = @CantidadEjes, Tara = @Tara, Marca = @Marca, Foto = @Foto WHERE Chasis = @Chasis";
 
                     using (SqlCommand command = new SqlCommand(query, connection))
                     {
@@ -408,6 +409,7 @@ namespace Entidades
                         command.Parameters.AddWithValue("@CantidadEjes", camion.CantidadEjes);
                         command.Parameters.AddWithValue("@Tara", camion.Tara);
                         command.Parameters.AddWithValue("@Marca", camion.Marca);
+                        command.Parameters.AddWithValue("@Foto", camion.Foto);
                        
 
 

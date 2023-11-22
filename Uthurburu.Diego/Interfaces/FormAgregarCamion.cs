@@ -14,13 +14,12 @@ namespace Interfaces
 {
     public partial class FormAgregarCamion : FormAgregar
     {
-        Camion nuevoCamion;
-        AccesoDatos datos;
+
         public FormAgregarCamion()
         {
             InitializeComponent();
-            nuevoCamion = new Camion();
-            datos = new AccesoDatos();
+            this.nuevoCamion = new Camion();
+            this.datos = new AccesoDatos();
 
             Controls.Remove(this.txtCantidadPasajeros);
             Controls.Remove(this.txtCantidadPuertas);
@@ -34,12 +33,8 @@ namespace Interfaces
             cboMarca.DataSource = Enum.GetValues(typeof(eMarcasCamiones));
         }
 
-        private void btnCancelar_Click(object sender, EventArgs e)
-        {
-            this.Close();
-        }
 
-        private void btnGuardar_Click(object sender, EventArgs e)
+        protected virtual void btnGuardar_Click(object sender, EventArgs e)
         {
             try
             {
@@ -79,15 +74,15 @@ namespace Interfaces
             this.nuevoCamion.Marca = (eMarcasCamiones)cboMarca.SelectedItem;
             this.nuevoCamion.Color = (eColores)cboColor.SelectedItem;
 
-            if (validarNumero(txtCosto.Text, out costo))
+            if (Funciones.validarNumero(txtCosto.Text, out costo))
             {
                 this.nuevoCamion.Costo = costo;
             }
-            if (validarNumero(txtTara.Text, out tara))
+            if (Funciones.validarNumero(txtTara.Text, out tara))
             {
                 this.nuevoCamion.Tara = tara;
             }
-            if (validarNumero(txtCantidadEjes.Text, out cantidadEjes))
+            if (Funciones.validarNumero(txtCantidadEjes.Text, out cantidadEjes))
             {
                 this.nuevoCamion.CantidadEjes = cantidadEjes;
             }
@@ -103,8 +98,9 @@ namespace Interfaces
                 string pathImagen = dlgImagen.FileName;
                 picImagen.ImageLocation = pathImagen;
                 this.nuevoCamion.Foto = File.ReadAllBytes(pathImagen);
-
             }
+
         }
+       
     }
 }

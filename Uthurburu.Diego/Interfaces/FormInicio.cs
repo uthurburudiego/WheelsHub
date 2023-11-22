@@ -183,5 +183,21 @@ namespace Interfaces
             FormMostrar mostrar = new FormMostrar(listaVehiculos.Find(v => v.NumeroChasis == this.numeroChasis));
             mostrar.ShowDialog();
         }
+
+        private void mayorToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            dtgVehiculos.Sort(dtgVehiculos.Columns["Costo"], ListSortDirection.Ascending);
+        }
+
+        private void usuariosToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FormVerUsuarios verUsuarios = new FormVerUsuarios();
+            verUsuarios.ShowDialog();
+        }
+
+        private void registrosToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

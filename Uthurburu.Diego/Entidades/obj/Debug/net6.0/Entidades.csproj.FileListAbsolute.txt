@@ -17,3 +17,4 @@ C:\Users\diego\OneDrive\Escritorio\Uthurburu.Diego.SegundoParcial\Uthurburu.Dieg
 C:\Users\diego\OneDrive\Escritorio\Uthurburu.Diego.SegundoParcial\Uthurburu.Diego\Entidades\obj\Debug\net6.0\refint\Entidades.dll
 C:\Users\diego\OneDrive\Escritorio\Uthurburu.Diego.SegundoParcial\Uthurburu.Diego\Entidades\obj\Debug\net6.0\Entidades.pdb
 C:\Users\diego\OneDrive\Escritorio\Uthurburu.Diego.SegundoParcial\Uthurburu.Diego\Entidades\obj\Debug\net6.0\ref\Entidades.dll
+C:\Users\diego\OneDrive\Escritorio\Uthurburu.Diego.SegundoParcial\Uthurburu.Diego\Entidades\obj\Debug\net6.0\Entidades.sourcelink.json

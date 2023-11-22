@@ -55,7 +55,7 @@
             lblEjes = new Label();
             lblPuertas = new Label();
             lblPasajeros = new Label();
-            openFileDialog1 = new OpenFileDialog();
+            dlgImagen = new OpenFileDialog();
             ((System.ComponentModel.ISupportInitialize)picImagen).BeginInit();
             SuspendLayout();
             // 
@@ -92,6 +92,7 @@
             btnCancelar.TabIndex = 9;
             btnCancelar.Text = "Cancelar";
             btnCancelar.UseVisualStyleBackColor = true;
+            btnCancelar.Click += btnCancelar_Click;
             // 
             // txtChasis
             // 
@@ -188,6 +189,7 @@
             picImagen.Location = new Point(80, 147);
             picImagen.Name = "picImagen";
             picImagen.Size = new Size(187, 209);
+            picImagen.SizeMode = PictureBoxSizeMode.AutoSize;
             picImagen.TabIndex = 21;
             picImagen.TabStop = false;
             // 
@@ -201,7 +203,6 @@
             btnExaminar.TabIndex = 22;
             btnExaminar.Text = "Examinar...";
             btnExaminar.UseVisualStyleBackColor = true;
-
             // 
             // lblChasis
             // 
@@ -335,9 +336,9 @@
             lblPasajeros.TabIndex = 33;
             lblPasajeros.Text = "Cant. pasajeros:";
             // 
-            // openFileDialog1
+            // dlgImagen
             // 
-            openFileDialog1.FileName = "openFileDialog1";
+            dlgImagen.FileName = "openFileDialog1";
             // 
             // FormAgregar
             // 
@@ -372,6 +373,7 @@
             Controls.Add(btnCancelar);
             Controls.Add(btnGuardar);
             Controls.Add(lblTitulo);
+            FormBorderStyle = FormBorderStyle.FixedSingle;
             Name = "FormAgregar";
             Text = "FormAgregar";
             ((System.ComponentModel.ISupportInitialize)picImagen).EndInit();
@@ -408,6 +410,6 @@
         protected Label lblEjes;
         protected Label lblPuertas;
         protected Label lblPasajeros;
-        private OpenFileDialog openFileDialog1;
+        private OpenFileDialog dlgImagen;
     }
 }

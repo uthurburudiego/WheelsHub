@@ -16,8 +16,6 @@ namespace Interfaces
     public partial class FormAgregarAuto : FormAgregar
     {
 
-        Auto nuevoAuto;
-        AccesoDatos datos;
         public FormAgregarAuto()
         {
             InitializeComponent();
@@ -39,8 +37,7 @@ namespace Interfaces
         {
             this.Close();
         }
-
-        private void btnGuardar_Click(object sender, EventArgs e)
+        protected virtual void btnGuardar_Click(object sender, EventArgs e)
         {
             try
             {
@@ -83,21 +80,20 @@ namespace Interfaces
             this.nuevoAuto.TipoVehiculo = eTipoVehiculo.Auto;
         
 
-            if (validarNumero(txtCosto.Text, out costo))
+            if (Funciones.validarNumero(txtCosto.Text, out costo))
             {
                 this.nuevoAuto.Costo = costo;
             }
-            if (validarNumero(txtCantidadPasajeros.Text, out cantidadPasajeros))
+            if (Funciones.validarNumero(txtCantidadPasajeros.Text, out cantidadPasajeros))
             {
                 this.nuevoAuto.CantidadPasajeros = cantidadPasajeros;
             }
-            if (validarNumero(txtCantidadPuertas.Text, out cantidadPuertas))
+            if (Funciones.validarNumero(txtCantidadPuertas.Text, out cantidadPuertas))
             {
                 this.nuevoAuto.CantidadPuertas = cantidadPuertas;
             }
           
         }
-
         private void btnExaminar_Click_1(object sender, EventArgs e)
         {
             OpenFileDialog ofd = new OpenFileDialog();
@@ -107,7 +103,6 @@ namespace Interfaces
                 string pathImagen = dlgImagen.FileName;
                 picImagen.ImageLocation = pathImagen;
                 this.nuevoAuto.Foto = File.ReadAllBytes(pathImagen);
-
             }
         }
     }

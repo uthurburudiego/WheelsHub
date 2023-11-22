@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Runtime.Serialization;
+using System.Data;
 
 namespace WheelsHub
 {
@@ -16,6 +17,7 @@ namespace WheelsHub
         private string correo;
         private string clave;
         private string perfil;
+        private DateTime ultimaConexion;
 
         public Usuario()
         { }
@@ -28,6 +30,7 @@ namespace WheelsHub
             this.correo = correo;
             this.clave = clave;
             this.perfil = perfil;
+            this.ultimaConexion = DateTime.Now;
         }
 
         public string Apellido { get => apellido; set => apellido = value; }
@@ -36,8 +39,19 @@ namespace WheelsHub
         public string Correo { get => correo; set => correo = value; }
         public string Clave { get => clave; set => clave = value; }
         public string Perfil { get => perfil; set => perfil = value; }
+        public DateTime UltimaConexion { get => ultimaConexion; set => ultimaConexion = value; }
 
+        public override string ToString()
+        {
+            return $"Legajo: {this.legajo} - Perfil:{this.perfil} - Apellido: {this.apellido} - Nombre: {this.nombre} ";
+        }
 
+        public string Registro()
+        {
+
+            return $"Usuario: [{this.correo}] -- Ultima coneción: [{this.ultimaConexion}]";
+        
+        }
 
     }
 

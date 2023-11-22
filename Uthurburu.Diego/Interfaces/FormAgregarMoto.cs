@@ -14,14 +14,13 @@ namespace Interfaces
 {
     public partial class FormAgregarMoto : FormAgregar
     {
-        Moto nuevaMoto;
-        AccesoDatos datos;
+     
         public FormAgregarMoto()
         {
             InitializeComponent();
 
-            nuevaMoto = new Moto();
-            datos = new AccesoDatos();
+            this.nuevaMoto = new Moto();
+            this.datos = new AccesoDatos();
 
 
             Controls.Remove(this.txtCantidadPasajeros);
@@ -82,11 +81,11 @@ namespace Interfaces
             this.nuevaMoto.Marca = (eMarcasMotos)cboMarca.SelectedItem;
             this.nuevaMoto.Color = (eColores)cboColor.SelectedItem;
             this.nuevaMoto.FrenosABS = (eTipoDeFrenos)cboABS.SelectedItem;
-            if (validarNumero(txtCosto.Text, out costo))
+            if (Funciones.validarNumero(txtCosto.Text, out costo))
             {
                 this.nuevaMoto.Costo = costo;
             }
-            if (validarNumero(txtCilindrada.Text, out cilindrada))
+            if (Funciones.validarNumero(txtCilindrada.Text, out cilindrada))
             {
                 this.nuevaMoto.Cilindrada = cilindrada;
             }

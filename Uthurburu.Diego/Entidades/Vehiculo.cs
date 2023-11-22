@@ -93,7 +93,7 @@ namespace WheelsHub
             get { return this.costo; }
             set
             {
-                if (Validaciones.ValidarRango(value, "El Costo no puede ser menor que 0", 0,9999999))
+                if (Funciones.ValidarRango(value, "El Costo no puede ser menor que 0", 0,9999999))
                 {
                     this.costo = value;
                 }
