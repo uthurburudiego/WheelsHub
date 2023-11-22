@@ -48,8 +48,6 @@
             usuariosToolStripMenuItem = new ToolStripMenuItem();
             registrosToolStripMenuItem = new ToolStripMenuItem();
             salirToolStripMenuItem1 = new ToolStripMenuItem();
-            cerrarSesionToolStripMenuItem = new ToolStripMenuItem();
-            cerrarAplicacionToolStripMenuItem = new ToolStripMenuItem();
             lblFecha = new Label();
             ((System.ComponentModel.ISupportInitialize)dtgVehiculos).BeginInit();
             msMenu.SuspendLayout();
@@ -163,21 +161,21 @@
             // autoToolStripMenuItem
             // 
             autoToolStripMenuItem.Name = "autoToolStripMenuItem";
-            autoToolStripMenuItem.Size = new Size(139, 26);
+            autoToolStripMenuItem.Size = new Size(180, 26);
             autoToolStripMenuItem.Text = "Auto";
             autoToolStripMenuItem.Click += autoToolStripMenuItem_Click;
             // 
             // motoToolStripMenuItem
             // 
             motoToolStripMenuItem.Name = "motoToolStripMenuItem";
-            motoToolStripMenuItem.Size = new Size(139, 26);
+            motoToolStripMenuItem.Size = new Size(180, 26);
             motoToolStripMenuItem.Text = "Moto";
             motoToolStripMenuItem.Click += motoToolStripMenuItem_Click;
             // 
             // camionToolStripMenuItem
             // 
             camionToolStripMenuItem.Name = "camionToolStripMenuItem";
-            camionToolStripMenuItem.Size = new Size(139, 26);
+            camionToolStripMenuItem.Size = new Size(180, 26);
             camionToolStripMenuItem.Text = "Camion";
             camionToolStripMenuItem.Click += camionToolStripMenuItem_Click;
             // 
@@ -234,25 +232,11 @@
             // salirToolStripMenuItem1
             // 
             salirToolStripMenuItem1.BackColor = Color.White;
-            salirToolStripMenuItem1.DropDownItems.AddRange(new ToolStripItem[] { cerrarSesionToolStripMenuItem, cerrarAplicacionToolStripMenuItem });
             salirToolStripMenuItem1.ForeColor = SystemColors.ControlText;
             salirToolStripMenuItem1.Name = "salirToolStripMenuItem1";
             salirToolStripMenuItem1.Size = new Size(54, 25);
             salirToolStripMenuItem1.Text = "Salir";
-            // 
-            // cerrarSesionToolStripMenuItem
-            // 
-            cerrarSesionToolStripMenuItem.Name = "cerrarSesionToolStripMenuItem";
-            cerrarSesionToolStripMenuItem.Size = new Size(210, 26);
-            cerrarSesionToolStripMenuItem.Text = "Cerrar Sesion";
-            cerrarSesionToolStripMenuItem.Click += cerrarSesionToolStripMenuItem_Click;
-            // 
-            // cerrarAplicacionToolStripMenuItem
-            // 
-            cerrarAplicacionToolStripMenuItem.Name = "cerrarAplicacionToolStripMenuItem";
-            cerrarAplicacionToolStripMenuItem.Size = new Size(210, 26);
-            cerrarAplicacionToolStripMenuItem.Text = "Cerrar Aplicacion";
-            cerrarAplicacionToolStripMenuItem.Click += cerrarAplicacionToolStripMenuItem_Click;
+            salirToolStripMenuItem1.Click += salirToolStripMenuItem1_Click;
             // 
             // lblFecha
             // 
@@ -321,8 +305,6 @@
         private ToolStripMenuItem autosToolStripMenuItem;
         private ToolStripMenuItem camionesToolStripMenuItem;
         private ToolStripMenuItem todosToolStripMenuItem;
-        private ToolStripMenuItem cerrarSesionToolStripMenuItem;
-        private ToolStripMenuItem cerrarAplicacionToolStripMenuItem;
         private Label lblFecha;
         private ToolStripMenuItem precioToolStripMenuItem;
         private ToolStripMenuItem mayorToolStripMenuItem;

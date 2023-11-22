@@ -16,6 +16,7 @@ namespace Interfaces
 {
     public partial class FormInicio : Form
     {
+        FormLogIn logIn = new FormLogIn();
         List<Moto> listaMotos;
         List<Auto> listaAutos;
         List<Camion> listaCamion;
@@ -32,10 +33,31 @@ namespace Interfaces
         private void FormInicio_Load(object sender, EventArgs e)
         {
             IniciarSesion();
-
             todosToolStripMenuItem_Click(sender, e);
             dtgVehiculos.AutoSize = true;
             dtgVehiculos.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
+
+            switch (this.logIn.Usuario.Perfil)
+            {
+                case "administrador":
+
+                    break;
+                case "supervisor":
+                    btnBorrar.Enabled = false;
+                    registrosToolStripMenuItem.Enabled = false;
+                    usuariosToolStripMenuItem.Enabled = false;
+                    break;
+                case "vendedor":
+                    btnBorrar.Enabled = false;
+                    btnModificar.Enabled = false;
+                    registrosToolStripMenuItem.Enabled = false;
+                    usuariosToolStripMenuItem.Enabled = false;
+                    agregarToolStripMenuItem.Enabled = false;
+                    break;
+
+
+
+            }
 
         }
 
@@ -107,20 +129,12 @@ namespace Interfaces
             this.numeroChasis = dtgVehiculos.Rows[selectedRowIndex].Cells["NumeroChasis"].Value.ToString();
         }
 
-        private void cerrarAplicacionToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            this.Close();
-        }
 
-        private void cerrarSesionToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-
-            IniciarSesion();
-        }
         private void btnModificar_Click(object sender, EventArgs e)
         {
 
             Vehiculo vehiculoEncontrado = listaVehiculos.Find(v => v.NumeroChasis == this.numeroChasis);
+
             if (vehiculoEncontrado is Moto)
             {
                 FormModificarMoto modificarMoto = new FormModificarMoto((Moto)vehiculoEncontrado);
@@ -149,12 +163,13 @@ namespace Interfaces
             this.Hide();
             DateTime currentDate = DateTime.Now;
 
-            FormLogIn logIn = new FormLogIn();
-            logIn.ShowDialog();
+
+            this.logIn.ShowDialog();
             this.Show();
 
-            lblSaludo.Text = $"Bienvenido, {logIn.Usuario.Perfil}: {logIn.Usuario.Nombre}";
+            lblSaludo.Text = $"Bienvenido, {this.logIn.Usuario.Perfil}: {this.logIn.Usuario.Nombre}";
             lblFecha.Text = $"{currentDate.ToString("dd/MM/yyyy")}";
+
         }
         private List<Vehiculo> Buscador(string textoBusqueda)
         {
@@ -184,10 +199,7 @@ namespace Interfaces
             mostrar.ShowDialog();
         }
 
-        private void mayorToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            dtgVehiculos.Sort(dtgVehiculos.Columns["Costo"], ListSortDirection.Ascending);
-        }
+       
 
         private void usuariosToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -199,6 +211,11 @@ namespace Interfaces
         {
             FormRegistroConexion registroConexion = new FormRegistroConexion();
             registroConexion.ShowDialog();
+        }
+
+        private void salirToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            this.Close();   
         }
     }
 }
