@@ -63,7 +63,10 @@ namespace Interfaces
             }
 
         }
-
+        /// <summary>
+        /// Valida las credenciales del usuario comparándolas con los usuarios almacenados en la lista de usuarios.
+        /// </summary>
+        /// <returns>Devuelve true si las credenciales son válidas y se encuentra el usuario en la lista, de lo contrario, devuelve false.</returns>
         private bool ValidarUsuario()
         {
             bool retorno = false;

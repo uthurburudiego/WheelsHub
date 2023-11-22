@@ -27,6 +27,7 @@ namespace Entidades
         /// <returns>Lista de usuarios deserializada.</returns>
         public static List<Usuario> DeserilizarUsuarios(string rutaRelativa) 
         {
+
             List<Usuario> usuarios = new List<Usuario>();
             try
             {

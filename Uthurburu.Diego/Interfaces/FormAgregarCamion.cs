@@ -62,7 +62,9 @@ namespace Interfaces
                 MessageBox.Show($"Debe completar los campos.", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning); ;
             }
         }
-
+        /// <summary>
+        /// Recupera la información del formulario y la asigna a la instancia de la clase Camion.
+        /// </summary>
         protected void RecuperarInformacion()
         {
             double costo = 0;
@@ -88,7 +90,11 @@ namespace Interfaces
             }
          
         }
-
+        /// <summary>
+        /// Maneja el evento de clic en el botón "Examinar" para seleccionar una imagen y asignarla a la instancia de la clase Camion.
+        /// </summary>
+        /// <param name="sender">Objeto que desencadenó el evento.</param>
+        /// <param name="e">Argumentos del evento.</param>
         protected void btnExaminar_Click_1(object sender, EventArgs e)
         {
             OpenFileDialog ofd = new OpenFileDialog();

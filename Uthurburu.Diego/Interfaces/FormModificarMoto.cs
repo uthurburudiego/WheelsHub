@@ -20,9 +20,7 @@ namespace Interfaces
             this.nuevaMoto = moto;
             txtChasis.Enabled = false;
             MostrarInformacion(moto);
-
         }
-
         private void btnGuardar_Click(object sender, EventArgs e)
         {
             try
@@ -37,6 +35,10 @@ namespace Interfaces
                 MessageBox.Show($"Debe completar los campos.", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning); ;
             }
         }
+        /// <summary>
+        /// Muestra la información del vehículo en los controles del formulario.
+        /// </summary>
+        /// <param name="vehiculo">Objeto de tipo Vehiculo que contiene la información a mostrar.</param>
         protected override void MostrarInformacion(Vehiculo vehiculo)
         {
             base.MostrarInformacion(vehiculo);

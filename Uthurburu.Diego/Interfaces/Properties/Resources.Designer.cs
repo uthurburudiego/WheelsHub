@@ -63,9 +63,9 @@ namespace Interfaces.Properties {
         /// <summary>
         ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap fondoAuto {
+        internal static System.Drawing.Bitmap fondo1 {
             get {
-                object obj = ResourceManager.GetObject("fondoAuto", resourceCulture);
+                object obj = ResourceManager.GetObject("fondo1", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -73,9 +73,9 @@ namespace Interfaces.Properties {
         /// <summary>
         ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap fondoCamion {
+        internal static System.Drawing.Bitmap fondo2 {
             get {
-                object obj = ResourceManager.GetObject("fondoCamion", resourceCulture);
+                object obj = ResourceManager.GetObject("fondo2", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -83,9 +83,9 @@ namespace Interfaces.Properties {
         /// <summary>
         ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap fondoMoto {
+        internal static System.Drawing.Bitmap fondo3 {
             get {
-                object obj = ResourceManager.GetObject("fondoMoto", resourceCulture);
+                object obj = ResourceManager.GetObject("fondo3", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

@@ -36,6 +36,10 @@ namespace Interfaces
             }
 
         }
+        /// <summary>
+        /// Muestra la información del vehículo en los controles del formulario.
+        /// </summary>
+        /// <param name="vehiculo">Objeto de tipo Vehiculo que contiene la información a mostrar.</param>
         protected override void MostrarInformacion(Vehiculo vehiculo)
         {
             base.MostrarInformacion(vehiculo);

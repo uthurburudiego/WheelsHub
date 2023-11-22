@@ -255,7 +255,7 @@
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.Black;
-            BackgroundImage = Properties.Resources.fondoMoto;
+            BackgroundImage = Properties.Resources.fondo1;
             BackgroundImageLayout = ImageLayout.Stretch;
             ClientSize = new Size(1064, 681);
             Controls.Add(lblFecha);

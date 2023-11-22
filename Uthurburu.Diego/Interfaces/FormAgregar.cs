@@ -23,15 +23,16 @@ namespace Interfaces
         public FormAgregar()
         {
             InitializeComponent();
-
-
         }
 
         private void btnCancelar_Click(object sender, EventArgs e)
         {
             this.Close();
         }
-
+        /// <summary>
+        /// Muestra la información de un vehículo en los controles del formulario.
+        /// </summary>
+        /// <param name="vehiculo">El vehículo del cual se mostrará la información.</param>
         protected virtual void MostrarInformacion(Vehiculo vehiculo)
         {
             txtChasis.Text = vehiculo.NumeroChasis;
@@ -40,6 +41,10 @@ namespace Interfaces
             txtCosto.Text = vehiculo.Costo.ToString();
             CargarImagen(vehiculo);
         }
+        /// <summary>
+        /// Carga la imagen del vehículo en un PictureBox.
+        /// </summary>
+        /// <param name="vehiculo">El vehículo del cual se cargará la imagen.</param>
         private void CargarImagen(Vehiculo vehiculo)
         {
             try

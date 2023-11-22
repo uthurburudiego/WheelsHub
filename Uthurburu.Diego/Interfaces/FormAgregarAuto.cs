@@ -32,7 +32,6 @@ namespace Interfaces
             cboMarca.DataSource = Enum.GetValues(typeof(eMarcasAutos));
         }
 
-
         private void btnCancelar_Click(object sender, EventArgs e)
         {
             this.Close();
@@ -59,15 +58,18 @@ namespace Interfaces
                     MessageBox.Show("El campo N° de chasis es obligatorio ", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-
-                MessageBox.Show($"Debe completar los campos.", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning); ;
+                throw new ExcepcionDatosInvalidos("Debe completar los campos.");
+                
             }
             
 
         }
-        protected  void RecuperarInformacion()
+        /// <summary>
+        /// Recupera la información del formulario y la asigna a la instancia de la clase Auto.
+        /// </summary>
+        protected void RecuperarInformacion()
         {
             double costo = 0;
             int cantidadPasajeros = 0;
@@ -94,6 +96,11 @@ namespace Interfaces
             }
           
         }
+        /// <summary>
+        /// Maneja el evento de clic en el botón "Examinar" para seleccionar una imagen y asignarla a la instancia de la clase Auto.
+        /// </summary>
+        /// <param name="sender">Objeto que desencadenó el evento.</param>
+        /// <param name="e">Argumentos del evento.</param>
         private void btnExaminar_Click_1(object sender, EventArgs e)
         {
             OpenFileDialog ofd = new OpenFileDialog();

@@ -21,6 +21,10 @@ namespace Interfaces
 
 
         }
+        private void btnSalir_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
         private void Mostrar(Vehiculo vehiculo)
         {
             if (vehiculo is Moto)
@@ -83,9 +87,5 @@ namespace Interfaces
             }
         }
 
-        private void btnSalir_Click(object sender, EventArgs e)
-        {
-            this.Close();
-        }
     }
 }
