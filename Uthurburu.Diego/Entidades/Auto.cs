@@ -55,8 +55,8 @@ namespace WheelsHub.Logica
             get { return this.cantidadPasajeros; }
             set 
             {
-                if (Funciones.ValidarRango(value,"Ingrese una cantidad de pasajeros valida (1-10)", 1, 10)) 
-                { 
+                if (Funciones.ValidarRango(value, "Supero rango valido (1-10), se guardara como valor por defecto 0", 1, 10))
+                {
                     this.cantidadPasajeros = value;
                 }
                 
@@ -69,7 +69,7 @@ namespace WheelsHub.Logica
             set
             {
 
-                if (Funciones.ValidarRango(value, "Ingrese una cantidad de puertas valida (2-5)", 2, 7))
+                if (Funciones.ValidarRango(value, "Supero rango valido (2-7), se guardara como valor por defecto 0", 2, 7))
                 {
                     this.cantidadPuertas = value;
                 }
@@ -110,7 +110,11 @@ namespace WheelsHub.Logica
         {
             return base.ToString() + $"\nMarca: {Marca} \nCantidad Puertas: {CantidadPuertas} \nCapacidad de pasajeros: {CantidadPasajeros}";
         }
-
+        /// <summary>
+        /// Compara el objeto actual con otro objeto para determinar si son iguales.
+        /// </summary>
+        /// <param name="obj">El objeto a comparar con el objeto actual.</param>
+        /// <returns>True si el objeto actual es igual al objeto proporcionado, False en caso contrario.</returns>
         public override bool Equals(object? obj)
         {
             bool retorno = false;
@@ -120,7 +124,15 @@ namespace WheelsHub.Logica
             }
             return retorno;
         }
-            #endregion
+        /// <summary>
+        /// Devuelve un código hash para el objeto actual.
+        /// </summary>
+        /// <returns>Código hash del objeto.</returns>
+        public override int GetHashCode()
+        {
+            throw new NotImplementedException();
+        }
+        #endregion
 
     }
 }

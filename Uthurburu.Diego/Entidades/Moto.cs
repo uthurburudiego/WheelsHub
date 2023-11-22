@@ -54,7 +54,7 @@ namespace WheelsHub.Logica
             get { return this.cilindrada; }
             set 
             {
-                if (Funciones.ValidarRango(value,"Ingreso un valor de cilindrada fuera de rango.(50 - 3000)", 50, 3000))
+                if (Funciones.ValidarRango(value, "Supero rango valido (50-3000), se guardara como valor por defecto 0", 50, 3000))
                 {
                     this.cilindrada = value;
                 }
@@ -93,12 +93,19 @@ namespace WheelsHub.Logica
         {
             return Costo * 0.3;
         }
-
+        /// <summary>
+        /// Devuelve una representación en cadena del objeto actual, incluyendo detalles específicos de la clase derivada.
+        /// </summary>
+        /// <returns>Cadena que representa el objeto actual.</returns>
         public override string ToString()
         {
             return base.ToString() + $"\nMarca: {Marca} \nCilindrada: {Cilindrada} \nFrenos ABS: {FrenosABS}";
         }
-
+        /// <summary>
+        /// Determina si el objeto actual es igual a otro objeto del mismo tipo.
+        /// </summary>
+        /// <param name="obj">Objeto con el que se va a comparar el objeto actual.</param>
+        /// <returns>True si el objeto actual es igual al objeto especificado; de lo contrario, false.</returns>
         public override bool Equals(object? obj)
         {
             bool retorno = false;
@@ -108,7 +115,15 @@ namespace WheelsHub.Logica
             }
             return retorno;
         }
+        /// <summary>
+        /// Devuelve un código hash para el objeto actual.
+        /// </summary>
+        /// <returns>Código hash del objeto.</returns>
+        public override int GetHashCode()
+        {
+            throw new NotImplementedException();
+        }
 
-            #endregion
+        #endregion
     }
 }

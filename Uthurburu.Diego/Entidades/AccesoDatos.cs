@@ -14,12 +14,14 @@ namespace Entidades
 {
     public class AccesoDatos
     {
+        #region Atributos
         private SqlConnection conexion;
         private static string cadena_conexion;
         private SqlCommand comando;
         private SqlDataReader lector;
+        #endregion
 
-
+        #region Constructores
         static AccesoDatos()
         {
             AccesoDatos.cadena_conexion = Properties.Resources.miConexion; 
@@ -28,6 +30,14 @@ namespace Entidades
         { 
             this.conexion = new SqlConnection(AccesoDatos.cadena_conexion);
         }
+        #endregion
+
+        #region Metodos
+        // <summary>
+        /// Realiza una prueba de conexión a la base de datos.
+        /// </summary>
+        /// <returns>True si la conexión es exitosa, de lo contrario, False.</returns>
+        /// <exception cref="ExcepcionBaseDatosError">Se lanza cuando no se puede establecer la conexión con la base de datos.</exception>
         public bool PruebaConexion()
         { 
             bool result = false;
@@ -39,7 +49,7 @@ namespace Entidades
             catch (Exception)
             {
 
-
+                throw new ExcepcionBaseDatosError("No se pudo conectar con la base de datos");
             }
             finally
             {
@@ -51,56 +61,17 @@ namespace Entidades
             }
             return result;
         }
-        public List<Usuario> ObtenerListaDatos()
-        {
-            List<Usuario> lista = new List<Usuario>();
-
-            try
-            {
-                this.comando = new SqlCommand();
-                this.comando.CommandType = System.Data.CommandType.Text;
-                this.comando.CommandText = "select Legajo, Apellido, Nombre, Correo, Clave, Perfil from Usuarios";
-                this.comando.Connection = this.conexion;
-
-                this.conexion.Open();
-                this.lector = this.comando.ExecuteReader();
-
-                while (this.lector.Read())
-                {
-                    Usuario usuario = new Usuario();
-                    usuario.Legajo = (int)this.lector["Legajo"];
-                    usuario.Apellido = this.lector["Apellido"].ToString();
-                    usuario.Nombre = this.lector["Nombre"].ToString();
-                    usuario.Correo = this.lector["Correo"].ToString();
-                    usuario.Clave = this.lector["Clave"].ToString();
-                    usuario.Perfil = this.lector["Perfil"].ToString();
-
-                    lista.Add(usuario);
-                }
-                this.lector.Close();
-
-            }
-            catch (Exception ex)
-            {
-
-                
-            }
-            finally 
-            {
-                if (this.conexion.State == System.Data.ConnectionState.Open)
-                {
-                    this.conexion.Close();
-                }
-            }
-            return lista;
-        }
+        /// <summary>
+        /// Obtiene una lista de vehículos almacenados en la base de datos.
+        /// </summary>
+        /// <returns>Lista de vehículos.</returns>
+        /// <exception cref="ExcepcionBaseDatosError">Se lanza cuando ocurre un error en la base de datos.</exception>
         public List<Vehiculo> ObtenerListaVehiculos()
         {
             List<Vehiculo> lista = new List<Vehiculo>();
 
             try
             {
-                
 
                 this.comando = new SqlCommand();
                 this.comando.CommandType = System.Data.CommandType.Text;
@@ -164,10 +135,10 @@ namespace Entidades
                 this.lector.Close();
 
             }
-            catch (Exception ex)
+            catch (Exception)
             {
 
-
+                throw new ExcepcionBaseDatosError("Error en la base de datos");
             }
             finally
             {
@@ -178,6 +149,12 @@ namespace Entidades
             }
             return lista;
         }
+        /// <summary>
+        /// Agrega una nueva moto a la base de datos.
+        /// </summary>
+        /// <param name="nuevaMoto">Instancia de la clase Moto que se agregará a la base de datos.</param>
+        /// <returns>True si la moto se agregó correctamente, False en caso contrario.</returns>
+        /// <exception cref="ExcepcionBaseDatosError">Se lanza cuando ocurre un error en la base de datos.</exception>
         public bool AgregarMoto(Moto nuevaMoto)
         {
             
@@ -206,10 +183,11 @@ namespace Entidades
 
                 return rowsAffected > 0;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 // Manejar la excepción, por ejemplo, loguearla o mostrar un mensaje al usuario.
-                return false;
+               
+                throw new ExcepcionBaseDatosError("No se pudo agregar la Moto, ERRROR en la Base de Datos ");
             }
             finally
             {
@@ -219,6 +197,12 @@ namespace Entidades
                 }
             }
         }
+        /// <summary>
+        /// Agrega un nuevo auto a la base de datos.
+        /// </summary>
+        /// <param name="auto">Instancia de la clase Auto que se agregará a la base de datos.</param>
+        /// <returns>True si el auto se agregó correctamente, False en caso contrario.</returns>
+        /// <exception cref="ExcepcionBaseDatosError">Se lanza cuando ocurre un error en la base de datos.</exception>
         public bool AgregarAuto(Auto auto)
         {
             try
@@ -251,10 +235,10 @@ namespace Entidades
                     return rowsAffected > 0;
                 }
             }
-            catch (Exception ex)
+            catch (Exception )
             {
                 // Maneja la excepción según tu lógica.
-                return false;
+                throw new ExcepcionBaseDatosError("No se pudo agregar el Auto, ERRROR en la Base de Datos ");
             }
             finally
             {
@@ -264,6 +248,12 @@ namespace Entidades
                 }
             }
         }
+        /// <summary>
+        /// Agrega un nuevo Camion a la base de datos.
+        /// </summary>
+        /// <param name="nuevoCamion">Instancia de la clase Camion que se agregará a la base de datos.</param>
+        /// <returns>True si el auto se agregó correctamente, False en caso contrario.</returns>
+        /// <exception cref="ExcepcionBaseDatosError">Se lanza cuando ocurre un error en la base de datos.</exception>
         public bool AgregarCamion(Camion nuevoCamion)
         {
 
@@ -291,10 +281,9 @@ namespace Entidades
 
                 return rowsAffected > 0;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                // Manejar la excepción, por ejemplo, loguearla o mostrar un mensaje al usuario.
-                return false;
+                throw new ExcepcionBaseDatosError("");
             }
             finally
             {
@@ -304,6 +293,12 @@ namespace Entidades
                 }
             }
         }
+        /// <summary>
+        /// Modifica los datos de una moto en la base de datos.
+        /// </summary>
+        /// <param name="moto">Instancia de la clase Moto con los nuevos datos.</param>
+        /// <returns>True si la modificación fue exitosa, False en caso contrario.</returns>
+        /// <exception cref="ExcepcionBaseDatosError">Se lanza cuando ocurre un error en la base de datos.</exception>
         public bool ModificarMoto(Moto moto)
         {
             try
@@ -332,11 +327,9 @@ namespace Entidades
                     }
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-              
-              
-                return false;
+                throw new ExcepcionBaseDatosError("No se pudo modificar la Moto, ERROR en la Base de Datos");
             }
             finally
             {
@@ -346,6 +339,12 @@ namespace Entidades
                 }
             }
         }
+        /// <summary>
+        /// Modifica los datos de un auto en la base de datos.
+        /// </summary>
+        /// <param name="auto">Instancia de la clase Auto con los nuevos datos.</param>
+        /// <returns>True si la modificación fue exitosa, False en caso contrario.</returns>
+        /// <exception cref="ExcepcionBaseDatosError">Se lanza cuando ocurre un error en la base de datos.</exception>
         public bool ModificarAuto(Auto auto)
         {
             try
@@ -375,11 +374,10 @@ namespace Entidades
                     }
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
 
-
-                return false;
+                throw new ExcepcionBaseDatosError("No se pudo modificar el Auto, ERROR en la Base de Datos");
             }
             finally
             {
@@ -389,6 +387,12 @@ namespace Entidades
                 }
             }
         }
+        /// <summary>
+        /// Modifica los datos de un camion en la base de datos.
+        /// </summary>
+        /// <param name="camion">Instancia de la clase Camion con los nuevos datos.</param>
+        /// <returns>True si la modificación fue exitosa, False en caso contrario.</returns>
+        /// <exception cref="ExcepcionBaseDatosError">Se lanza cuando ocurre un error en la base de datos.</exception>
         public bool ModificarCamion(Camion camion)
         {
             try
@@ -396,9 +400,7 @@ namespace Entidades
                 using (SqlConnection connection = new SqlConnection(cadena_conexion))
                 {
                     connection.Open();
-
                     string query = "UPDATE Vehiculos SET Modelo = @Modelo, Color = @Color, TipoVehiculo = @TipoVehiculo, Costo = @Costo, CantidadEjes = @CantidadEjes, Tara = @Tara, Marca = @Marca, Foto = @Foto WHERE Chasis = @Chasis";
-
                     using (SqlCommand command = new SqlCommand(query, connection))
                     {
                         command.Parameters.AddWithValue("@Modelo", camion.Modelo);
@@ -410,20 +412,15 @@ namespace Entidades
                         command.Parameters.AddWithValue("@Tara", camion.Tara);
                         command.Parameters.AddWithValue("@Marca", camion.Marca);
                         command.Parameters.AddWithValue("@Foto", camion.Foto);
-                       
-
-
                         int rowsAffected = command.ExecuteNonQuery();
 
                         return rowsAffected > 0; // Retorna true si se realizaron cambios en la base de datos.
                     }
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-
-
-                return false;
+                throw new ExcepcionBaseDatosError("No se pudo modificar el Camion, ERROR en la Base de Datos");
             }
             finally
             {
@@ -433,6 +430,11 @@ namespace Entidades
                 }
             }
         }
+        /// <summary>
+        /// Verifica si ya existe un vehículo con el mismo número de chasis en la base de datos.
+        /// </summary>
+        /// <param name="numeroChasis">Número de chasis a verificar.</param>
+        /// <returns>True si ya existe un vehículo con el mismo número de chasis, False en caso contrario.</returns>
         public bool VehiculoExiste(string numeroChasis)
         {
             try
@@ -455,9 +457,9 @@ namespace Entidades
             }
             catch (Exception ex)
             {
-             
-              
-                return false;
+
+
+                throw new ExcepcionBaseDatosError("No se pudo conectar con la Base de Datos");
             }
             finally
             {
@@ -467,6 +469,10 @@ namespace Entidades
                 }
             }
         }
+        /// <summary>
+        /// Elimina un vehículo de la base de datos utilizando el número de chasis.
+        /// </summary>
+        /// <param name="numeroChasis">Número de chasis del vehículo a eliminar.</param>
         public void BorrarVehiculo(string numeroChasis)
         {
             try
@@ -505,64 +511,6 @@ namespace Entidades
                 Console.WriteLine($"Error al borrar camión de la base de datos: {ex.Message}");
             }
         }
-        public bool ObtenerLista( out List<Moto> listaMotos)
-        {
-            List<Vehiculo> lista;
-            bool retorno = false;
-            listaMotos = new List<Moto>();
-
-            lista = ObtenerListaVehiculos();
-
-            foreach (Vehiculo vehiculo in lista)
-            {
-                if (vehiculo is Moto)
-                {
-                    listaMotos.Add((Moto)vehiculo);
-                    retorno = true;
-                }
-            }
-            
-            return retorno;
-        }
-        public bool ObtenerLista(out List<Auto> listaAutos)
-        {
-            List<Vehiculo> lista;
-            bool retorno = false;
-            listaAutos = new List<Auto>();
-
-            lista = ObtenerListaVehiculos();
-
-            foreach (Vehiculo vehiculo in lista)
-            {
-                if (vehiculo is Auto)
-                {
-                    listaAutos.Add((Auto)vehiculo);
-                    retorno = true;
-                }
-            }
-
-            return retorno;
-        }
-        public bool ObtenerLista(out List<Camion> listaCamion)
-        {
-            List<Vehiculo> lista;
-            bool retorno = false;
-            listaCamion = new List<Camion>();
-
-            lista = ObtenerListaVehiculos();
-
-            foreach (Vehiculo vehiculo in lista)
-            {
-                if (vehiculo is Camion)
-                {
-                    listaCamion.Add((Camion)vehiculo);
-                    retorno = true;
-                }
-            }
-
-            return retorno;
-        }
-       
-       
     }
+    #endregion
 }

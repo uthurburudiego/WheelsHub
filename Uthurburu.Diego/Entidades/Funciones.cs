@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Entidades;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -7,8 +8,11 @@ using System.Windows.Forms;
 
 namespace WheelsHub.Logica
 {
+        
     public class Funciones
     {
+        AccesoDatos datos = new AccesoDatos();
+
         #region Metodos
         /// <summary>
         /// Valida si un valor entero corto (short) se encuentra dentro de un rango específico.
@@ -112,6 +116,79 @@ namespace WheelsHub.Logica
             {
                 MessageBox.Show("Para este campo debe ingresar solo numeros.");
             }
+            return retorno;
+        }
+        /// <summary>
+        /// Obtiene la lista de motos almacenadas en la base de datos.
+        /// </summary>
+        /// <param name="listaMotos">Lista de motos obtenida de la base de datos.</param>
+        /// <returns>True si se obtuvo la lista exitosamente, false en caso contrario.</returns>
+        /// 
+        public bool ObtenerLista(out List<Moto> listaMotos)
+        {
+            List<Vehiculo> lista;
+            bool retorno = false;
+            listaMotos = new List<Moto>();
+
+            lista = datos.ObtenerListaVehiculos();
+
+            foreach (Vehiculo vehiculo in lista)
+            {
+                if (vehiculo is Moto)
+                {
+                    listaMotos.Add((Moto)vehiculo);
+                    retorno = true;
+                }
+            }
+
+            return retorno;
+        }
+        /// <summary>
+        /// Obtiene la lista de autos almacenados en la base de datos.
+        /// </summary>
+        /// <param name="listaAutos">Lista de autos obtenida de la base de datos.</param>
+        /// <returns>True si se obtuvo la lista exitosamente, false en caso contrario.</returns>
+        public bool ObtenerLista(out List<Auto> listaAutos)
+        {
+            List<Vehiculo> lista;
+            bool retorno = false;
+            listaAutos = new List<Auto>();
+
+            lista = datos.ObtenerListaVehiculos();
+
+            foreach (Vehiculo vehiculo in lista)
+            {
+                if (vehiculo is Auto)
+                {
+                    listaAutos.Add((Auto)vehiculo);
+                    retorno = true;
+                }
+            }
+
+            return retorno;
+        }
+        /// <summary>
+        /// Obtiene la lista de camiones almacenados en la base de datos.
+        /// </summary>
+        /// <param name="listaCamion">Lista de camiones obtenida de la base de datos.</param>
+        /// <returns>True si se obtuvo la lista exitosamente, false en caso contrario.</returns>
+        public bool ObtenerLista(out List<Camion> listaCamion)
+        {
+            List<Vehiculo> lista;
+            bool retorno = false;
+            listaCamion = new List<Camion>();
+
+            lista = datos.ObtenerListaVehiculos();
+
+            foreach (Vehiculo vehiculo in lista)
+            {
+                if (vehiculo is Camion)
+                {
+                    listaCamion.Add((Camion)vehiculo);
+                    retorno = true;
+                }
+            }
+
             return retorno;
         }
         #endregion
