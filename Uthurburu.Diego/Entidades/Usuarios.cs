@@ -30,7 +30,7 @@ namespace WheelsHub
             this.correo = correo;
             this.clave = clave;
             this.perfil = perfil;
-            this.ultimaConexion = DateTime.Now;
+            this.ultimaConexion = new DateTime();
         }
 
         public string Apellido { get => apellido; set => apellido = value; }
@@ -49,7 +49,7 @@ namespace WheelsHub
         public string Registro()
         {
 
-            return $"Usuario: [{this.correo}] -- Ultima coneción: [{this.ultimaConexion}]";
+            return $"Usuario: [{this.correo}] -- Ultima coneción: [{this.ultimaConexion = DateTime.Now}]";
         
         }
 

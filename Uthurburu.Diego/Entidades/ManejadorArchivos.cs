@@ -48,16 +48,29 @@ namespace Entidades
                 throw;
             }
         }
-        public static void SerializarRegistros(List<string> usuarios, string rutaRelativa)
+        public static void SerializarRegistros(List<string> nuevosUsuarios, string rutaRelativa)
         {
             try
             {
-                string registro = JsonConvert.SerializeObject(usuarios, Formatting.Indented);
+                List<string> usuariosExistente = new List<string>();
+
+                // Paso 1: Deserializar la lista existente desde el archivo JSON
+                if (File.Exists(rutaRelativa))
+                {
+                    string contenidoExistente = File.ReadAllText(rutaRelativa);
+                    usuariosExistente = JsonConvert.DeserializeObject<List<string>>(contenidoExistente);
+                }
+
+                // Paso 2: Agregar la nueva lista a la lista existente
+                usuariosExistente.AddRange(nuevosUsuarios);
+
+                // Paso 3: Serializar la lista combinada y guardarla en el archivo JSON
+                string registro = JsonConvert.SerializeObject(usuariosExistente, Formatting.Indented);
                 File.WriteAllText(rutaRelativa, registro);
             }
             catch (Exception ex)
             {
-
+                // Manejar la excepción según sea necesario
                 throw;
             }
         }

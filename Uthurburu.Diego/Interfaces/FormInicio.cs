@@ -197,7 +197,8 @@ namespace Interfaces
 
         private void registrosToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            FormRegistroConexion registroConexion = new FormRegistroConexion();
+            registroConexion.ShowDialog();
         }
     }
 }

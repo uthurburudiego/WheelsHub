@@ -16,6 +16,7 @@ namespace Interfaces
         public FormLogIn()
         {
             InitializeComponent();
+            registroUsuarios = new List<string>();
 
         }
 
@@ -70,7 +71,7 @@ namespace Interfaces
 
             foreach (Usuario u in this.listaUsuarios)
             {
-                if (u.Nombre == this.usuario.Nombre && u.Clave == this.usuario.Clave)
+                if (u.Correo == this.usuario.Correo && u.Clave == this.usuario.Clave)
                 {
                     this.usuario = u;
                     retorno = true;
