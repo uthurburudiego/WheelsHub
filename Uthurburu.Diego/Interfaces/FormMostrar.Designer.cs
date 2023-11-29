@@ -142,7 +142,7 @@
             MaximizeBox = false;
             Name = "FormMostrar";
             StartPosition = FormStartPosition.CenterParent;
-            Text = "FormMostrar";
+            Text = "Mostrar";
             ((System.ComponentModel.ISupportInitialize)picImagen).EndInit();
             ResumeLayout(false);
             PerformLayout();

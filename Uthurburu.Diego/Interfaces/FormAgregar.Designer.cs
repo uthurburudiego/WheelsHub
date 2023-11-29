@@ -375,7 +375,7 @@
             Controls.Add(lblTitulo);
             FormBorderStyle = FormBorderStyle.FixedSingle;
             Name = "FormAgregar";
-            Text = "FormAgregar";
+            Text = "Agregar";
             ((System.ComponentModel.ISupportInitialize)picImagen).EndInit();
             ResumeLayout(false);
             PerformLayout();

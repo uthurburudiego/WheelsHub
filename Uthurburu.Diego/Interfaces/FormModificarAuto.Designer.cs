@@ -41,7 +41,7 @@
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(950, 450);
             Name = "FormModificarAuto";
-            Text = "FormModificarAuto";
+            Text = "Modificar Auto";
             ((System.ComponentModel.ISupportInitialize)picImagen).EndInit();
             ResumeLayout(false);
             PerformLayout();

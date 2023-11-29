@@ -79,6 +79,7 @@
             FormBorderStyle = FormBorderStyle.FixedSingle;
             MaximizeBox = false;
             Name = "FormRegistroConexion";
+            StartPosition = FormStartPosition.CenterParent;
             Text = "Registro";
             Load += FormRegistroConexion_Load;
             ResumeLayout(false);

@@ -31,16 +31,15 @@ namespace Interfaces
         /// <param name="vehiculo">Objeto de tipo Vehiculo que contiene la información a mostrar.</param>
         private void Mostrar(Vehiculo vehiculo)
         {
+          
+            CargarImagen(vehiculo);
             if (vehiculo is Moto)
             {
                 Moto moto = (Moto)vehiculo;
                 lblMarcaModelo.Text = $"{moto.Marca} -- {moto.Modelo}";
                 lblInformacion.Text = moto.ToString();
                 lblDrescripcion.Text = moto.ObtenerDescripcion();
-                lblMantenimieto.Text = $"Costo de mantenimiento:\nUSD${moto.CalcularCostoMantenimiento()} por año.";
-                CargarImagen(vehiculo);
-
-
+                lblMantenimieto.Text = $"Costo de mantenimiento:\nUSD${moto.CalcularCostoMantenimiento():N2} por año.";
             }
             else if (vehiculo is Auto)
             {
@@ -48,8 +47,7 @@ namespace Interfaces
                 lblMarcaModelo.Text = $"{auto.Marca} -- {auto.Modelo}";
                 lblInformacion.Text = auto.ToString();
                 lblDrescripcion.Text = auto.ObtenerDescripcion();
-                lblMantenimieto.Text = $"Costo de mantenimiento:\nUSD${auto.CalcularCostoMantenimiento()} por año.";
-                CargarImagen(vehiculo);
+                lblMantenimieto.Text = $"Costo de mantenimiento:\nUSD${auto.CalcularCostoMantenimiento():N2} por año.";
             }
             else if (vehiculo is Camion)
             {
@@ -57,8 +55,7 @@ namespace Interfaces
                 lblMarcaModelo.Text = $"{camion.Marca} -- {camion.Modelo}";
                 lblInformacion.Text = camion.ToString();
                 lblDrescripcion.Text = camion.ObtenerDescripcion();
-                lblMantenimieto.Text = $"Costo de mantenimiento:\nUSD${camion.CalcularCostoMantenimiento()} por año.";
-                CargarImagen(vehiculo);
+                lblMantenimieto.Text = $"Costo de mantenimiento:\nUSD${camion.CalcularCostoMantenimiento():N2} por año.";
 
             }
 

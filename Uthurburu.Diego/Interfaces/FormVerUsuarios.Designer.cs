@@ -80,6 +80,7 @@
             FormBorderStyle = FormBorderStyle.FixedSingle;
             MaximizeBox = false;
             Name = "FormVerUsuarios";
+            StartPosition = FormStartPosition.CenterParent;
             Text = "Log Usuarios";
             Load += FormVerUsuarios_Load;
             ResumeLayout(false);
