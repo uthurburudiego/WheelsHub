@@ -21,19 +21,11 @@ namespace Interfaces
             txtChasis.Enabled = false;
             MostrarInformacion(moto);
         }
-        private void btnGuardar_Click(object sender, EventArgs e)
+       protected override void btnGuardar_Click(object sender, EventArgs e)
         {
-            try
-            {
-                RecuperarInformacion();
-                datos.ModificarMoto(this.nuevaMoto);
-                this.Close();
-            }
-            catch (Exception ex)
-            {
-
-                MessageBox.Show($"Debe completar los campos.", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning); ;
-            }
+            RecuperarInformacion();
+            datos.ModificarMoto(this.nuevaMoto);
+            this.Close();
         }
         /// <summary>
         /// Muestra la información del vehículo en los controles del formulario.

@@ -30,6 +30,7 @@
         {
             dlgImagen = new OpenFileDialog();
             ((System.ComponentModel.ISupportInitialize)picImagen).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)epErrores).BeginInit();
             SuspendLayout();
             // 
             // lblTitulo
@@ -73,7 +74,21 @@
             // 
             // cboColor
             // 
-            cboColor.Items.AddRange(new object[] { eColores.Seleccionar, eColores.Blanco, eColores.Negro, eColores.Rojo, eColores.Azul, eColores.Plata, eColores.Gris, eColores.Verde, eColores.Amarillo, eColores.Marrón, eColores.Naranja });
+            cboColor.DataSource = new eColores[]
+    {
+    eColores.Seleccionar,
+    eColores.Blanco,
+    eColores.Negro,
+    eColores.Rojo,
+    eColores.Azul,
+    eColores.Plata,
+    eColores.Gris,
+    eColores.Verde,
+    eColores.Amarillo,
+    eColores.Marrón,
+    eColores.Naranja
+    };
+      
             cboColor.Location = new Point(774, 232);
             // 
             // txtTara
@@ -159,7 +174,9 @@
             Name = "FormAgregarMoto";
             StartPosition = FormStartPosition.CenterParent;
             Text = "Agregar Moto";
+            Load += FormAgregarMoto_Load;
             ((System.ComponentModel.ISupportInitialize)picImagen).EndInit();
+            ((System.ComponentModel.ISupportInitialize)epErrores).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }

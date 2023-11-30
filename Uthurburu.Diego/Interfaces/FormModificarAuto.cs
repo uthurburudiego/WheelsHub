@@ -45,6 +45,10 @@ namespace Interfaces
             base.MostrarInformacion(vehiculo);
             txtCantidadPasajeros.Text = this.nuevoAuto.CantidadPasajeros.ToString();
             txtCantidadPuertas.Text = this.nuevoAuto.CantidadPuertas.ToString();
+            cboMarca.SelectedItem = this.nuevoAuto.Marca;
+        
+
+           
         }
     }
 }

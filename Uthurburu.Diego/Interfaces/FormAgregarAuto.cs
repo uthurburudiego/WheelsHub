@@ -21,50 +21,31 @@ namespace Interfaces
             InitializeComponent();
             this.nuevoAuto = new Auto();
             this.datos = new AccesoDatos();
-            Controls.Remove(this.txtCilindrada);
-            Controls.Remove(this.cboABS);
-            Controls.Remove(this.lblABS);
-            Controls.Remove(this.lblCilindrada);
-            Controls.Remove(this.txtTara);
-            Controls.Remove(this.txtCantidadEjes);
-            Controls.Remove(this.lblTara);
-            Controls.Remove(this.lblEjes);
-            cboMarca.DataSource = Enum.GetValues(typeof(eMarcasAutos));
-        }
 
+        }
         private void btnCancelar_Click(object sender, EventArgs e)
         {
             this.Close();
         }
         protected virtual void btnGuardar_Click(object sender, EventArgs e)
         {
-            try
+            RecuperarInformacion();
+            if (this.nuevoAuto.NumeroChasis != null)
             {
-                RecuperarInformacion();
-                if (this.nuevoAuto.NumeroChasis != null)
+                if (this.nuevoAuto.Foto != null)
                 {
-                    if (this.nuevoAuto.Foto != null)
-                    {
-                        datos.AgregarAuto(this.nuevoAuto);
-                        this.Close();
-                    }
-                    else
-                    {
-                        MessageBox.Show("Debe agregar una imagen ", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    }
+                    datos.AgregarAuto(this.nuevoAuto);
+                    this.Close();
                 }
                 else
                 {
-                    MessageBox.Show("El campo N° de chasis es obligatorio ", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBox.Show("Debe agregar una imagen ", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
             }
-            catch (Exception)
+            else
             {
-                throw new ExcepcionDatosInvalidos("Debe completar los campos.");
-                
+                MessageBox.Show("El campo N° de chasis es obligatorio ", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
-            
-
         }
         /// <summary>
         /// Recupera la información del formulario y la asigna a la instancia de la clase Auto.
@@ -80,7 +61,7 @@ namespace Interfaces
             this.nuevoAuto.Marca = (eMarcasAutos)cboMarca.SelectedItem;
             this.nuevoAuto.Color = (eColores)cboColor.SelectedItem;
             this.nuevoAuto.TipoVehiculo = eTipoVehiculo.Auto;
-        
+
 
             if (Funciones.validarNumero(txtCosto.Text, out costo))
             {
@@ -94,7 +75,7 @@ namespace Interfaces
             {
                 this.nuevoAuto.CantidadPuertas = cantidadPuertas;
             }
-          
+
         }
         /// <summary>
         /// Maneja el evento de clic en el botón "Examinar" para seleccionar una imagen y asignarla a la instancia de la clase Auto.
@@ -111,6 +92,18 @@ namespace Interfaces
                 picImagen.ImageLocation = pathImagen;
                 this.nuevoAuto.Foto = File.ReadAllBytes(pathImagen);
             }
+        }
+        private void FormAgregarAuto_Load(object sender, EventArgs e)
+        {
+            Controls.Remove(this.txtCilindrada);
+            Controls.Remove(this.cboABS);
+            Controls.Remove(this.lblABS);
+            Controls.Remove(this.lblCilindrada);
+            Controls.Remove(this.txtTara);
+            Controls.Remove(this.txtCantidadEjes);
+            Controls.Remove(this.lblTara);
+            Controls.Remove(this.lblEjes);
+            cboMarca.DataSource = Enum.GetValues(typeof(eMarcasAutos));
         }
     }
 }

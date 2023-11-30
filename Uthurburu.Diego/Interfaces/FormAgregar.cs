@@ -72,6 +72,46 @@ namespace Interfaces
             }
         }
 
+        private void FormAgregar_Load(object sender, EventArgs e)
+        {
+            cboColor.DataSource = Enum.GetValues(typeof(eColores));
+        }
+        private void txtCosto_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            InputNumeros(e, txtCosto);
+        }
+        private void txtCilindrada_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            InputNumeros(e, txtCilindrada);
+        }
+        private void txtTara_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            InputNumeros(e, txtTara);
+        }
+        private void txtCantidadEjes_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            InputNumeros(e, txtCantidadEjes);
+        }
+        private void txtCantidadPuertas_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            InputNumeros(e, txtCantidadPuertas);
+        }
+        private void txtCantidadPasajeros_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            InputNumeros(e, txtCantidadPasajeros);
+        }
+
+        protected void InputNumeros(KeyPressEventArgs e, TextBox box)
+        {
+            if (!Funciones.EsNumero(e))
+            {
+                this.epErrores.SetError(box, "Solo se admiten numeros");
+            }
+            else
+            {
+                this.epErrores.Clear();
+            }
+        }
 
     }
 }

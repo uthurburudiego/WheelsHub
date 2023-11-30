@@ -183,7 +183,7 @@ namespace Entidades
 
                 return rowsAffected > 0;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 // Manejar la excepción, por ejemplo, loguearla o mostrar un mensaje al usuario.
                

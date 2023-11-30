@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -90,34 +91,9 @@ namespace WheelsHub.Logica
             {
                 retorno = true;
             }
-            else
-            {
-                MessageBox.Show("Para este campo debe ingresar solo numeros.");
-            }
             return retorno;
         }
-        /// <summary>
-        /// Valida si la cadena de texto proporcionada es un número entero válido.
-        /// </summary>
-        /// <param name="valorIngresado">Cadena de texto que se intentará convertir a un número double.</param>
-        /// <param name="valorSalida">Variable de salida que contendrá el valor convertido si la validación es exitosa.</param>
-        /// <returns>
-        /// Retorna true si la cadena de texto se puede convertir a un número entero con éxito,
-        /// de lo contrario, retorna false y muestra un mensaje de advertencia.
-        /// </returns>
-        public static bool validarNumero(string valorIngresado, out short valorSalida)
-        {
-            bool retorno = false;
-            if (short.TryParse(valorIngresado, out valorSalida))
-            {
-                retorno = true;
-            }
-            else
-            {
-                Console.WriteLine("Para este campo debe ingresar solo numeros.");
-            }
-            return retorno;
-        }
+       
         /// <summary>
         /// Valida si la cadena de texto proporcionada es un número entero válido.
         /// </summary>
@@ -133,10 +109,6 @@ namespace WheelsHub.Logica
             if (int.TryParse(valorIngresado, out valorSalida))
             {
                 retorno = true;
-            }
-            else
-            {
-                MessageBox.Show("Para este campo debe ingresar solo numeros.");
             }
             return retorno;
         }
@@ -216,6 +188,43 @@ namespace WheelsHub.Logica
 
             return retorno;
         }
+        public static bool EsNumero(KeyPressEventArgs e)
+        {
+            bool retorno = false;
+            if (Char.IsNumber(e.KeyChar))
+            {
+                e.Handled = false;
+                retorno = true;
+            }
+            else if (Char.IsControl(e.KeyChar))
+            {
+                e.Handled = false;
+                retorno = true;
+            }
+            else
+            {
+                e.Handled = true;
+            }
+            return retorno;
+        }
+        public static bool TextVacios(TextBox text)
+        { 
+            bool retorno = false;
+
+            if (text.Text == string.Empty)
+            {
+                text.Focus();
+                retorno = true;
+            
+            }
+            return retorno;
+        }
+        public static bool ValidarEmail(string correo)
+        {
+           return correo != null && Regex.IsMatch(correo, @"^[^@\s]+@[^@\s]+\.[^@\s]+$");//Expresion regular para validar correo
+        }
+
+
         #endregion
 
     }

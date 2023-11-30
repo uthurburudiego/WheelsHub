@@ -28,6 +28,7 @@
         /// </summary>
         void InitializeComponent()
         {
+            components = new System.ComponentModel.Container();
             lblTitulo = new Label();
             btnGuardar = new Button();
             btnCancelar = new Button();
@@ -56,7 +57,9 @@
             lblPuertas = new Label();
             lblPasajeros = new Label();
             dlgImagen = new OpenFileDialog();
+            epErrores = new ErrorProvider(components);
             ((System.ComponentModel.ISupportInitialize)picImagen).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)epErrores).BeginInit();
             SuspendLayout();
             // 
             // lblTitulo
@@ -125,6 +128,7 @@
             txtCilindrada.PlaceholderText = "CC";
             txtCilindrada.Size = new Size(88, 23);
             txtCilindrada.TabIndex = 13;
+            txtCilindrada.KeyPress += txtCilindrada_KeyPress;
             // 
             // cboABS
             // 
@@ -141,6 +145,7 @@
             txtCosto.PlaceholderText = "USD$";
             txtCosto.Size = new Size(88, 23);
             txtCosto.TabIndex = 15;
+            txtCosto.KeyPress += txtCosto_KeyPress;
             // 
             // cboColor
             // 
@@ -158,6 +163,7 @@
             txtTara.PlaceholderText = "Ej:1234...";
             txtTara.Size = new Size(88, 23);
             txtTara.TabIndex = 17;
+            txtTara.KeyPress += txtTara_KeyPress;
             // 
             // txtCantidadEjes
             // 
@@ -166,6 +172,7 @@
             txtCantidadEjes.PlaceholderText = "Ej:1234...";
             txtCantidadEjes.Size = new Size(88, 23);
             txtCantidadEjes.TabIndex = 18;
+            txtCantidadEjes.KeyPress += txtCantidadEjes_KeyPress;
             // 
             // txtCantidadPuertas
             // 
@@ -174,6 +181,7 @@
             txtCantidadPuertas.PlaceholderText = "Ej:1234...";
             txtCantidadPuertas.Size = new Size(74, 23);
             txtCantidadPuertas.TabIndex = 19;
+            txtCantidadPuertas.KeyPress += txtCantidadPuertas_KeyPress;
             // 
             // txtCantidadPasajeros
             // 
@@ -182,6 +190,7 @@
             txtCantidadPasajeros.PlaceholderText = "Ej:1234...";
             txtCantidadPasajeros.Size = new Size(75, 23);
             txtCantidadPasajeros.TabIndex = 20;
+            txtCantidadPasajeros.KeyPress += txtCantidadPasajeros_KeyPress;
             // 
             // picImagen
             // 
@@ -340,6 +349,10 @@
             // 
             dlgImagen.FileName = "openFileDialog1";
             // 
+            // epErrores
+            // 
+            epErrores.ContainerControl = this;
+            // 
             // FormAgregar
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -376,7 +389,9 @@
             FormBorderStyle = FormBorderStyle.FixedSingle;
             Name = "FormAgregar";
             Text = "Agregar";
+            Load += FormAgregar_Load;
             ((System.ComponentModel.ISupportInitialize)picImagen).EndInit();
+            ((System.ComponentModel.ISupportInitialize)epErrores).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -411,5 +426,6 @@
         protected Label lblPuertas;
         protected Label lblPasajeros;
         private OpenFileDialog dlgImagen;
+        protected ErrorProvider epErrores;
     }
 }
