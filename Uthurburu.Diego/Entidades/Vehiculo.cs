@@ -5,11 +5,6 @@ using Microsoft.Data.SqlClient;
 
 namespace WheelsHub
 {
-
-    [XmlInclude(typeof(Camion))]
-    [XmlInclude(typeof(Moto))]
-    [XmlInclude(typeof(Auto))]
-    [XmlRoot("Vehiculos")]
     public abstract class Vehiculo
     {
         #region Atributos
@@ -91,13 +86,7 @@ namespace WheelsHub
         public double Costo
         {
             get { return this.costo; }
-            set
-            {
-                if (Funciones.ValidarRango(value, "El Costo no puede ser menor que 0", 0,9999999))
-                {
-                    this.costo = value;
-                }
-            }
+            set {this.costo = value;}
         }
 
         public byte[] Foto 

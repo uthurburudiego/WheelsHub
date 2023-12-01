@@ -53,28 +53,13 @@ namespace WheelsHub.Logica
         public int CantidadPasajeros 
         {
             get { return this.cantidadPasajeros; }
-            set 
-            {
-                if (Funciones.ValidarRango(value, "Supero rango valido (1-10), se guardara como valor por defecto 0", 1, 10))
-                {
-                    this.cantidadPasajeros = value;
-                }
-                
-            }
+            set {this.cantidadPasajeros = value; }
             
         }
         public int CantidadPuertas 
         {
             get { return this.cantidadPuertas; }
-            set
-            {
-
-                if (Funciones.ValidarRango(value, "Supero rango valido (2-7), se guardara como valor por defecto 0", 2, 7))
-                {
-                    this.cantidadPuertas = value;
-                }
-
-            }
+            set {this.cantidadPuertas = value;}
         }
         public eMarcasAutos Marca 
         {

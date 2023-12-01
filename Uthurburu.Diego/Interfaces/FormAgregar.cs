@@ -112,6 +112,26 @@ namespace Interfaces
                 this.epErrores.Clear();
             }
         }
+        /// <summary>
+        /// Recupera la información del formulario y la asigna a la instancia de la clase Auto.
+        /// </summary>
+        protected  virtual void RecuperarInformacion(Vehiculo nuevoVehiculo)
+        {
+            double costo = 0;
 
+            nuevoVehiculo.Modelo = txtModelo.Text;
+            nuevoVehiculo.NumeroChasis = txtChasis.Text;
+            nuevoVehiculo.Color = (eColores)cboColor.SelectedItem;
+            nuevoVehiculo.TipoVehiculo = eTipoVehiculo.Auto;
+
+
+            if (Funciones.validarNumero(txtCosto.Text, out costo) &&
+                Funciones.ValidarRango(costo, "El Costo no puede ser menor que 0", "Precio", 0, 9999999))
+            {
+                nuevoVehiculo.Costo = costo;
+            }
+           
+
+        }
     }
 }

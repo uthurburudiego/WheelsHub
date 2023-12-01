@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             ((System.ComponentModel.ISupportInitialize)picImagen).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)epErrores).BeginInit();
             SuspendLayout();
             // 
             // lblTitulo
@@ -39,6 +40,60 @@
             // btnGuardar
             // 
             btnGuardar.Click += btnGuardar_Click;
+            // 
+            // cboMarca
+            // 
+            cboMarca.DataSource = new eMarcasMotos[]
+    {
+    eMarcasMotos.Seleccionar,
+    eMarcasMotos.HarleyDavidson,
+    eMarcasMotos.Honda,
+    eMarcasMotos.Yamaha,
+    eMarcasMotos.Kawasaki,
+    eMarcasMotos.Suzuki,
+    eMarcasMotos.Ducati,
+    eMarcasMotos.BMWMotorrad,
+    eMarcasMotos.KTM,
+    eMarcasMotos.Triumph,
+    eMarcasMotos.Aprilia,
+    eMarcasMotos.MotoGuzzi,
+    eMarcasMotos.Husqvarna,
+    eMarcasMotos.RoyalEnfield,
+    eMarcasMotos.IndianMotorcycle,
+    eMarcasMotos.MVAgusta,
+    eMarcasMotos.Vespa,
+    eMarcasMotos.Piaggio,
+    eMarcasMotos.Norton,
+    eMarcasMotos.Bajaj,
+    eMarcasMotos.ZeroMotorcycles
+    };
+            // 
+            // cboABS
+            // 
+            cboABS.DataSource = new eTipoDeFrenos[]
+    {
+    eTipoDeFrenos.Seleccionar,
+    eTipoDeFrenos.Si,
+    eTipoDeFrenos.No
+    };
+  
+            // 
+            // cboColor
+            // 
+            cboColor.DataSource = new eColores[]
+    {
+    eColores.Seleccionar,
+    eColores.Blanco,
+    eColores.Negro,
+    eColores.Rojo,
+    eColores.Azul,
+    eColores.Plata,
+    eColores.Gris,
+    eColores.Verde,
+    eColores.Amarillo,
+    eColores.Marrón,
+    eColores.Naranja
+    };
             // 
             // picImagen
             // 
@@ -56,7 +111,9 @@
             ClientSize = new Size(950, 450);
             Name = "FormModificarMoto";
             Text = "Modificar Moto";
+            Load += FormModificarMoto_Load;
             ((System.ComponentModel.ISupportInitialize)picImagen).EndInit();
+            ((System.ComponentModel.ISupportInitialize)epErrores).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }

@@ -17,24 +17,13 @@ namespace Interfaces
         public FormModificarAuto(Auto auto)
         {
             InitializeComponent();
-            this.nuevoAuto = auto;
-            txtChasis.Enabled = false;
-            MostrarInformacion(auto);
+            this.nuevoAuto = auto; 
         }
         protected override void btnGuardar_Click(object sender, EventArgs e)
         {
-            try
-            {
-                RecuperarInformacion();
+                RecuperarInformacion( this.nuevoAuto);
                 datos.ModificarAuto(this.nuevoAuto);
-                this.Close();
-            }
-            catch (Exception ex)
-            {
-
-                MessageBox.Show($"Debe completar los campos.", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning); ;
-            }
-
+                this.Close();        
         }
         /// <summary>
         /// Muestra la información del vehículo en los controles del formulario.
@@ -46,9 +35,13 @@ namespace Interfaces
             txtCantidadPasajeros.Text = this.nuevoAuto.CantidadPasajeros.ToString();
             txtCantidadPuertas.Text = this.nuevoAuto.CantidadPuertas.ToString();
             cboMarca.SelectedItem = this.nuevoAuto.Marca;
-        
 
-           
+        }
+
+        private void FormModificarAuto_Load(object sender, EventArgs e)
+        {
+            txtChasis.Enabled = false;
+            MostrarInformacion(this.nuevoAuto);
         }
     }
 }

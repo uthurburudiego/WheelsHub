@@ -52,13 +52,8 @@ namespace WheelsHub.Logica
         public int Cilindrada 
         { 
             get { return this.cilindrada; }
-            set 
-            {
-                if (Funciones.ValidarRango(value, "Supero rango valido (50-3000), se guardara como valor por defecto 0", 50, 3000))
-                {
-                    this.cilindrada = value;
-                }
-            }
+            set {this.cilindrada = value;}
+   
         }
         public eTipoDeFrenos FrenosABS 
         {

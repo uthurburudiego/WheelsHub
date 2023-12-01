@@ -25,7 +25,7 @@ namespace WheelsHub.Logica
         /// <returns>
         /// Devuelve "true" si el valor ingresado está dentro del rango especificado; de lo contrario, devuelve "false".
         /// </returns>
-        public static bool ValidarRango(short valorIngresado, string mensajeError, int valorMinimo, int valorMaximo)
+        public static bool ValidarRango(short valorIngresado, string mensajeError, string titulo, int valorMinimo, int valorMaximo)
         {
             bool retorno = false;
             if (valorIngresado >= valorMinimo && valorIngresado <= valorMaximo)
@@ -45,14 +45,14 @@ namespace WheelsHub.Logica
         /// <returns>
         /// Devuelve "true" si el valor ingresado está dentro del rango especificado; de lo contrario, devuelve "false".
         /// </returns>
-        public static bool ValidarRango(int valorIngresado, string mensajeError, int valorMinimo, int valorMaximo)
+        public static bool ValidarRango(int valorIngresado, string mensajeError, string titulo, int valorMinimo, int valorMaximo)
         {
             bool retorno = false;
             if (valorIngresado >= valorMinimo && valorIngresado <= valorMaximo)
             {
                 retorno = true;
             }
-            else { MessageBox.Show(mensajeError, "ERROR", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning); }
+            else { MessageBox.Show(mensajeError, titulo, MessageBoxButtons.OKCancel, MessageBoxIcon.Warning); }
             return retorno;
         }
         /// <summary>
@@ -65,14 +65,14 @@ namespace WheelsHub.Logica
         /// <returns>
         /// Devuelve "true" si el valor ingresado está dentro del rango especificado; de lo contrario, devuelve "false".
         /// </returns>
-        public static bool ValidarRango(double valorIngresado, string mensajeError, double valorMinimo, double valorMaximo)
+        public static bool ValidarRango(double valorIngresado, string mensajeError, string titulo, double valorMinimo, double valorMaximo)
         {
             bool retorno = false;
             if (valorIngresado >= valorMinimo && valorIngresado <= valorMaximo)
             {
                 retorno = true;
             }
-            else { MessageBox.Show(mensajeError, "ERROR", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning); }
+            else { MessageBox.Show(mensajeError, titulo, MessageBoxButtons.OKCancel, MessageBoxIcon.Warning); }
             return retorno;
         }
         /// <summary>
@@ -207,11 +207,11 @@ namespace WheelsHub.Logica
             }
             return retorno;
         }
-        public static bool TextVacios(TextBox text)
+        public static bool TextVacio(TextBox text)
         { 
             bool retorno = false;
 
-            if (text.Text == string.Empty)
+            if (text.Text != string.Empty)
             {
                 text.Focus();
                 retorno = true;

@@ -1,4 +1,5 @@
 ﻿using Entidades;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -29,8 +30,8 @@ namespace Interfaces
         }
         protected virtual void btnGuardar_Click(object sender, EventArgs e)
         {
-            RecuperarInformacion();
-            if (this.nuevoAuto.NumeroChasis != null)
+            RecuperarInformacion(this.nuevoAuto);
+            if (Funciones.TextVacio(txtChasis))
             {
                 if (this.nuevoAuto.Foto != null)
                 {
@@ -50,32 +51,25 @@ namespace Interfaces
         /// <summary>
         /// Recupera la información del formulario y la asigna a la instancia de la clase Auto.
         /// </summary>
-        protected void RecuperarInformacion()
+        protected override void RecuperarInformacion(Vehiculo vehiculo)
         {
-            double costo = 0;
+            base.RecuperarInformacion (vehiculo);
             int cantidadPasajeros = 0;
             int cantidadPuertas = 0;
 
-            this.nuevoAuto.Modelo = txtModelo.Text;
-            this.nuevoAuto.NumeroChasis = txtChasis.Text;
             this.nuevoAuto.Marca = (eMarcasAutos)cboMarca.SelectedItem;
-            this.nuevoAuto.Color = (eColores)cboColor.SelectedItem;
-            this.nuevoAuto.TipoVehiculo = eTipoVehiculo.Auto;
-
-
-            if (Funciones.validarNumero(txtCosto.Text, out costo))
-            {
-                this.nuevoAuto.Costo = costo;
-            }
-            if (Funciones.validarNumero(txtCantidadPasajeros.Text, out cantidadPasajeros))
+     
+            if (Funciones.validarNumero(txtCantidadPasajeros.Text, out cantidadPasajeros) && 
+                Funciones.ValidarRango(cantidadPasajeros, "Rango valido (1-10), se guardara como valor por defecto 0", "Cantidad de Pasajeros", 1, 10))
             {
                 this.nuevoAuto.CantidadPasajeros = cantidadPasajeros;
             }
-            if (Funciones.validarNumero(txtCantidadPuertas.Text, out cantidadPuertas))
+            if (Funciones.validarNumero(txtCantidadPuertas.Text, out cantidadPuertas) && 
+                Funciones.ValidarRango(cantidadPuertas, "Rango valido (2-7), se guardara como valor por defecto 0", "Cantidad de Puertas", 2, 7))
             {
                 this.nuevoAuto.CantidadPuertas = cantidadPuertas;
             }
-
+          
         }
         /// <summary>
         /// Maneja el evento de clic en el botón "Examinar" para seleccionar una imagen y asignarla a la instancia de la clase Auto.

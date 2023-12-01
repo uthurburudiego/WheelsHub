@@ -29,11 +29,62 @@
         private void InitializeComponent()
         {
             ((System.ComponentModel.ISupportInitialize)picImagen).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)epErrores).BeginInit();
             SuspendLayout();
+            // 
+            // lblTitulo
+            // 
+            lblTitulo.Size = new Size(422, 78);
+            lblTitulo.Text = "Modificar Auto";
             // 
             // btnGuardar
             // 
             btnGuardar.Click += btnGuardar_Click;
+            // 
+            // cboMarca
+            // 
+            cboMarca.DataSource = new eMarcasAutos[]
+    {
+    eMarcasAutos.Seleccionar,
+    eMarcasAutos.Toyota,
+    eMarcasAutos.Honda,
+    eMarcasAutos.Ford,
+    eMarcasAutos.Chevrolet,
+    eMarcasAutos.Volkswagen,
+    eMarcasAutos.BMW,
+    eMarcasAutos.MercedesBenz,
+    eMarcasAutos.Audi,
+    eMarcasAutos.Nissan,
+    eMarcasAutos.Hyundai,
+    eMarcasAutos.Kia,
+    eMarcasAutos.Subaru,
+    eMarcasAutos.Tesla,
+    eMarcasAutos.Jaguar,
+    eMarcasAutos.Ferrari,
+    eMarcasAutos.Fiat,
+    eMarcasAutos.Lamborghini,
+    eMarcasAutos.Porsche,
+    eMarcasAutos.AstonMartin,
+    eMarcasAutos.Jeep,
+    eMarcasAutos.LandRover
+    };
+            // 
+            // cboColor
+            // 
+            cboColor.DataSource = new eColores[]
+    {
+    eColores.Seleccionar,
+    eColores.Blanco,
+    eColores.Negro,
+    eColores.Rojo,
+    eColores.Azul,
+    eColores.Plata,
+    eColores.Gris,
+    eColores.Verde,
+    eColores.Amarillo,
+    eColores.Marrón,
+    eColores.Naranja
+    };
             // 
             // FormModificarAuto
             // 
@@ -42,7 +93,9 @@
             ClientSize = new Size(950, 450);
             Name = "FormModificarAuto";
             Text = "Modificar Auto";
+            Load += FormModificarAuto_Load;
             ((System.ComponentModel.ISupportInitialize)picImagen).EndInit();
+            ((System.ComponentModel.ISupportInitialize)epErrores).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }

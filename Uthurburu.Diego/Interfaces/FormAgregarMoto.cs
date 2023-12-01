@@ -1,4 +1,5 @@
 ﻿using Entidades;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -8,6 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using WheelsHub;
 using WheelsHub.Logica;
 
 namespace Interfaces
@@ -28,8 +30,8 @@ namespace Interfaces
         }
         protected virtual void btnGuardar_Click(object sender, EventArgs e)
         {
-            RecuperarInformacion();
-            if (this.nuevaMoto.NumeroChasis != null)
+            RecuperarInformacion(this.nuevaMoto);
+            if (Funciones.TextVacio(txtChasis))
             {
                 if (this.nuevaMoto.Foto != null)
                 {
@@ -46,21 +48,16 @@ namespace Interfaces
                 MessageBox.Show("El campo N° de chasis es obligatorio ", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
-        protected void RecuperarInformacion()
+        protected override void RecuperarInformacion( Vehiculo vehiculo)
         {
-            double costo = 0;
+            base.RecuperarInformacion(vehiculo);
             int cilindrada = 0;
-            this.nuevaMoto.TipoVehiculo = eTipoVehiculo.Moto;
-            this.nuevaMoto.NumeroChasis = txtChasis.Text;
-            this.nuevaMoto.Modelo = txtModelo.Text;
+          
             this.nuevaMoto.Marca = (eMarcasMotos)cboMarca.SelectedItem;
-            this.nuevaMoto.Color = (eColores)cboColor.SelectedItem;
             this.nuevaMoto.FrenosABS = (eTipoDeFrenos)cboABS.SelectedItem;
-            if (Funciones.validarNumero(txtCosto.Text, out costo))
-            {
-                this.nuevaMoto.Costo = costo;
-            }
-            if (Funciones.validarNumero(txtCilindrada.Text, out cilindrada))
+          
+            if (Funciones.validarNumero(txtCilindrada.Text, out cilindrada) && 
+                Funciones.ValidarRango(cilindrada, "Rango valido (50-3000), se guardara como valor por defecto 0", "Cinlindrada", 50, 3000))
             {
                 this.nuevaMoto.Cilindrada = cilindrada;
             }

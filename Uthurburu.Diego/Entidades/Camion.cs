@@ -53,24 +53,12 @@ namespace WheelsHub.Logica
         public int Tara
         {
             get { return this.tara; }
-            set
-            {
-                if (value > 0)
-                {
-                    this.tara = value;
-                }
-            }
+            set { this.tara = value;}
         }
         public int CantidadEjes
         {
             get { return this.cantidadEjes; }
-            set
-            {
-                if (Funciones.ValidarRango(value, "Supero rango valido (2-10), se guardara como valor por defecto 0", 2, 10))
-                {
-                    this.cantidadEjes = value;
-                }
-            }
+            set {this.cantidadEjes = value; }
 
         }
         public eMarcasCamiones Marca

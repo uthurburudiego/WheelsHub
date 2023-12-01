@@ -135,9 +135,9 @@ namespace Entidades
                 this.lector.Close();
 
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-
+                MessageBox.Show(ex.Message);
                 throw new ExcepcionBaseDatosError("Error en la base de datos");
             }
             finally

@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             ((System.ComponentModel.ISupportInitialize)picImagen).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)epErrores).BeginInit();
             SuspendLayout();
             // 
             // lblTitulo
@@ -40,6 +41,23 @@
             // 
             btnGuardar.Click += btnGuardar_Click_1;
             // 
+            // cboColor
+            // 
+            cboColor.DataSource = new eColores[]
+    {
+    eColores.Seleccionar,
+    eColores.Blanco,
+    eColores.Negro,
+    eColores.Rojo,
+    eColores.Azul,
+    eColores.Plata,
+    eColores.Gris,
+    eColores.Verde,
+    eColores.Amarillo,
+    eColores.Marrón,
+    eColores.Naranja
+    };
+            // 
             // FormModificarCamion
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -47,7 +65,9 @@
             ClientSize = new Size(950, 450);
             Name = "FormModificarCamion";
             Text = "Modificar Camion";
+            Load += FormModificarCamion_Load;
             ((System.ComponentModel.ISupportInitialize)picImagen).EndInit();
+            ((System.ComponentModel.ISupportInitialize)epErrores).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }

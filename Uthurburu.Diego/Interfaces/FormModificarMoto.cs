@@ -18,12 +18,11 @@ namespace Interfaces
         {
             InitializeComponent();
             this.nuevaMoto = moto;
-            txtChasis.Enabled = false;
-            MostrarInformacion(moto);
+          
         }
-       protected override void btnGuardar_Click(object sender, EventArgs e)
+        protected override void btnGuardar_Click(object sender, EventArgs e)
         {
-            RecuperarInformacion();
+            RecuperarInformacion(this.nuevaMoto);
             datos.ModificarMoto(this.nuevaMoto);
             this.Close();
         }
@@ -36,6 +35,13 @@ namespace Interfaces
             base.MostrarInformacion(vehiculo);
             txtCilindrada.Text = this.nuevaMoto.Cilindrada.ToString();
             cboABS.SelectedItem = this.nuevaMoto.FrenosABS;
+            cboMarca.SelectedItem = this.nuevaMoto.Marca;
+        }
+
+        private void FormModificarMoto_Load(object sender, EventArgs e)
+        {
+            txtChasis.Enabled = false;
+            MostrarInformacion(this.nuevaMoto);
         }
     }
 }

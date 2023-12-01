@@ -1,4 +1,5 @@
 ﻿using Entidades;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -8,6 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using WheelsHub;
 using WheelsHub.Logica;
 
 namespace Interfaces
@@ -38,8 +40,8 @@ namespace Interfaces
         {
             try
             {
-                RecuperarInformacion();
-                if (this.nuevoCamion.NumeroChasis != null)
+                RecuperarInformacion(this.nuevoCamion);
+                if (Funciones.TextVacio(txtChasis))
                 {
                     if (this.nuevoCamion.Foto != null)
                     {
@@ -65,26 +67,22 @@ namespace Interfaces
         /// <summary>
         /// Recupera la información del formulario y la asigna a la instancia de la clase Camion.
         /// </summary>
-        protected void RecuperarInformacion()
+        protected override void RecuperarInformacion( Vehiculo vehiculo)
         {
-            double costo = 0;
+            base.RecuperarInformacion (vehiculo);
+           
             int tara = 0;
             int cantidadEjes = 0;
-            this.nuevoCamion.TipoVehiculo = eTipoVehiculo.Camion;
-            this.nuevoCamion.Modelo = txtModelo.Text;
-            this.nuevoCamion.NumeroChasis = txtChasis.Text;
+         
             this.nuevoCamion.Marca = (eMarcasCamiones)cboMarca.SelectedItem;
-            this.nuevoCamion.Color = (eColores)cboColor.SelectedItem;
 
-            if (Funciones.validarNumero(txtCosto.Text, out costo))
-            {
-                this.nuevoCamion.Costo = costo;
-            }
-            if (Funciones.validarNumero(txtTara.Text, out tara))
+            if (Funciones.validarNumero(txtTara.Text, out tara) && 
+                Funciones.ValidarRango(tara, "Rango valido (mayor o igual a 0), se guardara como valor por defecto 0", "Tara", 0, 9999999999))
             {
                 this.nuevoCamion.Tara = tara;
             }
-            if (Funciones.validarNumero(txtCantidadEjes.Text, out cantidadEjes))
+            if (Funciones.validarNumero(txtCantidadEjes.Text, out cantidadEjes) && 
+                Funciones.ValidarRango(cantidadEjes, "Rango valido (2-10), se guardara como valor por defecto 0", "Cantidad de Ejes", 2, 10))
             {
                 this.nuevoCamion.CantidadEjes = cantidadEjes;
             }

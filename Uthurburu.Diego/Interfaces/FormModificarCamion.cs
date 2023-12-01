@@ -20,15 +20,13 @@ namespace Interfaces
 
             InitializeComponent();
             this.nuevoCamion = camion;
-            txtChasis.Enabled = false;
 
-            MostrarInformacion(camion);
         }
         private void btnGuardar_Click_1(object sender, EventArgs e)
         {
             try
             {
-                RecuperarInformacion();
+                RecuperarInformacion(this.nuevoCamion);
                 datos.ModificarCamion(this.nuevoCamion);
                 this.Close();
             }
@@ -46,7 +44,15 @@ namespace Interfaces
         {
             base.MostrarInformacion(vehiculo);
             txtCantidadEjes.Text = this.nuevoCamion.CantidadEjes.ToString();
-            txtTara.Text = this.nuevoCamion.Tara.ToString();    
+            txtTara.Text = this.nuevoCamion.Tara.ToString();
+            cboMarca.SelectedItem = this.nuevoCamion.Marca;
+        }
+
+        private void FormModificarCamion_Load(object sender, EventArgs e)
+        {
+            txtChasis.Enabled = false;
+
+            MostrarInformacion(this.nuevoCamion);
         }
     }
 }
