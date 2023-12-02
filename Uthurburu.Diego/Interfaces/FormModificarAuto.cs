@@ -14,17 +14,29 @@ namespace Interfaces
 {
     public partial class FormModificarAuto : FormAgregarAuto
     {
+        #region Constructor
         public FormModificarAuto(Auto auto)
         {
             InitializeComponent();
             this.nuevoAuto = auto; 
         }
+        #endregion
+
+        #region Botones
         protected override void btnGuardar_Click(object sender, EventArgs e)
         {
                 RecuperarInformacion( this.nuevoAuto);
                 datos.ModificarAuto(this.nuevoAuto);
                 this.Close();        
         }
+        private void FormModificarAuto_Load(object sender, EventArgs e)
+        {
+            txtChasis.Enabled = false;
+            MostrarInformacion(this.nuevoAuto);
+        }
+        #endregion
+
+        #region Metodos
         /// <summary>
         /// Muestra la información del vehículo en los controles del formulario.
         /// </summary>
@@ -37,11 +49,6 @@ namespace Interfaces
             cboMarca.SelectedItem = this.nuevoAuto.Marca;
 
         }
-
-        private void FormModificarAuto_Load(object sender, EventArgs e)
-        {
-            txtChasis.Enabled = false;
-            MostrarInformacion(this.nuevoAuto);
-        }
+        #endregion
     }
 }

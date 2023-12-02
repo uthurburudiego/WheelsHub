@@ -15,19 +15,96 @@ namespace Interfaces
 {
     public partial class FormAgregar : Form
     {
-        protected Moto nuevaMoto;
-        protected Auto nuevoAuto;
-        protected Camion nuevoCamion;
+        #region Atributos
         protected AccesoDatos datos;
+        #endregion
 
+        #region Constructor
         public FormAgregar()
         {
             InitializeComponent();
+            this.datos = new AccesoDatos();
         }
+        #endregion
 
+        #region Botones
         private void btnCancelar_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+        private void FormAgregar_Load(object sender, EventArgs e)
+        {
+            cboColor.DataSource = Enum.GetValues(typeof(eColores));
+        }
+        private void txtCosto_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            InputNumeros(e, txtCosto);
+        }
+        private void txtCilindrada_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            InputNumeros(e, txtCilindrada);
+        }
+        private void txtTara_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            InputNumeros(e, txtTara);
+        }
+        private void txtCantidadEjes_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            InputNumeros(e, txtCantidadEjes);
+        }
+        private void txtCantidadPuertas_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            InputNumeros(e, txtCantidadPuertas);
+        }
+        private void txtCantidadPasajeros_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            InputNumeros(e, txtCantidadPasajeros);
+        }
+
+        #endregion
+
+        #region Metodos
+
+        /// <summary>
+        /// Valida y maneja el evento KeyPress para permitir solo la entrada de números en un TextBox.
+        /// </summary>
+        /// <param name="e">Argumentos del evento KeyPress.</param>
+        /// <param name="box">TextBox en el que se está ingresando el número.</param>
+        /// <remarks>
+        /// Esta función utiliza la clase Funciones para verificar si el carácter ingresado es un número.
+        /// Si el carácter no es un número, muestra un mensaje de error utilizando un ErrorProvider.
+        /// </remarks>
+        protected void InputNumeros(KeyPressEventArgs e, TextBox box)
+        {
+            if (!Funciones.EsNumero(e))
+            {
+                this.epErrores.SetError(box, "Solo se admiten numeros");
+            }
+            else
+            {
+                this.epErrores.Clear();
+            }
+        }
+        /// <summary>
+        /// Recupera la información del formulario y la asigna a la instancia de la clase Auto.
+        /// </summary>
+        protected virtual void RecuperarInformacion(Vehiculo nuevoVehiculo)
+        {
+            double costo = 0;
+
+            nuevoVehiculo.Modelo = txtModelo.Text;
+            nuevoVehiculo.NumeroChasis = txtChasis.Text;
+            nuevoVehiculo.Color = (eColores)cboColor.SelectedItem;
+            
+
+
+            if (Funciones.validarNumero(txtCosto.Text, out costo) &&
+                Funciones.ValidarRango(costo, "El Costo no puede ser menor que 0", "Precio", 0, 9999999))
+            {
+                nuevoVehiculo.Costo = costo;
+            }
+
+
         }
         /// <summary>
         /// Muestra la información de un vehículo en los controles del formulario.
@@ -71,67 +148,18 @@ namespace Interfaces
                 MessageBox.Show($"Error al cargar la imagen: {ex.Message}");
             }
         }
-
-        private void FormAgregar_Load(object sender, EventArgs e)
+        protected void GuardarImagen(Vehiculo vehiculo)
         {
-            cboColor.DataSource = Enum.GetValues(typeof(eColores));
-        }
-        private void txtCosto_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            InputNumeros(e, txtCosto);
-        }
-        private void txtCilindrada_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            InputNumeros(e, txtCilindrada);
-        }
-        private void txtTara_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            InputNumeros(e, txtTara);
-        }
-        private void txtCantidadEjes_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            InputNumeros(e, txtCantidadEjes);
-        }
-        private void txtCantidadPuertas_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            InputNumeros(e, txtCantidadPuertas);
-        }
-        private void txtCantidadPasajeros_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            InputNumeros(e, txtCantidadPasajeros);
-        }
-
-        protected void InputNumeros(KeyPressEventArgs e, TextBox box)
-        {
-            if (!Funciones.EsNumero(e))
+            OpenFileDialog ofd = new OpenFileDialog();
+            dlgImagen.Filter = "Archivos de imagen|*.png;*.jpg;";
+            if (dlgImagen.ShowDialog() == DialogResult.OK)
             {
-                this.epErrores.SetError(box, "Solo se admiten numeros");
+                string pathImagen = dlgImagen.FileName;
+                picImagen.ImageLocation = pathImagen;
+                vehiculo.Foto = File.ReadAllBytes(pathImagen);
             }
-            else
-            {
-                this.epErrores.Clear();
-            }
+            
         }
-        /// <summary>
-        /// Recupera la información del formulario y la asigna a la instancia de la clase Auto.
-        /// </summary>
-        protected  virtual void RecuperarInformacion(Vehiculo nuevoVehiculo)
-        {
-            double costo = 0;
-
-            nuevoVehiculo.Modelo = txtModelo.Text;
-            nuevoVehiculo.NumeroChasis = txtChasis.Text;
-            nuevoVehiculo.Color = (eColores)cboColor.SelectedItem;
-            nuevoVehiculo.TipoVehiculo = eTipoVehiculo.Auto;
-
-
-            if (Funciones.validarNumero(txtCosto.Text, out costo) &&
-                Funciones.ValidarRango(costo, "El Costo no puede ser menor que 0", "Precio", 0, 9999999))
-            {
-                nuevoVehiculo.Costo = costo;
-            }
-           
-
-        }
+        #endregion
     }
 }

@@ -16,18 +16,19 @@ namespace Interfaces
 {
     public partial class FormAgregarMoto : FormAgregar
     {
+        #region Atributos
+        protected Moto nuevaMoto;
+        #endregion
 
+        #region Contructor
         public FormAgregarMoto()
         {
             InitializeComponent();
-
             this.nuevaMoto = new Moto();
-            this.datos = new AccesoDatos();
         }
-        private void btnCancelar_Click(object sender, EventArgs e)
-        {
-            this.Close();
-        }
+        #endregion
+
+        #region Botones
         protected virtual void btnGuardar_Click(object sender, EventArgs e)
         {
             RecuperarInformacion(this.nuevaMoto);
@@ -47,48 +48,11 @@ namespace Interfaces
             {
                 MessageBox.Show("El campo N° de chasis es obligatorio ", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
-        }
-        protected override void RecuperarInformacion( Vehiculo vehiculo)
-        {
-            base.RecuperarInformacion(vehiculo);
-            int cilindrada = 0;
-          
-            this.nuevaMoto.Marca = (eMarcasMotos)cboMarca.SelectedItem;
-            this.nuevaMoto.FrenosABS = (eTipoDeFrenos)cboABS.SelectedItem;
-          
-            if (Funciones.validarNumero(txtCilindrada.Text, out cilindrada) && 
-                Funciones.ValidarRango(cilindrada, "Rango valido (50-3000), se guardara como valor por defecto 0", "Cinlindrada", 50, 3000))
-            {
-                this.nuevaMoto.Cilindrada = cilindrada;
-            }
-
-        }
-        /// <summary>
-        /// Recupera la información del formulario y la asigna a la instancia de la clase Moto.
-        /// </summary>
+         }
         private void btnExaminar_Click_1(object sender, EventArgs e)
         {
-            this.nuevaMoto = GuardarImagen(this.nuevaMoto);
+            GuardarImagen(this.nuevaMoto);
         }
-        /// <summary>
-        /// Maneja el evento de clic en el botón "Examinar" para seleccionar una imagen y asignarla a la instancia de la clase Moto.
-        /// </summary>
-        /// <param name="sender">Objeto que desencadenó el evento.</param>
-        /// <param name="e">Argumentos del evento.</param>
-        protected Moto GuardarImagen(Moto moto)
-        {
-            OpenFileDialog ofd = new OpenFileDialog();
-            dlgImagen.Filter = "Archivos de imagen|*.png;*.jpg;";
-            if (dlgImagen.ShowDialog() == DialogResult.OK)
-            {
-                string pathImagen = dlgImagen.FileName;
-                picImagen.ImageLocation = pathImagen;
-                moto.Foto = File.ReadAllBytes(pathImagen);
-
-            }
-            return moto;
-        }
-
         private void FormAgregarMoto_Load(object sender, EventArgs e)
         {
             Controls.Remove(this.txtCantidadPasajeros);
@@ -103,5 +67,36 @@ namespace Interfaces
             cboABS.DataSource = Enum.GetValues(typeof(eTipoDeFrenos));
             cboMarca.DataSource = Enum.GetValues(typeof(eMarcasMotos));
         }
+        #endregion
+
+        #region Metodos
+        /// <summary>
+        /// Recupera la información de una moto desde los controles del formulario y la asigna a la instancia de la moto actual.
+        /// </summary>
+        /// <param name="vehiculo">Instancia base del vehículo del cual se recuperará la información.</param>
+        /// <remarks>
+        /// Esta función sobrescribe el método base y extiende la recuperación de información para incluir propiedades específicas de las motos.
+        /// La función valida la cilindrada ingresada y verifica que esté dentro del rango permitido (50-3000). Si la validación falla, se utiliza
+        /// el valor por defecto 0 y se muestra un mensaje informativo.
+        /// </remarks>
+        /// <seealso cref="Funciones.validarNumero"/>
+        /// <seealso cref="Funciones.ValidarRango"/>
+        protected override void RecuperarInformacion( Vehiculo vehiculo)
+        {
+            base.RecuperarInformacion(vehiculo);
+            int cilindrada = 0;
+          
+            this.nuevaMoto.Marca = (eMarcasMotos)cboMarca.SelectedItem;
+            this.nuevaMoto.FrenosABS = (eTipoDeFrenos)cboABS.SelectedItem;
+            this.nuevaMoto.TipoVehiculo = eTipoVehiculo.Moto;
+
+            if (Funciones.validarNumero(txtCilindrada.Text, out cilindrada) && 
+                Funciones.ValidarRango(cilindrada, "Rango valido (50-3000), se guardara como valor por defecto 0", "Cinlindrada", 50, 3000))
+            {
+                this.nuevaMoto.Cilindrada = cilindrada;
+            }
+
+        }
+        #endregion
     }
 }

@@ -16,21 +16,24 @@ namespace Interfaces
 {
     public partial class FormAgregarAuto : FormAgregar
     {
+        #region Atributos
+        protected Auto nuevoAuto;
+        #endregion
 
+        #region Constructor
         public FormAgregarAuto()
         {
             InitializeComponent();
             this.nuevoAuto = new Auto();
-            this.datos = new AccesoDatos();
 
         }
-        private void btnCancelar_Click(object sender, EventArgs e)
-        {
-            this.Close();
-        }
+        #endregion
+
+        #region Botones
         protected virtual void btnGuardar_Click(object sender, EventArgs e)
         {
             RecuperarInformacion(this.nuevoAuto);
+
             if (Funciones.TextVacio(txtChasis))
             {
                 if (this.nuevoAuto.Foto != null)
@@ -48,45 +51,6 @@ namespace Interfaces
                 MessageBox.Show("El campo N° de chasis es obligatorio ", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
-        /// <summary>
-        /// Recupera la información del formulario y la asigna a la instancia de la clase Auto.
-        /// </summary>
-        protected override void RecuperarInformacion(Vehiculo vehiculo)
-        {
-            base.RecuperarInformacion (vehiculo);
-            int cantidadPasajeros = 0;
-            int cantidadPuertas = 0;
-
-            this.nuevoAuto.Marca = (eMarcasAutos)cboMarca.SelectedItem;
-     
-            if (Funciones.validarNumero(txtCantidadPasajeros.Text, out cantidadPasajeros) && 
-                Funciones.ValidarRango(cantidadPasajeros, "Rango valido (1-10), se guardara como valor por defecto 0", "Cantidad de Pasajeros", 1, 10))
-            {
-                this.nuevoAuto.CantidadPasajeros = cantidadPasajeros;
-            }
-            if (Funciones.validarNumero(txtCantidadPuertas.Text, out cantidadPuertas) && 
-                Funciones.ValidarRango(cantidadPuertas, "Rango valido (2-7), se guardara como valor por defecto 0", "Cantidad de Puertas", 2, 7))
-            {
-                this.nuevoAuto.CantidadPuertas = cantidadPuertas;
-            }
-          
-        }
-        /// <summary>
-        /// Maneja el evento de clic en el botón "Examinar" para seleccionar una imagen y asignarla a la instancia de la clase Auto.
-        /// </summary>
-        /// <param name="sender">Objeto que desencadenó el evento.</param>
-        /// <param name="e">Argumentos del evento.</param>
-        private void btnExaminar_Click_1(object sender, EventArgs e)
-        {
-            OpenFileDialog ofd = new OpenFileDialog();
-            dlgImagen.Filter = "Archivos de imagen|*.png;*.jpg;";
-            if (dlgImagen.ShowDialog() == DialogResult.OK)
-            {
-                string pathImagen = dlgImagen.FileName;
-                picImagen.ImageLocation = pathImagen;
-                this.nuevoAuto.Foto = File.ReadAllBytes(pathImagen);
-            }
-        }
         private void FormAgregarAuto_Load(object sender, EventArgs e)
         {
             Controls.Remove(this.txtCilindrada);
@@ -99,5 +63,45 @@ namespace Interfaces
             Controls.Remove(this.lblEjes);
             cboMarca.DataSource = Enum.GetValues(typeof(eMarcasAutos));
         }
+        private void btnExaminar_Click_1(object sender, EventArgs e)
+        {
+             GuardarImagen(this.nuevoAuto);
+        }
+        #endregion
+
+        #region Metodos
+        /// <summary>
+        /// Recupera la información de un auto desde los controles del formulario y la asigna a la instancia del auto actual.
+        /// </summary>
+        /// <param name="vehiculo">Instancia base del vehículo del cual se recuperará la información.</param>
+        /// <remarks>
+        /// Esta función sobrescribe el método base y extiende la recuperación de información para incluir propiedades específicas de los autos.
+        /// La función valida la cantidad de pasajeros y puertas ingresadas, asegurándose de que estén dentro de los rangos permitidos (1-10 y 2-7 respectivamente).
+        /// Si la validación falla, se utilizan los valores por defecto 0 y se muestra un mensaje informativo.
+        /// </remarks>
+        /// <seealso cref="Funciones.validarNumero"/>
+        /// <seealso cref="Funciones.ValidarRango"/>
+        protected override void RecuperarInformacion(Vehiculo vehiculo)
+        {
+            base.RecuperarInformacion (vehiculo);
+            int cantidadPasajeros = 0;
+            int cantidadPuertas = 0;
+
+            this.nuevoAuto.Marca = (eMarcasAutos)cboMarca.SelectedItem;
+            this.nuevoAuto.TipoVehiculo = eTipoVehiculo.Auto;
+
+            if (Funciones.validarNumero(txtCantidadPasajeros.Text, out cantidadPasajeros) && 
+                Funciones.ValidarRango(cantidadPasajeros, "Rango valido (1-10), se guardara como valor por defecto 0", "Cantidad de Pasajeros", 1, 10))
+            {
+                this.nuevoAuto.CantidadPasajeros = cantidadPasajeros;
+            }
+            if (Funciones.validarNumero(txtCantidadPuertas.Text, out cantidadPuertas) && 
+                Funciones.ValidarRango(cantidadPuertas, "Rango valido (2-7), se guardara como valor por defecto 0", "Cantidad de Puertas", 2, 7))
+            {
+                this.nuevoAuto.CantidadPuertas = cantidadPuertas;
+            }
+          
+        }
+        #endregion
     }
 }

@@ -7,19 +7,25 @@ namespace Interfaces
 {
     public partial class FormLogIn : Form
     {
+        #region Atributos
         private Usuario usuario;
         private List<Usuario> listaUsuarios;
         List<string> registroUsuarios;
+        #endregion
 
+        #region Propiedades
         public Usuario Usuario { get => usuario; set => usuario = value; }
+        #endregion
 
+        #region Constructor
         public FormLogIn()
         {
             InitializeComponent();
             registroUsuarios = new List<string>();
-
         }
+        #endregion
 
+        #region Botones
         private void chkVer_CheckedChanged(object sender, EventArgs e)
         {
             if (chkVer.Checked)
@@ -33,12 +39,10 @@ namespace Interfaces
                 txtContraseña.UseSystemPasswordChar = true;
             }
         }
-
         private void btnCancelar_Click(object sender, EventArgs e)
         {
             Application.Exit();
         }
-
         private void btnAceptar_Click(object sender, EventArgs e)
         {
             this.usuario = new Usuario();
@@ -63,6 +67,27 @@ namespace Interfaces
             }
 
         }
+        private void txtUsuario_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                // El código que deseas ejecutar al presionar Enter
+                btnAceptar_Click(sender, e);
+                e.SuppressKeyPress = true; // Evita que se procese la tecla Enter más de una vez
+            }
+        }
+        private void txtContraseña_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                // El código que deseas ejecutar al presionar Enter
+                btnAceptar_Click(sender, e);
+                e.SuppressKeyPress = true; // Evita que se procese la tecla Enter más de una vez
+            }
+        }
+        #endregion
+
+        #region Metodos
         /// <summary>
         /// Valida las credenciales del usuario comparándolas con los usuarios almacenados en la lista de usuarios.
         /// </summary>
@@ -85,25 +110,7 @@ namespace Interfaces
             return retorno;
 
         }
+        #endregion 
 
-        private void txtUsuario_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Enter)
-            {
-                // El código que deseas ejecutar al presionar Enter
-                btnAceptar_Click(sender, e);
-                e.SuppressKeyPress = true; // Evita que se procese la tecla Enter más de una vez
-            }
-        }
-
-        private void txtContraseña_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Enter)
-            {
-                // El código que deseas ejecutar al presionar Enter
-                btnAceptar_Click(sender, e);
-                e.SuppressKeyPress = true; // Evita que se procese la tecla Enter más de una vez
-            }
-        }
     }
 }

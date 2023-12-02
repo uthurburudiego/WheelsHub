@@ -46,7 +46,6 @@
             // btnCancelar
             // 
             btnCancelar.Location = new Point(496, 340);
-            btnCancelar.Click += btnCancelar_Click;
             // 
             // txtChasis
             // 

@@ -14,17 +14,22 @@ namespace Interfaces
 {
     public partial class FormMostrar : Form
     {
+        #region Constructor
         public FormMostrar(Vehiculo vehiculo)
         {
             InitializeComponent();
             Mostrar(vehiculo);
-
-
         }
+        #endregion
+
+        #region Botones
         private void btnSalir_Click(object sender, EventArgs e)
         {
             this.Close();
         }
+        #endregion
+
+        #region Metodos
         /// <summary>
         /// Muestra la información detallada de un vehículo en los controles del formulario.
         /// </summary>
@@ -91,6 +96,6 @@ namespace Interfaces
                 MessageBox.Show($"Error al cargar la imagen: {ex.Message}");
             }
         }
-
+        #endregion
     }
 }

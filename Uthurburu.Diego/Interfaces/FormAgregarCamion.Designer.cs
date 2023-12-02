@@ -30,6 +30,7 @@
         {
             dlgImagen = new OpenFileDialog();
             ((System.ComponentModel.ISupportInitialize)picImagen).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)epErrores).BeginInit();
             SuspendLayout();
             // 
             // lblTitulo
@@ -60,6 +61,20 @@
             // 
             // cboColor
             // 
+            cboColor.DataSource = new eColores[]
+    {
+    eColores.Seleccionar,
+    eColores.Blanco,
+    eColores.Negro,
+    eColores.Rojo,
+    eColores.Azul,
+    eColores.Plata,
+    eColores.Gris,
+    eColores.Verde,
+    eColores.Amarillo,
+    eColores.Marrón,
+    eColores.Naranja
+    };
             cboColor.Items.AddRange(new object[] { eColores.Seleccionar, eColores.Blanco, eColores.Negro, eColores.Rojo, eColores.Azul, eColores.Plata, eColores.Gris, eColores.Verde, eColores.Amarillo, eColores.Marrón, eColores.Naranja });
             // 
             // txtTara
@@ -126,7 +141,9 @@
             Name = "FormAgregarCamion";
             StartPosition = FormStartPosition.CenterParent;
             Text = "Agregar Camion";
+            Load += FormAgregarCamion_Load;
             ((System.ComponentModel.ISupportInitialize)picImagen).EndInit();
+            ((System.ComponentModel.ISupportInitialize)epErrores).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }

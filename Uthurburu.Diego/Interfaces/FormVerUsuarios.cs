@@ -14,12 +14,19 @@ namespace Interfaces
 {
     public partial class FormVerUsuarios : Form
     {
+        #region Atributos
         List<Usuario> listaUsuarios;
+        #endregion
+
+        #region Constructor
         public FormVerUsuarios()
         {
             InitializeComponent();
             this.Enabled = true;    
         }
+        #endregion
+
+        #region Metodos
         private void FormVerUsuarios_Load(object sender, EventArgs e)
         {
             string rutaRelativa = ManejadorArchivos.ObtenerPath(@"..\..\..\..\Datos\MOCK_DATA.json");
@@ -30,5 +37,6 @@ namespace Interfaces
             }
 
         }
+        #endregion
     }
 }

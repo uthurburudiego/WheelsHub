@@ -14,18 +14,30 @@ namespace Interfaces
 {
     public partial class FormModificarMoto : FormAgregarMoto
     {
+        #region Contructor
         public FormModificarMoto(Moto moto)
         {
             InitializeComponent();
             this.nuevaMoto = moto;
           
         }
+        #endregion
+
+        #region Botones
         protected override void btnGuardar_Click(object sender, EventArgs e)
         {
             RecuperarInformacion(this.nuevaMoto);
             datos.ModificarMoto(this.nuevaMoto);
             this.Close();
         }
+        private void FormModificarMoto_Load(object sender, EventArgs e)
+        {
+            txtChasis.Enabled = false;
+            MostrarInformacion(this.nuevaMoto);
+        }
+        #endregion
+
+        #region Metodos
         /// <summary>
         /// Muestra la información del vehículo en los controles del formulario.
         /// </summary>
@@ -37,11 +49,6 @@ namespace Interfaces
             cboABS.SelectedItem = this.nuevaMoto.FrenosABS;
             cboMarca.SelectedItem = this.nuevaMoto.Marca;
         }
-
-        private void FormModificarMoto_Load(object sender, EventArgs e)
-        {
-            txtChasis.Enabled = false;
-            MostrarInformacion(this.nuevaMoto);
-        }
+        #endregion
     }
 }

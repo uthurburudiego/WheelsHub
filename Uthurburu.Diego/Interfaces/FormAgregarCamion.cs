@@ -16,13 +16,21 @@ namespace Interfaces
 {
     public partial class FormAgregarCamion : FormAgregar
     {
+        #region Atributos
+        protected Camion nuevoCamion;
+        #endregion
 
+        #region Constructor
         public FormAgregarCamion()
         {
             InitializeComponent();
-            this.nuevoCamion = new Camion();
-            this.datos = new AccesoDatos();
+            this.nuevoCamion = new Camion();   
+        }
+        #endregion
 
+        #region Botones
+        private void FormAgregarCamion_Load(object sender, EventArgs e)
+        {
             Controls.Remove(this.txtCantidadPasajeros);
             Controls.Remove(this.txtCantidadPuertas);
             Controls.Remove(this.lblPasajeros);
@@ -34,77 +42,68 @@ namespace Interfaces
 
             cboMarca.DataSource = Enum.GetValues(typeof(eMarcasCamiones));
         }
-
-
         protected virtual void btnGuardar_Click(object sender, EventArgs e)
         {
-            try
+            RecuperarInformacion(this.nuevoCamion);
+            if (Funciones.TextVacio(txtChasis))
             {
-                RecuperarInformacion(this.nuevoCamion);
-                if (Funciones.TextVacio(txtChasis))
+                if (this.nuevoCamion.Foto != null)
                 {
-                    if (this.nuevoCamion.Foto != null)
-                    {
-                        datos.AgregarCamion(this.nuevoCamion);
-                        this.Close();
-                    }
-                    else
-                    {
-                        MessageBox.Show("Debe agregar una imagen ", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    }
+                    datos.AgregarCamion(this.nuevoCamion);
+                    this.Close();
                 }
                 else
                 {
-                    MessageBox.Show("El campo N° de chasis es obligatorio ", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBox.Show("Debe agregar una imagen ", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
             }
-            catch (Exception ex)
+            else
             {
-
-                MessageBox.Show($"Debe completar los campos.", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning); ;
+                MessageBox.Show("El campo N° de chasis es obligatorio ", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
+
         }
-        /// <summary>
-        /// Recupera la información del formulario y la asigna a la instancia de la clase Camion.
-        /// </summary>
-        protected override void RecuperarInformacion( Vehiculo vehiculo)
+        protected void btnExaminar_Click_1(object sender, EventArgs e)
         {
-            base.RecuperarInformacion (vehiculo);
-           
+
+            GuardarImagen(this.nuevoCamion);
+        }
+        #endregion
+
+        #region Metodos
+        /// <summary>
+        /// Recupera la información de un camión desde los controles del formulario y la asigna a la instancia del camión actual.
+        /// </summary>
+        /// <param name="vehiculo">Instancia base del vehículo del cual se recuperará la información.</param>
+        /// <remarks>
+        /// Esta función sobrescribe el método base y extiende la recuperación de información para incluir propiedades específicas de los camiones.
+        /// La función valida la tara y la cantidad de ejes ingresados, asegurándose de que estén dentro de los rangos permitidos (mayor o igual a 0 y 2-10 respectivamente).
+        /// Si la validación falla, se utilizan los valores por defecto 0 y se muestra un mensaje informativo.
+        /// </remarks>
+        /// <seealso cref="Funciones.validarNumero"/>
+        /// <seealso cref="Funciones.ValidarRango"/>
+        protected override void RecuperarInformacion(Vehiculo vehiculo)
+        {
+            base.RecuperarInformacion(vehiculo);
+
             int tara = 0;
             int cantidadEjes = 0;
-         
-            this.nuevoCamion.Marca = (eMarcasCamiones)cboMarca.SelectedItem;
 
-            if (Funciones.validarNumero(txtTara.Text, out tara) && 
+            this.nuevoCamion.Marca = (eMarcasCamiones)cboMarca.SelectedItem;
+            this.nuevoCamion.TipoVehiculo = eTipoVehiculo.Camion;
+
+            if (Funciones.validarNumero(txtTara.Text, out tara) &&
                 Funciones.ValidarRango(tara, "Rango valido (mayor o igual a 0), se guardara como valor por defecto 0", "Tara", 0, 9999999999))
             {
                 this.nuevoCamion.Tara = tara;
             }
-            if (Funciones.validarNumero(txtCantidadEjes.Text, out cantidadEjes) && 
+            if (Funciones.validarNumero(txtCantidadEjes.Text, out cantidadEjes) &&
                 Funciones.ValidarRango(cantidadEjes, "Rango valido (2-10), se guardara como valor por defecto 0", "Cantidad de Ejes", 2, 10))
             {
                 this.nuevoCamion.CantidadEjes = cantidadEjes;
             }
-         
-        }
-        /// <summary>
-        /// Maneja el evento de clic en el botón "Examinar" para seleccionar una imagen y asignarla a la instancia de la clase Camion.
-        /// </summary>
-        /// <param name="sender">Objeto que desencadenó el evento.</param>
-        /// <param name="e">Argumentos del evento.</param>
-        protected void btnExaminar_Click_1(object sender, EventArgs e)
-        {
-            OpenFileDialog ofd = new OpenFileDialog();
-            dlgImagen.Filter = "Archivos de imagen|*.png;*.jpg;";
-            if (dlgImagen.ShowDialog() == DialogResult.OK)
-            {
-                string pathImagen = dlgImagen.FileName;
-                picImagen.ImageLocation = pathImagen;
-                this.nuevoCamion.Foto = File.ReadAllBytes(pathImagen);
-            }
 
         }
-       
+        #endregion
     }
 }

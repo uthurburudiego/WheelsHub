@@ -14,7 +14,7 @@ namespace Interfaces
 {
     public partial class FormModificarCamion : FormAgregarCamion
     {
-
+        #region Constructor
         public FormModificarCamion(Camion camion)
         {
 
@@ -22,6 +22,9 @@ namespace Interfaces
             this.nuevoCamion = camion;
 
         }
+        #endregion
+
+        #region Botones
         private void btnGuardar_Click_1(object sender, EventArgs e)
         {
             try
@@ -36,6 +39,15 @@ namespace Interfaces
                 MessageBox.Show($"Debe completar los campos.", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning); ;
             }
         }
+        private void FormModificarCamion_Load(object sender, EventArgs e)
+        {
+            txtChasis.Enabled = false;
+
+            MostrarInformacion(this.nuevoCamion);
+        }
+        #endregion
+
+        #region Metodos
         /// <summary>
         /// Muestra la información del vehículo en los controles del formulario.
         /// </summary>
@@ -47,12 +59,6 @@ namespace Interfaces
             txtTara.Text = this.nuevoCamion.Tara.ToString();
             cboMarca.SelectedItem = this.nuevoCamion.Marca;
         }
-
-        private void FormModificarCamion_Load(object sender, EventArgs e)
-        {
-            txtChasis.Enabled = false;
-
-            MostrarInformacion(this.nuevoCamion);
-        }
+        #endregion
     }
 }

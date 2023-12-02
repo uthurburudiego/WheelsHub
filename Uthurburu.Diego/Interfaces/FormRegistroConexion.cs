@@ -14,13 +14,19 @@ namespace Interfaces
 {
     public partial class FormRegistroConexion : Form
     {
+        #region Atributos
         List<string> listaRegistros;
+        #endregion
+
+        #region Constructor
         public FormRegistroConexion()
         {
             InitializeComponent();
             listaRegistros = new List<string>();
         }
+        #endregion
 
+        #region Botones
         private void FormRegistroConexion_Load(object sender, EventArgs e)
         {
             string rutaRelativa = ManejadorArchivos.ObtenerPath(@"..\..\..\..\Datos\usuarios_log.json");
@@ -30,7 +36,7 @@ namespace Interfaces
             {
                 ltsRegistros.Items.Add(registro);
             }
-
         }
+        #endregion
     }
 }

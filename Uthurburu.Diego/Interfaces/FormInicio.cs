@@ -16,19 +16,20 @@ namespace Interfaces
 {
     public partial class FormInicio : Form
     {
+        #region Atributos
         FormLogIn logIn = new FormLogIn();
         List<Moto> listaMotos;
         List<Auto> listaAutos;
         List<Camion> listaCamion;
         List<Vehiculo> listaVehiculos;
         int indiceImagenActual = 0;
-        readonly string[] nombresImagenes = { "fondo1", "fondo2", "fondo3" }; 
-        const int intervaloCambioImagen = 10000; 
-
-
+        readonly string[] nombresImagenes = { "fondo1", "fondo2", "fondo3" };
+        const int intervaloCambioImagen = 10000;
         string numeroChasis;
-
         AccesoDatos datos;
+        #endregion
+
+        #region Constructor
         public FormInicio()
         {
             InitializeComponent();
@@ -37,7 +38,9 @@ namespace Interfaces
 
             IniciarCambioAutomatico();
         }
+        #endregion
 
+        #region Botones
         private void FormInicio_Load(object sender, EventArgs e)
         {
             IniciarSesion();
@@ -163,15 +166,15 @@ namespace Interfaces
         }
         private void salirToolStripMenuItem1_Click(object sender, EventArgs e)
         {
-            this.Close();   
+            this.Close();
         }
         private void txtBuscador_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
             {
-                
+
                 btnBuscar_Click(sender, e);
-                e.SuppressKeyPress = true; 
+                e.SuppressKeyPress = true;
             }
         }
         private void dtgVehiculos_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
@@ -179,6 +182,9 @@ namespace Interfaces
             FormMostrar mostrar = new FormMostrar(listaVehiculos.Find(v => v.NumeroChasis == this.numeroChasis));
             mostrar.ShowDialog();
         }
+        #endregion
+
+        #region Metodos
         /// <summary>
         /// Inicia el proceso de inicio de sesión y muestra información de bienvenida.
         /// </summary>
@@ -235,7 +241,6 @@ namespace Interfaces
                 CambiarImagenDeFondo();
             }
         }
-
-
+        #endregion
     }
 }
