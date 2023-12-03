@@ -8,6 +8,12 @@ namespace Entidades
 {
     public class ExcepcionBaseDatosError: Exception
     {
-        public ExcepcionBaseDatosError(string msj) : base(msj) { }  
+        Object objetoError;
+        public ExcepcionBaseDatosError(string msj, object objetoError) : base(msj) 
+        {
+            this.objetoError = objetoError;
+        }  
+
+        public object ObjetoError{ get => this.objetoError; }
     }
 }

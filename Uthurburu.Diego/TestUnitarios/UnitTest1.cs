@@ -46,11 +46,12 @@ namespace TestUnitarios
             //ARANGE
             short valorIngresado = 5;
             string mensajeError = "El valor ingresado esta fuera de rango";
+            string titulo = "Test dentro del rango";
             int valorMinimo =  1;
             int valorMaximo = 10;
 
             //ACT
-            bool prueba = Funciones.ValidarRango(valorIngresado, mensajeError, valorMinimo, valorMaximo);
+            bool prueba = Funciones.ValidarRango(valorIngresado, mensajeError, titulo ,valorMinimo, valorMaximo);
             //ASSERT
             Assert.IsTrue(prueba);
         }
@@ -63,11 +64,12 @@ namespace TestUnitarios
             //ARANGE
             short valorIngresado = 300;
             string mensajeError = "El valor ingresado esta fuera de rango";
+            string titulo = "Test fuera del rango";
             int valorMinimo = 1;
             int valorMaximo = 10;
 
             //ACT
-            bool prueba = Funciones.ValidarRango(valorIngresado, mensajeError, valorMinimo, valorMaximo);
+            bool prueba = Funciones.ValidarRango(valorIngresado, mensajeError,titulo , valorMinimo, valorMaximo);
             //ASSERT
             Assert.IsFalse(prueba);
         }

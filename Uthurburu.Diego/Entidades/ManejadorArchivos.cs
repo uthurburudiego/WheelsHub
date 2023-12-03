@@ -34,10 +34,10 @@ namespace Entidades
               usuarios = JsonConvert.DeserializeObject<List<Usuario>>(File.ReadAllText(rutaRelativa));
 
             }
-            catch (Exception )
+            catch (Exception ex )
             {
 
-                throw new ExcepcionArchivos($"ERROR no se pudo encontrar el archivo en la ruta: {rutaRelativa}");
+                throw new ExcepcionArchivos($"ERROR no se pudo encontrar el archivo en la ruta: {rutaRelativa}\nNo se pudo obtener usuarios.", ex);
             }
             return usuarios;
         }
@@ -53,10 +53,10 @@ namespace Entidades
                 string usuariosJson = JsonConvert.SerializeObject(usuarios, Formatting.Indented);
                 File.WriteAllText(rutaRelativa, usuariosJson);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
 
-                throw new ExcepcionArchivos($"ERROR no se pudo encontrar el archivo en la ruta: {rutaRelativa}");
+                throw new ExcepcionArchivos($"ERROR no se pudo encontrar el archivo en la ruta: {rutaRelativa}\nNo se pudo guardar usuarios.", ex);
             }
         }
         /// <summary>
@@ -83,7 +83,7 @@ namespace Entidades
             catch (Exception ex)
             {
                 
-                throw new ExcepcionArchivos($"ERROR no se pudo encontrar el archivo en la ruta: {rutaRelativa}");
+                throw new ExcepcionArchivos($"ERROR no se pudo encontrar el archivo en la ruta: {rutaRelativa}\nNo se pudo guardar los registros.", ex);
             }
         }
         /// <summary>
@@ -99,10 +99,10 @@ namespace Entidades
                 registro = JsonConvert.DeserializeObject<List<string>>(File.ReadAllText(rutaRelativa));
 
             }
-            catch (Exception )
+            catch (Exception ex)
             {
 
-                throw new ExcepcionArchivos($"ERROR no se pudo encontrar el archivo en la ruta: {rutaRelativa}");
+                throw new ExcepcionArchivos($"ERROR no se pudo encontrar el archivo en la ruta: {rutaRelativa}\nNo se pudo obtener los registros.", ex);
             }
             return registro;
 

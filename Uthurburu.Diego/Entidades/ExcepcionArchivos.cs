@@ -9,6 +9,12 @@ namespace Entidades
     public class ExcepcionArchivos : Exception
     {
 
-        public ExcepcionArchivos(string mnj):base(mnj) { }  
+        Object objetoError;
+        public ExcepcionArchivos(string msj, object objetoError) : base(msj)
+        {
+            this.objetoError = objetoError;
+        }
+
+        public object ObjetoError { get => this.objetoError; }
     }
 }

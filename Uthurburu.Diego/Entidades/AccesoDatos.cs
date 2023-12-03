@@ -46,10 +46,10 @@ namespace Entidades
                 this.conexion.Open();
                 result = true;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
 
-                throw new ExcepcionBaseDatosError("No se pudo conectar con la base de datos");
+                throw new ExcepcionBaseDatosError("No se pudo conectar con la base de datos", ex);
             }
             finally
             {
@@ -138,7 +138,7 @@ namespace Entidades
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
-                throw new ExcepcionBaseDatosError("Error en la base de datos");
+                throw new ExcepcionBaseDatosError("ERROR, no se pudo obtener lista de vehiculos de la base de datos", ex);
             }
             finally
             {
@@ -187,7 +187,7 @@ namespace Entidades
             {
                 // Manejar la excepción, por ejemplo, loguearla o mostrar un mensaje al usuario.
                
-                throw new ExcepcionBaseDatosError("No se pudo agregar la Moto, ERRROR en la Base de Datos ");
+                throw new ExcepcionBaseDatosError("ERROR, no se pudo agregar un moto en la base de datos.", ex);
             }
             finally
             {
@@ -235,10 +235,10 @@ namespace Entidades
                     return rowsAffected > 0;
                 }
             }
-            catch (Exception )
+            catch (Exception ex)
             {
                 // Maneja la excepción según tu lógica.
-                throw new ExcepcionBaseDatosError("No se pudo agregar el Auto, ERRROR en la Base de Datos ");
+                throw new ExcepcionBaseDatosError("ERROR, no se pudo agregar un auto en la base de datos.", ex);
             }
             finally
             {
@@ -281,9 +281,9 @@ namespace Entidades
 
                 return rowsAffected > 0;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                throw new ExcepcionBaseDatosError("");
+                throw new ExcepcionBaseDatosError("ERROR, no se pudo agregar un camion en la base de datos.", ex);
             }
             finally
             {
@@ -327,9 +327,9 @@ namespace Entidades
                     }
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                throw new ExcepcionBaseDatosError("No se pudo modificar la Moto, ERROR en la Base de Datos");
+                throw new ExcepcionBaseDatosError("No se pudo modificar la Moto, ERROR en la Base de Datos", ex);
             }
             finally
             {
@@ -374,10 +374,10 @@ namespace Entidades
                     }
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
 
-                throw new ExcepcionBaseDatosError("No se pudo modificar el Auto, ERROR en la Base de Datos");
+                throw new ExcepcionBaseDatosError("No se pudo modificar el Auto, ERROR en la Base de Datos", ex);
             }
             finally
             {
@@ -418,9 +418,9 @@ namespace Entidades
                     }
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                throw new ExcepcionBaseDatosError("No se pudo modificar el Camion, ERROR en la Base de Datos");
+                throw new ExcepcionBaseDatosError("No se pudo modificar el Camion, ERROR en la Base de Datos", ex);
             }
             finally
             {
@@ -457,9 +457,7 @@ namespace Entidades
             }
             catch (Exception ex)
             {
-
-
-                throw new ExcepcionBaseDatosError("No se pudo conectar con la Base de Datos");
+                throw new ExcepcionBaseDatosError("No se pudo conectar con la Base de Datos", ex);
             }
             finally
             {

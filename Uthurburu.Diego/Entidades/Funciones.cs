@@ -113,6 +113,24 @@ namespace WheelsHub.Logica
             return retorno;
         }
         /// <summary>
+        /// Valida si la cadena de texto proporcionada es un número entero válido.
+        /// </summary>
+        /// <param name="valorIngresado">Cadena de texto que se intentará convertir a un número entero.</param>
+        /// <param name="valorSalida">Variable de salida que contendrá el valor convertido si la validación es exitosa.</param>
+        /// <returns>
+        /// Retorna true si la cadena de texto se puede convertir a un número entero con éxito,
+        /// de lo contrario, retorna false y muestra un mensaje de advertencia.
+        /// </returns>
+        public static bool validarNumero(string valorIngresado, out short valorSalida)
+        {
+            bool retorno = false;
+            if (short.TryParse(valorIngresado, out valorSalida))
+            {
+                retorno = true;
+            }
+            return retorno;
+        }
+        /// <summary>
         /// Obtiene la lista de motos almacenadas en la base de datos.
         /// </summary>
         /// <param name="listaMotos">Lista de motos obtenida de la base de datos.</param>
