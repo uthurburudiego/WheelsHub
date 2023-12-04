@@ -16,6 +16,7 @@ namespace Interfaces
     {
         #region Atributos
         List<Usuario> listaUsuarios;
+        ManejadorArchivos<List<Usuario>> serializadoraUsuarios = new ManejadorArchivos<List<Usuario>>();
         #endregion
 
         #region Constructor
@@ -29,8 +30,8 @@ namespace Interfaces
         #region Metodos
         private void FormVerUsuarios_Load(object sender, EventArgs e)
         {
-            string rutaRelativa = ManejadorArchivos.ObtenerPath(@"..\..\..\..\Datos\MOCK_DATA.json");
-            listaUsuarios = ManejadorArchivos.DeserilizarUsuarios(rutaRelativa);
+            string path = ManejadorArchivos<string>.ObtenerPath(@"..\..\..\..\Datos\MOCK_DATA.json");
+            listaUsuarios = serializadoraUsuarios.Deserializar(path);
             foreach (Usuario usuario in listaUsuarios)
             {
                 ltsUsuarios.Items.Add(usuario.ToString());

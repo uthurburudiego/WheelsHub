@@ -8,7 +8,7 @@ using Newtonsoft.Json;
 
 namespace Entidades
 {
-    public class ManejadorArchivos
+    public class ManejadorArchivos<T> : ISerializadora<T>
     {
         /// <summary>
         /// Obtiene la ruta completa a partir de una ruta relativa.
@@ -21,91 +21,59 @@ namespace Entidades
             return Path.GetFullPath(rutaRelativa);
         }
         /// <summary>
-        /// Deserializa una lista de usuarios desde un archivo JSON en la ruta especificada.
+        /// Serializa datos y los guarda en un archivo JSON, fusionándolos con los datos existentes si el archivo ya existe.
         /// </summary>
-        /// <param name="rutaRelativa">Ruta relativa del archivo JSON.</param>
-        /// <returns>Lista de usuarios deserializada.</returns>
-        public static List<Usuario> DeserilizarUsuarios(string rutaRelativa) 
-        {
-
-            List<Usuario> usuarios = new List<Usuario>();
-            try
-            {
-              usuarios = JsonConvert.DeserializeObject<List<Usuario>>(File.ReadAllText(rutaRelativa));
-
-            }
-            catch (Exception ex )
-            {
-
-                throw new ExcepcionArchivos($"ERROR no se pudo encontrar el archivo en la ruta: {rutaRelativa}\nNo se pudo obtener usuarios.", ex);
-            }
-            return usuarios;
-        }
-        /// <summary>
-        /// Serializa una lista de usuarios y guarda el contenido en un archivo JSON en la ruta especificada.
-        /// </summary>
-        /// <param name="usuarios">Lista de usuarios a serializar.</param>
-        /// <param name="rutaRelativa">Ruta relativa del archivo JSON.</param>
-        public static void SerializarUsuarios(List<Usuario> usuarios, string rutaRelativa)
-        {
-            try
-            {
-                string usuariosJson = JsonConvert.SerializeObject(usuarios, Formatting.Indented);
-                File.WriteAllText(rutaRelativa, usuariosJson);
-            }
-            catch (Exception ex)
-            {
-
-                throw new ExcepcionArchivos($"ERROR no se pudo encontrar el archivo en la ruta: {rutaRelativa}\nNo se pudo guardar usuarios.", ex);
-            }
-        }
-        /// <summary>
-        /// Serializa una lista de nuevos usuarios y la agrega a la lista existente en un archivo JSON en la ruta especificada.
-        /// </summary>
-        /// <param name="nuevosUsuarios">Lista de nuevos usuarios a serializar y agregar.</param>
-        /// <param name="rutaRelativa">Ruta relativa del archivo JSON.</param>
-        public static void SerializarRegistros(List<string> nuevosUsuarios, string rutaRelativa)
+        /// <param name="datos">Datos a serializar y guardar.</param>
+        /// <param name="path">Ruta del archivo JSON donde se guardarán los datos.</param>
+        /// <typeparam name="T">Tipo de datos a serializar.</typeparam>
+        /// <exception cref="ExcepcionArchivos">
+        /// Se lanza cuando no se puede encontrar el archivo en la ruta especificada o no se pueden guardar los registros.
+        /// </exception>
+        public void Serializar(T datos, string path)
         {
             try
             {
                 List<string> usuariosExistente = new List<string>();
 
                 // Paso 1: Deserializar la lista existente desde el archivo JSON
-                if (File.Exists(rutaRelativa))
+                if (File.Exists(path))
                 {
-                    string contenidoExistente = File.ReadAllText(rutaRelativa);
+                    string contenidoExistente = File.ReadAllText(path);
                     usuariosExistente = JsonConvert.DeserializeObject<List<string>>(contenidoExistente);
                 }
-                usuariosExistente.AddRange(nuevosUsuarios);
+                usuariosExistente.AddRange((IEnumerable<string>)datos); 
                 string registro = JsonConvert.SerializeObject(usuariosExistente, Formatting.Indented);
-                File.WriteAllText(rutaRelativa, registro);
+                File.WriteAllText(path, registro);
             }
             catch (Exception ex)
             {
-                
-                throw new ExcepcionArchivos($"ERROR no se pudo encontrar el archivo en la ruta: {rutaRelativa}\nNo se pudo guardar los registros.", ex);
+
+                throw new ExcepcionArchivos($"ERROR no se pudo encontrar el archivo en la ruta: {path}\nNo se pudo guardar los registros.", ex);
             }
         }
         /// <summary>
-        /// Deserializa la lista de registros desde un archivo JSON en la ruta especificada.
+        /// Deserializa los datos desde un archivo JSON en la ruta especificada y los devuelve como un objeto del tipo T.
         /// </summary>
-        /// <param name="rutaRelativa">Ruta relativa del archivo JSON.</param>
-        /// <returns>Lista de registros deserializada.</returns>
-        public static List<string> DeserilizarRegistro(string rutaRelativa)
+        /// <param name="path">Ruta del archivo JSON desde el cual se deserializarán los datos.</param>
+        /// <typeparam name="T">Tipo de datos a deserializar.</typeparam>
+        /// <returns>Objeto del tipo T que representa los datos deserializados.</returns>
+        /// <exception cref="ExcepcionArchivos">
+        /// Se lanza cuando no se puede encontrar el archivo en la ruta especificada o no se pueden obtener los datos.
+        /// </exception>
+        public T Deserializar(string path)
         {
-            List<string> registro;
+            T usuarios = default(T);
             try
             {
-                registro = JsonConvert.DeserializeObject<List<string>>(File.ReadAllText(rutaRelativa));
+                usuarios = JsonConvert.DeserializeObject<T>(File.ReadAllText(path));
 
             }
             catch (Exception ex)
             {
 
-                throw new ExcepcionArchivos($"ERROR no se pudo encontrar el archivo en la ruta: {rutaRelativa}\nNo se pudo obtener los registros.", ex);
+                throw new ExcepcionArchivos($"ERROR no se pudo encontrar el archivo en la ruta: {path}\nNo se pudo obtener usuarios.", ex);
             }
-            return registro;
-
+            return usuarios;
         }
     }
 }

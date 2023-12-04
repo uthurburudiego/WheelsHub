@@ -10,7 +10,11 @@ namespace Interfaces
         #region Atributos
         private Usuario usuario;
         private List<Usuario> listaUsuarios;
+        string path;
         List<string> registroUsuarios;
+        ManejadorArchivos<List<string>> serializadoraRegistros = new ManejadorArchivos<List<string>>();
+        ManejadorArchivos<List<Usuario>> serializadoraUsuarios = new ManejadorArchivos<List<Usuario>>();
+
         #endregion
 
         #region Propiedades
@@ -49,15 +53,15 @@ namespace Interfaces
             this.usuario.Correo = this.txtUsuario.Text;
             this.usuario.Clave = this.txtContraseña.Text;
 
-            string rutaRelativa = ManejadorArchivos.ObtenerPath(@"..\..\..\..\Datos\MOCK_DATA.json");
+            this.path = ManejadorArchivos<List<string>>.ObtenerPath(@"..\..\..\..\Datos\MOCK_DATA.json");
+            this.listaUsuarios = serializadoraUsuarios.Deserializar(path);
 
-            this.listaUsuarios = ManejadorArchivos.DeserilizarUsuarios(rutaRelativa);
-
+            
             if (ValidarUsuario())
             {
                 this.registroUsuarios.Add(this.usuario.Registro());
-                rutaRelativa = ManejadorArchivos.ObtenerPath(@"..\..\..\..\Datos\usuarios_log.json");
-                ManejadorArchivos.SerializarRegistros(registroUsuarios,rutaRelativa);
+                this.path = ManejadorArchivos<string>.ObtenerPath(@"..\..\..\..\Datos\usuarios_log.json");
+                serializadoraRegistros.Serializar(registroUsuarios,path);
 
                 this.Close();
             }

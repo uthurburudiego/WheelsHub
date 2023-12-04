@@ -16,6 +16,7 @@ namespace Interfaces
     {
         #region Atributos
         List<string> listaRegistros;
+        ManejadorArchivos<List<string>> serializadoraRegistros = new ManejadorArchivos<List<string>>();
         #endregion
 
         #region Constructor
@@ -29,8 +30,9 @@ namespace Interfaces
         #region Botones
         private void FormRegistroConexion_Load(object sender, EventArgs e)
         {
-            string rutaRelativa = ManejadorArchivos.ObtenerPath(@"..\..\..\..\Datos\usuarios_log.json");
-            this.listaRegistros = ManejadorArchivos.DeserilizarRegistro(rutaRelativa);
+            string path= ManejadorArchivos<string>.ObtenerPath(@"..\..\..\..\Datos\usuarios_log.json");
+            this.listaRegistros = serializadoraRegistros.Deserializar(path);
+         
 
             foreach (string registro in this.listaRegistros)
             {
