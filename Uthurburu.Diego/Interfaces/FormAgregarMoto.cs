@@ -36,7 +36,7 @@ namespace Interfaces
             {
                 if (this.nuevaMoto.Foto != null)
                 {
-                    datos.AgregarMoto(this.nuevaMoto);
+                    datos.AltaModificacionVehiculo(this.nuevaMoto, "INSERT");
                     this.Close();
                 }
                 else

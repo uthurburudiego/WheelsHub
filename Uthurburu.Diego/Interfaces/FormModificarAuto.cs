@@ -26,7 +26,7 @@ namespace Interfaces
         protected override void btnGuardar_Click(object sender, EventArgs e)
         {
                 RecuperarInformacion( this.nuevoAuto);
-                datos.ModificarAuto(this.nuevoAuto);
+                datos.AltaModificacionVehiculo(this.nuevoAuto, "UPDATE");
                 this.Close();        
         }
         private void FormModificarAuto_Load(object sender, EventArgs e)

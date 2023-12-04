@@ -30,7 +30,7 @@ namespace Interfaces
             try
             {
                 RecuperarInformacion(this.nuevoCamion);
-                datos.ModificarCamion(this.nuevoCamion);
+                datos.AltaModificacionVehiculo(this.nuevoCamion, "UPDATE");
                 this.Close();
             }
             catch (Exception ex)

@@ -75,7 +75,7 @@
     eColores.Marrón,
     eColores.Naranja
     };
-            cboColor.Items.AddRange(new object[] { eColores.Seleccionar, eColores.Blanco, eColores.Negro, eColores.Rojo, eColores.Azul, eColores.Plata, eColores.Gris, eColores.Verde, eColores.Amarillo, eColores.Marrón, eColores.Naranja });
+         
             // 
             // txtTara
             // 

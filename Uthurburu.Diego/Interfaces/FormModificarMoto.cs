@@ -27,7 +27,7 @@ namespace Interfaces
         protected override void btnGuardar_Click(object sender, EventArgs e)
         {
             RecuperarInformacion(this.nuevaMoto);
-            datos.ModificarMoto(this.nuevaMoto);
+            datos.AltaModificacionVehiculo(this.nuevaMoto, "UPDATE");
             this.Close();
         }
         private void FormModificarMoto_Load(object sender, EventArgs e)

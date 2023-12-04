@@ -24,10 +24,10 @@ namespace Entidades
         #region Constructores
         static AccesoDatos()
         {
-            AccesoDatos.cadena_conexion = Properties.Resources.miConexion; 
+            AccesoDatos.cadena_conexion = Properties.Resources.miConexion;
         }
         public AccesoDatos()
-        { 
+        {
             this.conexion = new SqlConnection(AccesoDatos.cadena_conexion);
         }
         #endregion
@@ -39,7 +39,7 @@ namespace Entidades
         /// <returns>True si la conexión es exitosa, de lo contrario, False.</returns>
         /// <exception cref="ExcepcionBaseDatosError">Se lanza cuando no se puede establecer la conexión con la base de datos.</exception>
         public bool PruebaConexion()
-        { 
+        {
             bool result = false;
             try
             {
@@ -53,7 +53,7 @@ namespace Entidades
             }
             finally
             {
-                if (this.conexion.State == System.Data.ConnectionState.Open )
+                if (this.conexion.State == System.Data.ConnectionState.Open)
                 {
                     this.conexion.Close();
 
@@ -149,287 +149,7 @@ namespace Entidades
             }
             return lista;
         }
-        /// <summary>
-        /// Agrega una nueva moto a la base de datos.
-        /// </summary>
-        /// <param name="nuevaMoto">Instancia de la clase Moto que se agregará a la base de datos.</param>
-        /// <returns>True si la moto se agregó correctamente, False en caso contrario.</returns>
-        /// <exception cref="ExcepcionBaseDatosError">Se lanza cuando ocurre un error en la base de datos.</exception>
-        public bool AgregarMoto(Moto nuevaMoto)
-        {
-            
-            try
-            {
-                this.comando = new SqlCommand();
-                this.comando.CommandType = System.Data.CommandType.Text;
-                this.comando.CommandText = "INSERT INTO Vehiculos (Chasis, Modelo, Color, TipoVehiculo, Costo, Cilindrada, FrenoABS, Marca, Foto) " +
-                                           "VALUES (@Chasis, @Modelo, @Color, @TipoVehiculo, @Costo, @Cilindrada, @FrenoABS, @Marca,@Foto)";
-                this.comando.Connection = this.conexion;
-
-                this.comando.Parameters.AddWithValue("@Chasis", nuevaMoto.NumeroChasis);
-                this.comando.Parameters.AddWithValue("@Modelo", nuevaMoto.Modelo);
-                this.comando.Parameters.AddWithValue("@Color", nuevaMoto.Color);
-                this.comando.Parameters.AddWithValue("@TipoVehiculo", (int)nuevaMoto.TipoVehiculo);
-                this.comando.Parameters.AddWithValue("@Costo", nuevaMoto.Costo);
-                this.comando.Parameters.AddWithValue("@Cilindrada", nuevaMoto.Cilindrada);
-                this.comando.Parameters.AddWithValue("@FrenoABS", (int)nuevaMoto.FrenosABS);
-                this.comando.Parameters.AddWithValue("@Marca", (int)nuevaMoto.Marca);
-                if (nuevaMoto.Foto != null)
-                { this.comando.Parameters.AddWithValue("@Foto", nuevaMoto.Foto); }
-              
-
-                this.conexion.Open();
-                int rowsAffected = this.comando.ExecuteNonQuery();
-
-                return rowsAffected > 0;
-            }
-            catch (Exception ex)
-            {
-                // Manejar la excepción, por ejemplo, loguearla o mostrar un mensaje al usuario.
-               
-                throw new ExcepcionBaseDatosError("ERROR, no se pudo agregar un moto en la base de datos.", ex);
-            }
-            finally
-            {
-                if (this.conexion.State == System.Data.ConnectionState.Open)
-                {
-                    this.conexion.Close();
-                }
-            }
-        }
-        /// <summary>
-        /// Agrega un nuevo auto a la base de datos.
-        /// </summary>
-        /// <param name="auto">Instancia de la clase Auto que se agregará a la base de datos.</param>
-        /// <returns>True si el auto se agregó correctamente, False en caso contrario.</returns>
-        /// <exception cref="ExcepcionBaseDatosError">Se lanza cuando ocurre un error en la base de datos.</exception>
-        public bool AgregarAuto(Auto auto)
-        {
-            try
-            {
-                this.conexion.Open();
-
-                // Consulta SQL para insertar un nuevo auto con imagen
-                string consulta = "INSERT INTO Vehiculos (Chasis, Modelo, Color, TipoVehiculo, Costo, CantidadPasajeros, Marca, CantidadPuertas, Foto) " +
-                                  "VALUES (@Chasis, @Modelo, @Color, @TipoVehiculo, @Costo, @CantidadPasajeros, @Marca, @CantidadPuertas, @Foto)";
-
-                using (SqlCommand cmd = new SqlCommand(consulta, this.conexion))
-                {
-                    cmd.Parameters.AddWithValue("@Chasis", auto.NumeroChasis);
-                    cmd.Parameters.AddWithValue("@Modelo", auto.Modelo);
-                    cmd.Parameters.AddWithValue("@Color", auto.Color);
-                    cmd.Parameters.AddWithValue("@TipoVehiculo", (int)auto.TipoVehiculo);
-                    cmd.Parameters.AddWithValue("@Costo", auto.Costo);
-                    cmd.Parameters.AddWithValue("@CantidadPasajeros", auto.CantidadPasajeros);
-                    cmd.Parameters.AddWithValue("@Marca", (int)auto.Marca);
-                    cmd.Parameters.AddWithValue("@CantidadPuertas", auto.CantidadPuertas);
-                    if (auto.Foto != null)
-                        cmd.Parameters.AddWithValue("@Foto", auto.Foto);
-                    else
-                    cmd.Parameters.AddWithValue("@Foto", null);
-
-
-
-                    // Ejecuta la consulta de inserción.
-                    int rowsAffected = cmd.ExecuteNonQuery();
-                    return rowsAffected > 0;
-                }
-            }
-            catch (Exception ex)
-            {
-                // Maneja la excepción según tu lógica.
-                throw new ExcepcionBaseDatosError("ERROR, no se pudo agregar un auto en la base de datos.", ex);
-            }
-            finally
-            {
-                if (this.conexion.State == System.Data.ConnectionState.Open)
-                {
-                    this.conexion.Close();
-                }
-            }
-        }
-        /// <summary>
-        /// Agrega un nuevo Camion a la base de datos.
-        /// </summary>
-        /// <param name="nuevoCamion">Instancia de la clase Camion que se agregará a la base de datos.</param>
-        /// <returns>True si el auto se agregó correctamente, False en caso contrario.</returns>
-        /// <exception cref="ExcepcionBaseDatosError">Se lanza cuando ocurre un error en la base de datos.</exception>
-        public bool AgregarCamion(Camion nuevoCamion)
-        {
-
-            try
-            {
-                this.comando = new SqlCommand();
-                this.comando.CommandType = System.Data.CommandType.Text;
-                this.comando.CommandText = "INSERT INTO Vehiculos (Chasis, Modelo, Color, TipoVehiculo, Costo, Tara,CantidadEjes, Marca, Foto) " +
-                                           "VALUES (@Chasis, @Modelo, @Color, @TipoVehiculo, @Costo, @Tara, @CantidadEjes, @Marca, @Foto)";
-                this.comando.Connection = this.conexion;
-
-                this.comando.Parameters.AddWithValue("@Chasis", nuevoCamion.NumeroChasis);
-                this.comando.Parameters.AddWithValue("@Modelo", nuevoCamion.Modelo);
-                this.comando.Parameters.AddWithValue("@Color", nuevoCamion.Color);
-                this.comando.Parameters.AddWithValue("@TipoVehiculo", (int)nuevoCamion.TipoVehiculo);
-                this.comando.Parameters.AddWithValue("@Costo", nuevoCamion.Costo);
-                this.comando.Parameters.AddWithValue("@Tara", nuevoCamion.Tara);
-                this.comando.Parameters.AddWithValue("@CantidadEjes", nuevoCamion.CantidadEjes);
-                this.comando.Parameters.AddWithValue("@Marca", (int)nuevoCamion.Marca);
-                this.comando.Parameters.AddWithValue("@Foto", nuevoCamion.Foto); 
-
-
-                this.conexion.Open();
-                int rowsAffected = this.comando.ExecuteNonQuery();
-
-                return rowsAffected > 0;
-            }
-            catch (Exception ex)
-            {
-                throw new ExcepcionBaseDatosError("ERROR, no se pudo agregar un camion en la base de datos.", ex);
-            }
-            finally
-            {
-                if (this.conexion.State == System.Data.ConnectionState.Open)
-                {
-                    this.conexion.Close();
-                }
-            }
-        }
-        /// <summary>
-        /// Modifica los datos de una moto en la base de datos.
-        /// </summary>
-        /// <param name="moto">Instancia de la clase Moto con los nuevos datos.</param>
-        /// <returns>True si la modificación fue exitosa, False en caso contrario.</returns>
-        /// <exception cref="ExcepcionBaseDatosError">Se lanza cuando ocurre un error en la base de datos.</exception>
-        public bool ModificarMoto(Moto moto)
-        {
-            try
-            {
-                using (SqlConnection connection = new SqlConnection(cadena_conexion))
-                {
-                    connection.Open();
-
-                    string query = "UPDATE Vehiculos SET Modelo = @Modelo, Color = @Color, TipoVehiculo = @TipoVehiculo, Costo = @Costo, FrenoABS = @FrenoABS, Cilindrada = @Cilindrada, Marca = @Marca WHERE Chasis = @Chasis";
-
-                    using (SqlCommand command = new SqlCommand(query, connection))
-                    {
-                        command.Parameters.AddWithValue("@Modelo", moto.Modelo);
-                        command.Parameters.AddWithValue("@Color", moto.Color);
-                        command.Parameters.AddWithValue("@TipoVehiculo", moto.TipoVehiculo);
-                        command.Parameters.AddWithValue("@Costo", moto.Costo);
-                        command.Parameters.AddWithValue("@Chasis", moto.NumeroChasis);
-                        command.Parameters.AddWithValue("@Cilindrada", moto.Cilindrada);
-                        command.Parameters.AddWithValue("@FrenoABS", moto.FrenosABS);
-                        command.Parameters.AddWithValue("@Marca", moto.Marca);
-                       
-
-                        int rowsAffected = command.ExecuteNonQuery();
-
-                        return rowsAffected > 0; // Retorna true si se realizaron cambios en la base de datos.
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                throw new ExcepcionBaseDatosError("No se pudo modificar la Moto, ERROR en la Base de Datos", ex);
-            }
-            finally
-            {
-                if (this.conexion.State == System.Data.ConnectionState.Open)
-                {
-                    this.conexion.Close();
-                }
-            }
-        }
-        /// <summary>
-        /// Modifica los datos de un auto en la base de datos.
-        /// </summary>
-        /// <param name="auto">Instancia de la clase Auto con los nuevos datos.</param>
-        /// <returns>True si la modificación fue exitosa, False en caso contrario.</returns>
-        /// <exception cref="ExcepcionBaseDatosError">Se lanza cuando ocurre un error en la base de datos.</exception>
-        public bool ModificarAuto(Auto auto)
-        {
-            try
-            {
-                using (SqlConnection connection = new SqlConnection(cadena_conexion))
-                {
-                    connection.Open();
-
-                    string query = "UPDATE Vehiculos SET Modelo = @Modelo, Color = @Color, TipoVehiculo = @TipoVehiculo, Costo = @Costo, CantidadPasajeros = @CantidadPasajeros, CantidadPuertas = @CantidadPuertas, Marca = @Marca, Foto = @Foto WHERE Chasis = @Chasis";
-
-                    using (SqlCommand command = new SqlCommand(query, connection))
-                    {
-                        command.Parameters.AddWithValue("@Modelo", auto.Modelo);
-                        command.Parameters.AddWithValue("@Color", auto.Color);
-                        command.Parameters.AddWithValue("@TipoVehiculo", auto.TipoVehiculo);
-                        command.Parameters.AddWithValue("@Costo", auto.Costo);
-                        command.Parameters.AddWithValue("@Chasis", auto.NumeroChasis);
-                        command.Parameters.AddWithValue("@CantidadPasajeros", auto.CantidadPasajeros);
-                        command.Parameters.AddWithValue("@CantidadPuertas", auto.CantidadPuertas);
-                        command.Parameters.AddWithValue("@Marca", auto.Marca);
-                        command.Parameters.AddWithValue("@Foto", auto.Foto);
-                        
-
-                        int rowsAffected = command.ExecuteNonQuery();
-
-                        return rowsAffected > 0; // Retorna true si se realizaron cambios en la base de datos.
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-
-                throw new ExcepcionBaseDatosError("No se pudo modificar el Auto, ERROR en la Base de Datos", ex);
-            }
-            finally
-            {
-                if (this.conexion.State == System.Data.ConnectionState.Open)
-                {
-                    this.conexion.Close();
-                }
-            }
-        }
-        /// <summary>
-        /// Modifica los datos de un camion en la base de datos.
-        /// </summary>
-        /// <param name="camion">Instancia de la clase Camion con los nuevos datos.</param>
-        /// <returns>True si la modificación fue exitosa, False en caso contrario.</returns>
-        /// <exception cref="ExcepcionBaseDatosError">Se lanza cuando ocurre un error en la base de datos.</exception>
-        public bool ModificarCamion(Camion camion)
-        {
-            try
-            {
-                using (SqlConnection connection = new SqlConnection(cadena_conexion))
-                {
-                    connection.Open();
-                    string query = "UPDATE Vehiculos SET Modelo = @Modelo, Color = @Color, TipoVehiculo = @TipoVehiculo, Costo = @Costo, CantidadEjes = @CantidadEjes, Tara = @Tara, Marca = @Marca, Foto = @Foto WHERE Chasis = @Chasis";
-                    using (SqlCommand command = new SqlCommand(query, connection))
-                    {
-                        command.Parameters.AddWithValue("@Modelo", camion.Modelo);
-                        command.Parameters.AddWithValue("@Color", camion.Color);
-                        command.Parameters.AddWithValue("@TipoVehiculo", camion.TipoVehiculo);
-                        command.Parameters.AddWithValue("@Costo", camion.Costo);
-                        command.Parameters.AddWithValue("@Chasis", camion.NumeroChasis);
-                        command.Parameters.AddWithValue("@CantidadEjes", camion.CantidadEjes);
-                        command.Parameters.AddWithValue("@Tara", camion.Tara);
-                        command.Parameters.AddWithValue("@Marca", camion.Marca);
-                        command.Parameters.AddWithValue("@Foto", camion.Foto);
-                        int rowsAffected = command.ExecuteNonQuery();
-
-                        return rowsAffected > 0; // Retorna true si se realizaron cambios en la base de datos.
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                throw new ExcepcionBaseDatosError("No se pudo modificar el Camion, ERROR en la Base de Datos", ex);
-            }
-            finally
-            {
-                if (this.conexion.State == System.Data.ConnectionState.Open)
-                {
-                    this.conexion.Close();
-                }
-            }
-        }
+     
         /// <summary>
         /// Verifica si ya existe un vehículo con el mismo número de chasis en la base de datos.
         /// </summary>
@@ -508,6 +228,140 @@ namespace Entidades
             {
                 Console.WriteLine($"Error al borrar camión de la base de datos: {ex.Message}");
             }
+        }
+        /// <summary>
+        /// Realiza la operación de alta o modificación de un vehículo en la base de datos.
+        /// </summary>
+        /// <typeparam name="T">Tipo de vehículo que hereda de la clase base Vehiculo.</typeparam>
+        /// <param name="nuevoVehiculo">Instancia del nuevo vehículo a agregar o modificar.</param>
+        /// <param name="comando">Comando que indica la operación a realizar (INSERT o UPDATE).</param>
+        /// <returns>True si la operación se realizó correctamente; de lo contrario, false.</returns>
+        /// <exception cref="ExcepcionBaseDatosError">Se produce cuando ocurre un error durante la interacción con la base de datos.</exception>
+        public bool AltaModificacionVehiculo<T>(T nuevoVehiculo, string comando) where T : Vehiculo
+        {
+       
+            try
+            {
+                this.comando = new SqlCommand();
+                this.comando.CommandType = System.Data.CommandType.Text;
+                this.comando.CommandText = ComandText(nuevoVehiculo, comando);
+
+                this.comando.Connection = this.conexion;
+
+                this.comando.Parameters.AddWithValue("@Chasis", nuevoVehiculo.NumeroChasis);
+                this.comando.Parameters.AddWithValue("@Modelo", nuevoVehiculo.Modelo);
+                this.comando.Parameters.AddWithValue("@Color", nuevoVehiculo.Color);
+                this.comando.Parameters.AddWithValue("@TipoVehiculo", (int)nuevoVehiculo.TipoVehiculo);
+                this.comando.Parameters.AddWithValue("@Costo", nuevoVehiculo.Costo);
+                this.comando.Parameters.AddWithValue("@Foto", nuevoVehiculo.Foto);
+
+                // Agregar parámetros específicos de cada tipo de vehículo
+                if (nuevoVehiculo is Moto moto)
+                {
+                    this.comando.Parameters.AddWithValue("@Cilindrada", moto.Cilindrada);
+                    this.comando.Parameters.AddWithValue("@FrenoABS", (int)moto.FrenosABS);
+                    this.comando.Parameters.AddWithValue("@Marca", (int)moto.Marca);
+                }
+                else if (nuevoVehiculo is Auto auto)
+                {
+                    this.comando.Parameters.AddWithValue("@CantidadPasajeros", auto.CantidadPasajeros);
+                    this.comando.Parameters.AddWithValue("@CantidadPuertas", auto.CantidadPuertas);
+                    this.comando.Parameters.AddWithValue("@Marca", (int)auto.Marca);
+                }
+                else if (nuevoVehiculo is Camion camion)
+                {
+                    this.comando.Parameters.AddWithValue("@Tara", camion.Tara);
+                    this.comando.Parameters.AddWithValue("@CantidadEjes", camion.CantidadEjes);
+                    this.comando.Parameters.AddWithValue("@Marca", (int)camion.Marca);
+                }
+
+                this.conexion.Open();
+                int rowsAffected = this.comando.ExecuteNonQuery();
+
+                return rowsAffected > 0;
+            }
+            catch (Exception ex)
+            {
+                throw new ExcepcionBaseDatosError("ERROR, no se pudo agregar un vehículo en la base de datos.", ex);
+            }
+            finally
+            {
+                if (this.conexion.State == System.Data.ConnectionState.Open)
+                {
+                    this.conexion.Close();
+                }
+            }
+        }
+        /// <summary>
+        /// Genera un comando SQL dinámico para realizar operaciones de INSERT o UPDATE en la tabla Vehiculos
+        /// según el tipo de vehículo y el comando especificado.
+        /// </summary>
+        /// <param name="vehiculo">Instancia del vehículo para el cual se generará el comando.</param>
+        /// <param name="comando">Comando que indica la operación a realizar (INSERT o UPDATE).</param>
+        /// <returns>Cadena de texto con el comando SQL generado.</returns>
+        /// <exception cref="ArgumentException">Se produce cuando el tipo de vehículo o comando no es reconocido.</exception>
+        private string ComandText(Vehiculo vehiculo, string comando)
+        {
+            StringBuilder sb = new StringBuilder();
+
+            if (vehiculo is Vehiculo)
+            {
+                if (comando.ToUpper() == "UPDATE")
+                {
+                    // Comando UPDATE
+                    sb.Append($"{comando} Vehiculos SET Modelo = @Modelo, Color = @Color, TipoVehiculo = @TipoVehiculo, Costo = @Costo, Foto = @Foto");
+
+                    switch (vehiculo.TipoVehiculo)
+                    {
+                        case eTipoVehiculo.Moto:
+                            sb.Append(", Cilindrada = @Cilindrada, FrenoABS = @FrenoABS, Marca = @Marca");
+                            break;
+                        case eTipoVehiculo.Auto:
+                            sb.Append(", CantidadPasajeros = @CantidadPasajeros, Marca = @Marca, CantidadPuertas = @CantidadPuertas");
+                            break;
+                        case eTipoVehiculo.Camion:
+                            sb.Append(", Tara = @Tara, CantidadEjes = @CantidadEjes, Marca = @Marca");
+                            break;
+                    }
+                    sb.Append(" WHERE Chasis = @Chasis");
+                }
+                else if (comando.ToUpper() == "INSERT")
+                {
+                    // Comando INSERT
+                    sb.Append($"{comando} Vehiculos (Chasis, Modelo, Color, TipoVehiculo, Costo, Foto");
+
+                    switch (vehiculo.TipoVehiculo)
+                    {
+                        case eTipoVehiculo.Moto:
+                            sb.Append(", Cilindrada, FrenoABS, Marca");
+                            sb.Append(") VALUES (@Chasis, @Modelo, @Color, @TipoVehiculo, @Costo, @Foto");
+                            sb.Append(", @Cilindrada, @FrenoABS, @Marca");
+                            break;
+                        case eTipoVehiculo.Auto:
+                            sb.Append(", CantidadPasajeros, Marca, CantidadPuertas");
+                            sb.Append(") VALUES (@Chasis, @Modelo, @Color, @TipoVehiculo, @Costo, @Foto");
+                            sb.Append(", @CantidadPasajeros, @Marca, @CantidadPuertas");
+
+                            break;
+                        case eTipoVehiculo.Camion:
+                            sb.Append(", Tara, CantidadEjes, Marca");
+                            sb.Append(") VALUES (@Chasis, @Modelo, @Color, @TipoVehiculo, @Costo, @Foto");
+                            sb.Append(", @Tara, @CantidadEjes, @Marca");
+                            break;
+                    }
+                    sb.Append(")");
+                }
+                else
+                {
+                    throw new ArgumentException("Tipo de comando no reconocido.", nameof(comando));
+                }
+            }
+            else
+            {
+                throw new ArgumentException("Tipo de vehículo no reconocido.", nameof(vehiculo));
+            }
+
+            return sb.ToString();
         }
     }
     #endregion

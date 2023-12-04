@@ -49,7 +49,7 @@ namespace Interfaces
             {
                 if (this.nuevoCamion.Foto != null)
                 {
-                    datos.AgregarCamion(this.nuevoCamion);
+                    datos.AltaModificacionVehiculo(this.nuevoCamion, "INSERT");
                     this.Close();
                 }
                 else
