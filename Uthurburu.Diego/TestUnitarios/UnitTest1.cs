@@ -82,9 +82,10 @@ namespace TestUnitarios
             //ARANGE
             string numeroIngresado = "5";
             short numeroParseado;
+            Funciones funciones= new Funciones();   
 
             //ACT
-            bool prueba = Funciones.validarNumero(numeroIngresado, out numeroParseado);
+            bool prueba = funciones.validarNumero(numeroIngresado, out numeroParseado);
             //ASSERT
             Assert.IsTrue(prueba);
             Assert.AreEqual(numeroParseado, 5);
@@ -98,9 +99,10 @@ namespace TestUnitarios
             //ARANGE
             string numeroIngresado = "5g";
             short numeroParseado;
+            Funciones funciones = new Funciones();
 
             //ACT
-            bool prueba = Funciones.validarNumero(numeroIngresado, out numeroParseado);
+            bool prueba = funciones.validarNumero(numeroIngresado, out numeroParseado);
             //ASSERT
             Assert.IsFalse(prueba);
             

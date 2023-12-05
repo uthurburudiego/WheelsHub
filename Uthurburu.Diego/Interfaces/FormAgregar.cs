@@ -13,12 +13,13 @@ using WheelsHub.Logica;
 
 namespace Interfaces
 {
-    
+    public delegate void DelAdevetencia(string titulo, string mensaje);
     public partial class FormAgregar : Form
     {
         #region Atributos
         protected AccesoDatos datos;
         Funciones funciones;
+        DelAdevetencia advertencia;
         #endregion
 
         #region Constructor
@@ -27,6 +28,7 @@ namespace Interfaces
             InitializeComponent();
             this.datos = new AccesoDatos();
             this.funciones = new Funciones();
+            this.advertencia = new DelAdevetencia(MostrarAdevetencia);
         }
         #endregion
 
@@ -96,7 +98,7 @@ namespace Interfaces
         {
             bool retorno = false;
             double costo = 0;
-            if (funciones.TextVacio(txtChasis) && !this.datos.VehiculoExiste(txtChasis.Text) )
+            if (funciones.TextVacio(txtChasis) || !this.datos.VehiculoExiste(txtChasis.Text) )
             {
                 if (picImagen.Image != null)
                 {
@@ -116,12 +118,12 @@ namespace Interfaces
                 }
                 else
                 {
-                    MessageBox.Show("Debe agregar una imagen ", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    this.advertencia("Advertencia", "Debe agregar una imagen ");
                 }
             }
             else
             {
-                MessageBox.Show("El campo N° de chasis es obligatorio ", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                this.advertencia("Advertencia","El campo N° de chasis es obligatorio ");
             }
 
             
@@ -167,7 +169,7 @@ namespace Interfaces
             catch (Exception ex)
             {
                 // Maneja la excepción según tu lógica
-                MessageBox.Show($"Error al cargar la imagen: {ex.Message}");
+               this.advertencia("Cargar Imagen", $"{ex.Message}");
             }
         }
         protected void GuardarImagen(Vehiculo vehiculo)
@@ -181,6 +183,11 @@ namespace Interfaces
                 vehiculo.Foto = File.ReadAllBytes(pathImagen);
             }
             
+        }
+        protected void MostrarAdevetencia(string titulo, string mensaje)
+        {
+            FormMessageBox messageBox = new FormMessageBox(titulo, mensaje);
+            messageBox.ShowDialog();
         }
         #endregion
     }

@@ -47,24 +47,11 @@ namespace Interfaces
         }
         protected virtual void btnGuardar_Click(object sender, EventArgs e)
         {
-            if (funciones.TextVacio(txtChasis))
+            if (RecuperarInformacion(this.nuevoCamion))
             {
-                if (picImagen.Image != null)
-                {
-                    RecuperarInformacion(this.nuevoCamion);
-                    datos.AltaModificacionVehiculo(this.nuevoCamion, "INSERT");
-                    this.Close();
-                }
-                else
-                {
-                    MessageBox.Show("Debe agregar una imagen ", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                }
+                datos.AltaModificacionVehiculo(this.nuevoCamion, "INSERT");
+                this.Close();
             }
-            else
-            {
-                MessageBox.Show("El campo N° de chasis es obligatorio ", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            }
-
         }
         protected void btnExaminar_Click_1(object sender, EventArgs e)
         {

@@ -147,12 +147,16 @@ namespace WheelsHub.Logica
             bool retorno = false;
             try
             {
+                
                 valorSalida = (T)Convert.ChangeType(valorIngresado, typeof(T));
-                retorno = true;
+                return  true;
                 
             }
-            catch { throw new FormatException(valorIngresado); }
-            return retorno;
+            catch (Exception)
+            {
+                validarNumero("0", out valorSalida);
+                return false;
+            }
         }
         /// <summary>
         /// Obtiene una lista de vehículos del tipo genérico especificado.

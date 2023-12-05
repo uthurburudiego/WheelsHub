@@ -38,11 +38,12 @@
             lblMensaje.BackColor = SystemColors.ActiveCaptionText;
             lblMensaje.Font = new Font("Microsoft Sans Serif", 9F, FontStyle.Bold, GraphicsUnit.Point);
             lblMensaje.ForeColor = Color.White;
-            lblMensaje.Location = new Point(20, 29);
+            lblMensaje.Location = new Point(26, 39);
             lblMensaje.Name = "lblMensaje";
             lblMensaje.Size = new Size(160, 15);
             lblMensaje.TabIndex = 0;
             lblMensaje.Text = "Mensaje de advertencia";
+            lblMensaje.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // btnAceptar
             // 
@@ -67,6 +68,7 @@
             Controls.Add(btnAceptar);
             Controls.Add(lblMensaje);
             Name = "FormMessageBox";
+            StartPosition = FormStartPosition.CenterParent;
             Text = "FormMessageBox";
             ResumeLayout(false);
             PerformLayout();
