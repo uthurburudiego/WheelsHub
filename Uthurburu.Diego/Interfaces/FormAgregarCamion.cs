@@ -18,14 +18,17 @@ namespace Interfaces
     {
         #region Atributos
         protected Camion nuevoCamion;
+        Funciones funciones;
         #endregion
 
         #region Constructor
         public FormAgregarCamion()
         {
             InitializeComponent();
-            this.nuevoCamion = new Camion();   
+            this.nuevoCamion = new Camion(); 
+            this.funciones = new Funciones();
         }
+
         #endregion
 
         #region Botones
@@ -44,11 +47,11 @@ namespace Interfaces
         }
         protected virtual void btnGuardar_Click(object sender, EventArgs e)
         {
-            RecuperarInformacion(this.nuevoCamion);
-            if (Funciones.TextVacio(txtChasis))
+            if (funciones.TextVacio(txtChasis))
             {
-                if (this.nuevoCamion.Foto != null)
+                if (picImagen.Image != null)
                 {
+                    RecuperarInformacion(this.nuevoCamion);
                     datos.AltaModificacionVehiculo(this.nuevoCamion, "INSERT");
                     this.Close();
                 }
@@ -82,8 +85,9 @@ namespace Interfaces
         /// </remarks>
         /// <seealso cref="Funciones.validarNumero"/>
         /// <seealso cref="Funciones.ValidarRango"/>
-        protected override void RecuperarInformacion(Vehiculo vehiculo)
+        protected override bool RecuperarInformacion(Vehiculo vehiculo)
         {
+            bool retorno = false;   
             base.RecuperarInformacion(vehiculo);
 
             int tara = 0;
@@ -92,17 +96,17 @@ namespace Interfaces
             this.nuevoCamion.Marca = (eMarcasCamiones)cboMarca.SelectedItem;
             this.nuevoCamion.TipoVehiculo = eTipoVehiculo.Camion;
 
-            if (Funciones.validarNumero(txtTara.Text, out tara) &&
+            if (funciones.validarNumero(txtTara.Text, out tara) &&
                 Funciones.ValidarRango(tara, "Rango valido (mayor o igual a 0), se guardara como valor por defecto 0", "Tara", 0, 9999999999))
             {
                 this.nuevoCamion.Tara = tara;
             }
-            if (Funciones.validarNumero(txtCantidadEjes.Text, out cantidadEjes) &&
+            if (funciones.validarNumero(txtCantidadEjes.Text, out cantidadEjes) &&
                 Funciones.ValidarRango(cantidadEjes, "Rango valido (2-10), se guardara como valor por defecto 0", "Cantidad de Ejes", 2, 10))
             {
                 this.nuevoCamion.CantidadEjes = cantidadEjes;
             }
-
+            return retorno;
         }
         #endregion
     }

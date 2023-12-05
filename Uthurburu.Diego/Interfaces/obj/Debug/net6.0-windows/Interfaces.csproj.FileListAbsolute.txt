@@ -56,3 +56,4 @@ C:\Users\diego\OneDrive\Escritorio\Uthurburu.Diego.SegundoParcial\Uthurburu.Dieg
 C:\Users\diego\OneDrive\Escritorio\Uthurburu.Diego.SegundoParcial\Uthurburu.Diego\Interfaces\obj\Debug\net6.0-windows\Interfaces.FormVerUsuarios.resources
 C:\Users\diego\OneDrive\Escritorio\Uthurburu.Diego.SegundoParcial\Uthurburu.Diego\Interfaces\obj\Debug\net6.0-windows\Interfaces.sourcelink.json
 C:\Users\diego\OneDrive\Escritorio\Uthurburu.Diego.SegundoParcial\Uthurburu.Diego\Interfaces\obj\Debug\net6.0-windows\Interfaces.FormRegistroConexion.resources
+C:\Users\diego\OneDrive\Escritorio\Uthurburu.Diego.SegundoParcial\Uthurburu.Diego\Interfaces\obj\Debug\net6.0-windows\Interfaces.FormMessageBox.resources

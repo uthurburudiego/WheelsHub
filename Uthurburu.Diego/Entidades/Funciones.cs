@@ -10,10 +10,9 @@ using System.Windows.Forms;
 namespace WheelsHub.Logica
 {
         
-    public class Funciones
+    public class Funciones: IValidar, IFunciones
     {
         AccesoDatos datos = new AccesoDatos();
-
         #region Metodos
         /// <summary>
         /// Valida si un valor entero corto (short) se encuentra dentro de un rango específico.
@@ -76,136 +75,12 @@ namespace WheelsHub.Logica
             return retorno;
         }
         /// <summary>
-        /// Valida si la cadena de texto proporcionada es un número entero válido.
+        /// Verifica si la tecla presionada en un control de entrada es un número o un carácter de control.
         /// </summary>
-        /// <param name="valorIngresado">Cadena de texto que se intentará convertir a un número double.</param>
-        /// <param name="valorSalida">Variable de salida que contendrá el valor convertido si la validación es exitosa.</param>
+        /// <param name="e">Argumentos del evento KeyPress que contiene la tecla presionada.</param>
         /// <returns>
-        /// Retorna true si la cadena de texto se puede convertir a un número entero con éxito,
-        /// de lo contrario, retorna false y muestra un mensaje de advertencia.
+        ///   <c>true</c> si la tecla presionada es un número o un carácter de control; de lo contrario, <c>false</c>.
         /// </returns>
-        public static bool validarNumero(string valorIngresado, out double valorSalida)
-        {
-            bool retorno = false;
-            if (double.TryParse(valorIngresado, out valorSalida))
-            {
-                retorno = true;
-            }
-            return retorno;
-        }
-       
-        /// <summary>
-        /// Valida si la cadena de texto proporcionada es un número entero válido.
-        /// </summary>
-        /// <param name="valorIngresado">Cadena de texto que se intentará convertir a un número entero.</param>
-        /// <param name="valorSalida">Variable de salida que contendrá el valor convertido si la validación es exitosa.</param>
-        /// <returns>
-        /// Retorna true si la cadena de texto se puede convertir a un número entero con éxito,
-        /// de lo contrario, retorna false y muestra un mensaje de advertencia.
-        /// </returns>
-        public static bool validarNumero(string valorIngresado, out int valorSalida)
-        {
-            bool retorno = false;
-            if (int.TryParse(valorIngresado, out valorSalida))
-            {
-                retorno = true;
-            }
-            return retorno;
-        }
-        /// <summary>
-        /// Valida si la cadena de texto proporcionada es un número entero válido.
-        /// </summary>
-        /// <param name="valorIngresado">Cadena de texto que se intentará convertir a un número entero.</param>
-        /// <param name="valorSalida">Variable de salida que contendrá el valor convertido si la validación es exitosa.</param>
-        /// <returns>
-        /// Retorna true si la cadena de texto se puede convertir a un número entero con éxito,
-        /// de lo contrario, retorna false y muestra un mensaje de advertencia.
-        /// </returns>
-        public static bool validarNumero(string valorIngresado, out short valorSalida)
-        {
-            bool retorno = false;
-            if (short.TryParse(valorIngresado, out valorSalida))
-            {
-                retorno = true;
-            }
-            return retorno;
-        }
-        /// <summary>
-        /// Obtiene la lista de motos almacenadas en la base de datos.
-        /// </summary>
-        /// <param name="listaMotos">Lista de motos obtenida de la base de datos.</param>
-        /// <returns>True si se obtuvo la lista exitosamente, false en caso contrario.</returns>
-        /// 
-        public static bool ObtenerLista(out List<Moto> listaMotos)
-        {
-            AccesoDatos datos = new AccesoDatos();
-            List<Vehiculo> lista;
-            bool retorno = false;
-            listaMotos = new List<Moto>();
-
-            lista =datos.ObtenerListaVehiculos();
-
-            foreach (Vehiculo vehiculo in lista)
-            {
-                if (vehiculo is Moto)
-                {
-                    listaMotos.Add((Moto)vehiculo);
-                    retorno = true;
-                }
-            }
-
-            return retorno;
-        }
-        /// <summary>
-        /// Obtiene la lista de autos almacenados en la base de datos.
-        /// </summary>
-        /// <param name="listaAutos">Lista de autos obtenida de la base de datos.</param>
-        /// <returns>True si se obtuvo la lista exitosamente, false en caso contrario.</returns>
-        public static bool ObtenerLista(out List<Auto> listaAutos)
-        {
-            AccesoDatos datos = new AccesoDatos();
-            List<Vehiculo> lista;
-            bool retorno = false;
-            listaAutos = new List<Auto>();
-
-            lista = datos.ObtenerListaVehiculos();
-
-            foreach (Vehiculo vehiculo in lista)
-            {
-                if (vehiculo is Auto)
-                {
-                    listaAutos.Add((Auto)vehiculo);
-                    retorno = true;
-                }
-            }
-
-            return retorno;
-        }
-        /// <summary>
-        /// Obtiene la lista de camiones almacenados en la base de datos.
-        /// </summary>
-        /// <param name="listaCamion">Lista de camiones obtenida de la base de datos.</param>
-        /// <returns>True si se obtuvo la lista exitosamente, false en caso contrario.</returns>
-        public static bool ObtenerLista(out List<Camion> listaCamion)
-        {
-            AccesoDatos datos = new AccesoDatos();
-            List<Vehiculo> lista;
-            bool retorno = false;
-            listaCamion = new List<Camion>();
-
-            lista = datos.ObtenerListaVehiculos();
-
-            foreach (Vehiculo vehiculo in lista)
-            {
-                if (vehiculo is Camion)
-                {
-                    listaCamion.Add((Camion)vehiculo);
-                    retorno = true;
-                }
-            }
-
-            return retorno;
-        }
         public static bool EsNumero(KeyPressEventArgs e)
         {
             bool retorno = false;
@@ -225,7 +100,14 @@ namespace WheelsHub.Logica
             }
             return retorno;
         }
-        public static bool TextVacio(TextBox text)
+        /// <summary>
+        /// Verifica si el contenido de un control TextBox está vacío.
+        /// </summary>
+        /// <param name="text">El control TextBox a verificar.</param>
+        /// <returns>
+        ///   <c>true</c> si el contenido del control TextBox no está vacío; de lo contrario, <c>false</c>.
+        /// </returns>
+        public bool TextVacio(TextBox text)
         { 
             bool retorno = false;
 
@@ -237,12 +119,65 @@ namespace WheelsHub.Logica
             }
             return retorno;
         }
-        public static bool ValidarEmail(string correo)
+        /// <summary>
+        /// Valida si una cadena de texto representa una dirección de correo electrónico válida.
+        /// </summary>
+        /// <param name="correo">La cadena de texto que se va a validar como correo electrónico.</param>
+        /// <returns>
+        ///   <c>true</c> si la cadena de texto es una dirección de correo electrónico válida; de lo contrario, <c>false</c>.
+        /// </returns>
+        public bool ValidarEmail(string correo)
         {
            return correo != null && Regex.IsMatch(correo, @"^[^@\s]+@[^@\s]+\.[^@\s]+$");//Expresion regular para validar correo
         }
+        /// <summary>
+        /// Intenta convertir una cadena de texto en un tipo numérico genérico.
+        /// </summary>
+        /// <typeparam name="T">El tipo numérico al que se intentará convertir la cadena de texto.</typeparam>
+        /// <param name="valorIngresado">La cadena de texto que se intentará convertir.</param>
+        /// <param name="valorSalida">Cuando la conversión es exitosa, contiene el valor convertido.</param>
+        /// <returns>
+        ///   <c>true</c> si la conversión es exitosa; de lo contrario, <c>false</c>.
+        /// </returns>
+        public bool validarNumero<T>(string valorIngresado, out T valorSalida)
+        {
+            if(valorIngresado == "")
+                valorIngresado = "0";
 
+            bool retorno = false;
+            try
+            {
+                valorSalida = (T)Convert.ChangeType(valorIngresado, typeof(T));
+                retorno = true;
+                
+            }
+            catch { throw new FormatException(valorIngresado); }
+            return retorno;
+        }
+        /// <summary>
+        /// Obtiene una lista de vehículos del tipo genérico especificado.
+        /// </summary>
+        /// <typeparam name="T">El tipo de vehículo que se desea obtener.</typeparam>
+        /// <param name="vehiculo">Una lista de vehículos que se utilizará como referencia.</param>
+        /// <returns>
+        ///   Una lista de vehículos del tipo genérico especificado.
+        /// </returns>
+        public List<T> ObtenerLista<T>( List<T> vehiculo)
+        {
+     
+            List<T> listaVehiculos = new List<T>();
+            List<Vehiculo> lista = this.datos.ObtenerListaVehiculos();
 
+            foreach (Vehiculo v in lista)
+            {
+                if (v is T)
+                {
+                    listaVehiculos.Add((T)Convert.ChangeType(v, typeof(T)));
+                }
+            }
+
+            return listaVehiculos;
+        }
         #endregion
 
     }

@@ -13,10 +13,12 @@ using WheelsHub.Logica;
 
 namespace Interfaces
 {
+    
     public partial class FormAgregar : Form
     {
         #region Atributos
         protected AccesoDatos datos;
+        Funciones funciones;
         #endregion
 
         #region Constructor
@@ -24,8 +26,10 @@ namespace Interfaces
         {
             InitializeComponent();
             this.datos = new AccesoDatos();
+            this.funciones = new Funciones();
         }
         #endregion
+
 
         #region Botones
         private void btnCancelar_Click(object sender, EventArgs e)
@@ -88,22 +92,40 @@ namespace Interfaces
         /// <summary>
         /// Recupera la información del formulario y la asigna a la instancia de la clase Auto.
         /// </summary>
-        protected virtual void RecuperarInformacion(Vehiculo nuevoVehiculo)
+        protected virtual bool RecuperarInformacion(Vehiculo nuevoVehiculo)
         {
+            bool retorno = false;
             double costo = 0;
-
-            nuevoVehiculo.Modelo = txtModelo.Text;
-            nuevoVehiculo.NumeroChasis = txtChasis.Text;
-            nuevoVehiculo.Color = (eColores)cboColor.SelectedItem;
-            
-
-
-            if (Funciones.validarNumero(txtCosto.Text, out costo) &&
-                Funciones.ValidarRango(costo, "El Costo no puede ser menor que 0", "Precio", 0, 9999999))
+            if (funciones.TextVacio(txtChasis) && !this.datos.VehiculoExiste(txtChasis.Text) )
             {
-                nuevoVehiculo.Costo = costo;
+                if (picImagen.Image != null)
+                {
+
+                    nuevoVehiculo.Modelo = txtModelo.Text;
+                    nuevoVehiculo.NumeroChasis = txtChasis.Text;
+                    nuevoVehiculo.Color = (eColores)cboColor.SelectedItem;
+                    retorno = true;
+
+
+
+                    if (funciones.validarNumero(txtCosto.Text, out costo) &&
+                        Funciones.ValidarRango(costo, "El Costo no puede ser menor que 0", "Precio", 0, 9999999))
+                    {
+                        nuevoVehiculo.Costo = costo;
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Debe agregar una imagen ", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+            }
+            else
+            {
+                MessageBox.Show("El campo N° de chasis es obligatorio ", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
 
+            
+            return retorno;
 
         }
         /// <summary>

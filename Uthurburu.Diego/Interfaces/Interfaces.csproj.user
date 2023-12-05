@@ -19,6 +19,9 @@
     <Compile Update="FormInicio.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="FormMessageBox.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="FormModificarAuto.cs">
       <SubType>Form</SubType>
     </Compile>

@@ -18,6 +18,7 @@ namespace Interfaces
     {
         #region Atributos
         protected Moto nuevaMoto;
+        Funciones funciones;
         #endregion
 
         #region Contructor
@@ -25,17 +26,19 @@ namespace Interfaces
         {
             InitializeComponent();
             this.nuevaMoto = new Moto();
+            this.funciones = new Funciones();   
         }
         #endregion
 
         #region Botones
         protected virtual void btnGuardar_Click(object sender, EventArgs e)
         {
-            RecuperarInformacion(this.nuevaMoto);
-            if (Funciones.TextVacio(txtChasis))
+
+            if (funciones.TextVacio(txtChasis))
             {
-                if (this.nuevaMoto.Foto != null)
+                if (picImagen.Image != null)
                 {
+                    RecuperarInformacion(this.nuevaMoto);
                     datos.AltaModificacionVehiculo(this.nuevaMoto, "INSERT");
                     this.Close();
                 }
@@ -81,8 +84,9 @@ namespace Interfaces
         /// </remarks>
         /// <seealso cref="Funciones.validarNumero"/>
         /// <seealso cref="Funciones.ValidarRango"/>
-        protected override void RecuperarInformacion( Vehiculo vehiculo)
+        protected override bool RecuperarInformacion( Vehiculo vehiculo)
         {
+            bool retorno = false;
             base.RecuperarInformacion(vehiculo);
             int cilindrada = 0;
           
@@ -90,12 +94,12 @@ namespace Interfaces
             this.nuevaMoto.FrenosABS = (eTipoDeFrenos)cboABS.SelectedItem;
             this.nuevaMoto.TipoVehiculo = eTipoVehiculo.Moto;
 
-            if (Funciones.validarNumero(txtCilindrada.Text, out cilindrada) && 
+            if (funciones.validarNumero(txtCilindrada.Text, out cilindrada) && 
                 Funciones.ValidarRango(cilindrada, "Rango valido (50-3000), se guardara como valor por defecto 0", "Cinlindrada", 50, 3000))
             {
                 this.nuevaMoto.Cilindrada = cilindrada;
             }
-
+            return retorno; 
         }
         #endregion
     }

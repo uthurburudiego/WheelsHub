@@ -17,6 +17,7 @@ namespace Interfaces
     public partial class FormInicio : Form
     {
         #region Atributos
+        Funciones funciones;
         FormLogIn logIn = new FormLogIn();
         List<Moto> listaMotos;
         List<Auto> listaAutos;
@@ -33,7 +34,8 @@ namespace Interfaces
         public FormInicio()
         {
             InitializeComponent();
-            datos = new AccesoDatos();
+            this.datos = new AccesoDatos();
+            this.funciones = new Funciones();    
             CambiarImagenDeFondo();
 
             IniciarCambioAutomatico();
@@ -47,9 +49,10 @@ namespace Interfaces
             todosToolStripMenuItem_Click(sender, e);
             dtgVehiculos.AutoSize = true;
             dtgVehiculos.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
-
+           
             this.BackgroundImage = Properties.Resources.fondo1;
 
+           
             switch (this.logIn.Usuario.Perfil)
             {
                 case "administrador":
@@ -79,19 +82,19 @@ namespace Interfaces
         private void autosToolStripMenuItem_Click(object sender, EventArgs e)
         {
 
-            Funciones.ObtenerLista(out listaAutos);
+            this.listaAutos = funciones.ObtenerLista(this.listaAutos);
             dtgVehiculos.DataSource = listaAutos;
         }
         private void camionesToolStripMenuItem_Click(object sender, EventArgs e)
         {
 
-            Funciones.ObtenerLista(out this.listaCamion);
+            this.listaCamion = funciones.ObtenerLista(this.listaCamion);
             dtgVehiculos.DataSource = listaCamion;
         }
         private void motosToolStripMenuItem_Click(object sender, EventArgs e)
         {
 
-            Funciones.ObtenerLista(out this.listaMotos);
+            this.listaMotos = funciones.ObtenerLista(this.listaMotos);
             dtgVehiculos.DataSource = listaMotos;
         }
         private void autoToolStripMenuItem_Click(object sender, EventArgs e)
@@ -192,12 +195,16 @@ namespace Interfaces
         {
             DateTime currentDate = DateTime.Now;
 
-            this.logIn.ShowDialog();
-            this.Show();
-
-            lblSaludo.Text = $"Bienvenido, {this.logIn.Usuario.Perfil}: {this.logIn.Usuario.Nombre}";
-            lblFecha.Text = $"{currentDate.ToString("dd/MM/yyyy")}";
-
+            try
+            {
+                this.logIn.ShowDialog();
+                this.Show();
+                lblSaludo.Text = $"Bienvenido, {this.logIn.Usuario.Perfil}: {this.logIn.Usuario.Nombre}";
+                lblFecha.Text = $"{currentDate.ToString("dd/MM/yyyy")}";
+            }
+            catch (Exception)
+            {
+            }
         }
         /// <summary>
         /// Realiza una búsqueda en la lista de vehículos basándose en el texto de búsqueda.
