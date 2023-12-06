@@ -98,7 +98,6 @@ namespace WheelsHub
 
         #region Metodos
        
-
         /// <summary>
         /// Calcula el costo de mantenimiento del vehículo.
         /// </summary>
@@ -179,6 +178,14 @@ namespace WheelsHub
         {
             return $"{TipoVehiculo} \nModelo: {Modelo} \nColor: {Color} " + $"\nCosto: US${Costo} ";
         }
+        /// <summary>
+        /// Determina si el objeto actual es igual a otro objeto.
+        /// </summary>
+        /// <param name="obj">Objeto a comparar con el objeto actual.</param>
+        /// <returns>
+        /// <c>true</c> si el objeto actual es igual al parámetro <paramref name="obj"/>; 
+        /// de lo contrario, <c>false</c>.
+        /// </returns>
         public override bool Equals(object? obj)
         {
             bool retorno = false;

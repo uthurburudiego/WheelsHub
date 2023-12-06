@@ -49,6 +49,7 @@
             registrosToolStripMenuItem = new ToolStripMenuItem();
             salirToolStripMenuItem1 = new ToolStripMenuItem();
             lblFecha = new Label();
+            chkOrdenar = new CheckBox();
             ((System.ComponentModel.ISupportInitialize)dtgVehiculos).BeginInit();
             msMenu.SuspendLayout();
             SuspendLayout();
@@ -161,21 +162,21 @@
             // autoToolStripMenuItem
             // 
             autoToolStripMenuItem.Name = "autoToolStripMenuItem";
-            autoToolStripMenuItem.Size = new Size(180, 26);
+            autoToolStripMenuItem.Size = new Size(139, 26);
             autoToolStripMenuItem.Text = "Auto";
             autoToolStripMenuItem.Click += autoToolStripMenuItem_Click;
             // 
             // motoToolStripMenuItem
             // 
             motoToolStripMenuItem.Name = "motoToolStripMenuItem";
-            motoToolStripMenuItem.Size = new Size(180, 26);
+            motoToolStripMenuItem.Size = new Size(139, 26);
             motoToolStripMenuItem.Text = "Moto";
             motoToolStripMenuItem.Click += motoToolStripMenuItem_Click;
             // 
             // camionToolStripMenuItem
             // 
             camionToolStripMenuItem.Name = "camionToolStripMenuItem";
-            camionToolStripMenuItem.Size = new Size(180, 26);
+            camionToolStripMenuItem.Size = new Size(139, 26);
             camionToolStripMenuItem.Text = "Camion";
             camionToolStripMenuItem.Click += camionToolStripMenuItem_Click;
             // 
@@ -250,6 +251,20 @@
             lblFecha.TabIndex = 12;
             lblFecha.Text = "Fecha: ";
             // 
+            // chkOrdenar
+            // 
+            chkOrdenar.AutoSize = true;
+            chkOrdenar.BackColor = Color.Transparent;
+            chkOrdenar.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
+            chkOrdenar.ForeColor = Color.White;
+            chkOrdenar.Location = new Point(199, 351);
+            chkOrdenar.Name = "chkOrdenar";
+            chkOrdenar.Size = new Size(208, 20);
+            chkOrdenar.TabIndex = 13;
+            chkOrdenar.Text = "Ordenar por menor precio:";
+            chkOrdenar.UseVisualStyleBackColor = false;
+            chkOrdenar.CheckedChanged += chkOrdenar_CheckedChanged;
+            // 
             // FormInicio
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -258,6 +273,7 @@
             BackgroundImage = Properties.Resources.fondo1;
             BackgroundImageLayout = ImageLayout.Stretch;
             ClientSize = new Size(1064, 681);
+            Controls.Add(chkOrdenar);
             Controls.Add(lblFecha);
             Controls.Add(lblSaludo);
             Controls.Add(label1);
@@ -311,5 +327,6 @@
         private ToolStripMenuItem menorToolStripMenuItem;
         private ToolStripMenuItem usuariosToolStripMenuItem;
         private ToolStripMenuItem registrosToolStripMenuItem;
+        private CheckBox chkOrdenar;
     }
 }

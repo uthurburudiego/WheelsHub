@@ -39,8 +39,35 @@
             // 
             // btnGuardar
             // 
-            btnGuardar.Click += btnGuardar_Click_1;
+            btnGuardar.Click += btnGuardar_Click;
             // 
+            // cboMarca
+            // 
+            cboMarca.DataSource = new eMarcasCamiones[]
+    {
+    eMarcasCamiones.Seleccionar,
+    eMarcasCamiones.Volvo,
+    eMarcasCamiones.Scania,
+    eMarcasCamiones.MercedesBenzTrucks,
+    eMarcasCamiones.MAN,
+    eMarcasCamiones.DAF,
+    eMarcasCamiones.RenaultTrucks,
+    eMarcasCamiones.Iveco,
+    eMarcasCamiones.Kenworth,
+    eMarcasCamiones.Peterbilt,
+    eMarcasCamiones.MackTrucks,
+    eMarcasCamiones.InternationalTrucks,
+    eMarcasCamiones.Freightliner,
+    eMarcasCamiones.WesternStar,
+    eMarcasCamiones.Isuzu,
+    eMarcasCamiones.Hino,
+    eMarcasCamiones.Fuso,
+    eMarcasCamiones.FordTrucks,
+    eMarcasCamiones.GMC,
+    eMarcasCamiones.ChevroletTrucks,
+    eMarcasCamiones.RamTrucks
+    };
+             // 
             // cboColor
             // 
             cboColor.DataSource = new eColores[]

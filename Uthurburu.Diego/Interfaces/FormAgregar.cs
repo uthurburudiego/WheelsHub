@@ -13,13 +13,15 @@ using WheelsHub.Logica;
 
 namespace Interfaces
 {
-    public delegate void DelAdevetencia(string titulo, string mensaje);
     public partial class FormAgregar : Form
     {
         #region Atributos
         protected AccesoDatos datos;
         Funciones funciones;
-        DelAdevetencia advertencia;
+        DelegadoAdevetencia advertencia;
+        DelegadoEsNumero funcionEsNumero;
+        DelegadoValidarKeyPress funcionValidarKeyPress;
+        protected bool esModificacion;
         #endregion
 
         #region Constructor
@@ -28,10 +30,13 @@ namespace Interfaces
             InitializeComponent();
             this.datos = new AccesoDatos();
             this.funciones = new Funciones();
-            this.advertencia = new DelAdevetencia(MostrarAdevetencia);
+            this.advertencia = new DelegadoAdevetencia(MostrarAdevetencia);
+            this.funcionEsNumero = new DelegadoEsNumero(funciones.EsNumero);
+            this.funcionValidarKeyPress = new DelegadoValidarKeyPress(InputNumeros);
+            this.esModificacion = false;
+            
         }
         #endregion
-
 
         #region Botones
         private void btnCancelar_Click(object sender, EventArgs e)
@@ -44,27 +49,27 @@ namespace Interfaces
         }
         private void txtCosto_KeyPress(object sender, KeyPressEventArgs e)
         {
-            InputNumeros(e, txtCosto);
+            funcionValidarKeyPress(e, txtCosto);
         }
         private void txtCilindrada_KeyPress(object sender, KeyPressEventArgs e)
         {
-            InputNumeros(e, txtCilindrada);
+            funcionValidarKeyPress(e, txtCilindrada);
         }
         private void txtTara_KeyPress(object sender, KeyPressEventArgs e)
         {
-            InputNumeros(e, txtTara);
+            funcionValidarKeyPress(e, txtTara);
         }
         private void txtCantidadEjes_KeyPress(object sender, KeyPressEventArgs e)
         {
-            InputNumeros(e, txtCantidadEjes);
+            funcionValidarKeyPress(e, txtCantidadEjes);
         }
         private void txtCantidadPuertas_KeyPress(object sender, KeyPressEventArgs e)
         {
-            InputNumeros(e, txtCantidadPuertas);
+            funcionValidarKeyPress(e, txtCantidadPuertas);
         }
         private void txtCantidadPasajeros_KeyPress(object sender, KeyPressEventArgs e)
         {
-            InputNumeros(e, txtCantidadPasajeros);
+            funcionValidarKeyPress(e, txtCantidadPasajeros);
         }
 
         #endregion
@@ -82,8 +87,8 @@ namespace Interfaces
         /// </remarks>
         protected void InputNumeros(KeyPressEventArgs e, TextBox box)
         {
-            if (!Funciones.EsNumero(e))
-            {
+            if (!funcionEsNumero(e))
+            { 
                 this.epErrores.SetError(box, "Solo se admiten numeros");
             }
             else
@@ -94,37 +99,32 @@ namespace Interfaces
         /// <summary>
         /// Recupera la información del formulario y la asigna a la instancia de la clase Auto.
         /// </summary>
-        protected virtual bool RecuperarInformacion(Vehiculo nuevoVehiculo)
+        protected virtual bool RecuperarInformacion(Vehiculo nuevoVehiculo, bool esModificacion)
         {
             bool retorno = false;
             double costo = 0;
-            if (funciones.TextVacio(txtChasis) || !this.datos.VehiculoExiste(txtChasis.Text) )
+            if (funciones.TextVacio(txtChasis))
             {
-                if (picImagen.Image != null)
+                if (!this.datos.VehiculoExiste(txtChasis.Text) || esModificacion)
                 {
-
-                    nuevoVehiculo.Modelo = txtModelo.Text;
-                    nuevoVehiculo.NumeroChasis = txtChasis.Text;
-                    nuevoVehiculo.Color = (eColores)cboColor.SelectedItem;
-                    retorno = true;
-
-
-
-                    if (funciones.validarNumero(txtCosto.Text, out costo) &&
-                        Funciones.ValidarRango(costo, "El Costo no puede ser menor que 0", "Precio", 0, 9999999))
+                    if (picImagen.Image != null)
                     {
-                        nuevoVehiculo.Costo = costo;
+
+                        nuevoVehiculo.Modelo = txtModelo.Text;
+                        nuevoVehiculo.NumeroChasis = txtChasis.Text;
+                        nuevoVehiculo.Color = (eColores)cboColor.SelectedItem;
+                        retorno = true;
+                        if (funciones.validarNumero(txtCosto.Text, out costo) &&
+                            Funciones.ValidarRango(costo, "El Costo no puede ser menor que 0", "Precio", 0, 9999999))
+                        {
+                            nuevoVehiculo.Costo = costo;
+                        }
                     }
+                    else { this.advertencia("Advertencia", "Debe agregar una imagen "); }
                 }
-                else
-                {
-                    this.advertencia("Advertencia", "Debe agregar una imagen ");
-                }
+                else { this.advertencia("Advertencia", "N° de chasis ya existe "); }
             }
-            else
-            {
-                this.advertencia("Advertencia","El campo N° de chasis es obligatorio ");
-            }
+            else{this.advertencia("Advertencia","El campo N° de chasis es obligatorio ");}
 
             
             return retorno;
@@ -172,6 +172,11 @@ namespace Interfaces
                this.advertencia("Cargar Imagen", $"{ex.Message}");
             }
         }
+        /// <summary>
+        /// Abre un cuadro de diálogo para seleccionar y cargar una imagen en el PictureBox del formulario.
+        /// Además, asigna la representación de bytes de la imagen al atributo 'Foto' del vehículo.
+        /// </summary>
+        /// <param name="vehiculo">Objeto de tipo Vehiculo al que se le asignará la imagen.</param>
         protected void GuardarImagen(Vehiculo vehiculo)
         {
             OpenFileDialog ofd = new OpenFileDialog();
@@ -184,6 +189,11 @@ namespace Interfaces
             }
             
         }
+        /// <summary>
+        /// Muestra un cuadro de diálogo de advertencia con el título y el mensaje especificados.
+        /// </summary>
+        /// <param name="titulo">Título del cuadro de diálogo.</param>
+        /// <param name="mensaje">Mensaje de advertencia.</param>
         protected void MostrarAdevetencia(string titulo, string mensaje)
         {
             FormMessageBox messageBox = new FormMessageBox(titulo, mensaje);

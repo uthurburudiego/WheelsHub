@@ -34,7 +34,7 @@ namespace Interfaces
         #region Botones
         protected virtual void btnGuardar_Click(object sender, EventArgs e)
         {
-            if (RecuperarInformacion(this.nuevoAuto))
+            if (RecuperarInformacion(this.nuevoAuto, this.esModificacion))
             {
                 datos.AltaModificacionVehiculo(this.nuevoAuto, "INSERT");
                 this.Close();
@@ -70,10 +70,10 @@ namespace Interfaces
         /// </remarks>
         /// <seealso cref="funciones.validarNumero"/>
         /// <seealso cref="Funciones.ValidarRango"/>
-        protected override bool RecuperarInformacion(Vehiculo vehiculo)
+        protected override bool RecuperarInformacion(Vehiculo vehiculo, bool esModificacion)
         {
             bool retorno = false;
-            if (base.RecuperarInformacion(vehiculo))
+            if (base.RecuperarInformacion(vehiculo, esModificacion))
             {
                 int cantidadPasajeros = 0;
                 int cantidadPuertas = 0;

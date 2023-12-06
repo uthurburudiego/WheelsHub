@@ -21,15 +21,23 @@ namespace Interfaces
             InitializeComponent();
             this.nuevoCamion = camion;
 
+
         }
         #endregion
 
         #region Botones
-        private void btnGuardar_Click_1(object sender, EventArgs e)
+        private void FormModificarCamion_Load(object sender, EventArgs e)
         {
+            txtChasis.Enabled = false;
+
+            MostrarInformacion(this.nuevoCamion);
+        }
+        protected override void btnGuardar_Click(object sender, EventArgs e)
+        {
+            this.esModificacion = true;
             try
             {
-                RecuperarInformacion(this.nuevoCamion);
+                this.RecuperarInformacion(this.nuevoCamion, this.esModificacion);
                 datos.AltaModificacionVehiculo(this.nuevoCamion, "UPDATE");
                 this.Close();
             }
@@ -38,12 +46,6 @@ namespace Interfaces
 
                 MessageBox.Show($"Debe completar los campos.", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning); ;
             }
-        }
-        private void FormModificarCamion_Load(object sender, EventArgs e)
-        {
-            txtChasis.Enabled = false;
-
-            MostrarInformacion(this.nuevoCamion);
         }
         #endregion
 
@@ -60,5 +62,6 @@ namespace Interfaces
             cboMarca.SelectedItem = this.nuevoCamion.Marca;
         }
         #endregion
+
     }
 }

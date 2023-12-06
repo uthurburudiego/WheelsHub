@@ -47,7 +47,7 @@ namespace Interfaces
         }
         protected virtual void btnGuardar_Click(object sender, EventArgs e)
         {
-            if (RecuperarInformacion(this.nuevoCamion))
+            if (RecuperarInformacion(this.nuevoCamion, this.esModificacion))
             {
                 datos.AltaModificacionVehiculo(this.nuevoCamion, "INSERT");
                 this.Close();
@@ -72,26 +72,28 @@ namespace Interfaces
         /// </remarks>
         /// <seealso cref="Funciones.validarNumero"/>
         /// <seealso cref="Funciones.ValidarRango"/>
-        protected override bool RecuperarInformacion(Vehiculo vehiculo)
+        protected override bool RecuperarInformacion(Vehiculo vehiculo, bool esModificacion)
         {
-            bool retorno = false;   
-            base.RecuperarInformacion(vehiculo);
-
-            int tara = 0;
-            int cantidadEjes = 0;
-
-            this.nuevoCamion.Marca = (eMarcasCamiones)cboMarca.SelectedItem;
-            this.nuevoCamion.TipoVehiculo = eTipoVehiculo.Camion;
-
-            if (funciones.validarNumero(txtTara.Text, out tara) &&
-                Funciones.ValidarRango(tara, "Rango valido (mayor o igual a 0), se guardara como valor por defecto 0", "Tara", 0, 9999999999))
+            bool retorno = false;
+            if (base.RecuperarInformacion(vehiculo, esModificacion))
             {
-                this.nuevoCamion.Tara = tara;
-            }
-            if (funciones.validarNumero(txtCantidadEjes.Text, out cantidadEjes) &&
-                Funciones.ValidarRango(cantidadEjes, "Rango valido (2-10), se guardara como valor por defecto 0", "Cantidad de Ejes", 2, 10))
-            {
-                this.nuevoCamion.CantidadEjes = cantidadEjes;
+
+                int tara = 0;
+                int cantidadEjes = 0;
+
+                this.nuevoCamion.Marca = (eMarcasCamiones)cboMarca.SelectedItem;
+                this.nuevoCamion.TipoVehiculo = eTipoVehiculo.Camion;
+                retorno = true;
+                if (funciones.validarNumero(txtTara.Text, out tara) &&
+                    Funciones.ValidarRango(tara, "Rango valido (mayor o igual a 0), se guardara como valor por defecto 0", "Tara", 0, 9999999999))
+                {
+                    this.nuevoCamion.Tara = tara;
+                }
+                if (funciones.validarNumero(txtCantidadEjes.Text, out cantidadEjes) &&
+                    Funciones.ValidarRango(cantidadEjes, "Rango valido (2-10), se guardara como valor por defecto 0", "Cantidad de Ejes", 2, 10))
+                {
+                    this.nuevoCamion.CantidadEjes = cantidadEjes;
+                }
             }
             return retorno;
         }

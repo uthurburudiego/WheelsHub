@@ -99,7 +99,7 @@ namespace WheelsHub.Logica
         /// <returns>Una cadena que representa el objeto Camion.</returns>
         public override string ToString()
         {
-            return base.ToString() + $"\nMarca: {Marca} \nTara: {Modelo} \nCantidad Ejes: {CantidadEjes}";
+            return base.ToString() + $"\nMarca: {Marca} \nTara: {Tara} \nCantidad Ejes: {CantidadEjes}";
         }
         /// <summary>
         /// Compara el objeto actual con otro objeto para determinar si son iguales.

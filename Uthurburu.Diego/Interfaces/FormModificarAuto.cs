@@ -25,7 +25,8 @@ namespace Interfaces
         #region Botones
         protected override void btnGuardar_Click(object sender, EventArgs e)
         {
-                RecuperarInformacion( this.nuevoAuto);
+            this.esModificacion = true;
+                RecuperarInformacion( this.nuevoAuto, this.esModificacion);
                 datos.AltaModificacionVehiculo(this.nuevoAuto, "UPDATE");
                 this.Close();        
         }

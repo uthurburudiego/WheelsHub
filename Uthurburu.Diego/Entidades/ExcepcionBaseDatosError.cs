@@ -13,7 +13,6 @@ namespace Entidades
         {
             this.objetoError = objetoError;
         }  
-
         public object ObjetoError{ get => this.objetoError; }
     }
 }

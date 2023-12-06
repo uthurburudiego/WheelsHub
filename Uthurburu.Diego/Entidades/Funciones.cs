@@ -81,7 +81,7 @@ namespace WheelsHub.Logica
         /// <returns>
         ///   <c>true</c> si la tecla presionada es un número o un carácter de control; de lo contrario, <c>false</c>.
         /// </returns>
-        public static bool EsNumero(KeyPressEventArgs e)
+        public bool EsNumero(KeyPressEventArgs e)
         {
             bool retorno = false;
             if (Char.IsNumber(e.KeyChar))
@@ -182,7 +182,15 @@ namespace WheelsHub.Logica
 
             return listaVehiculos;
         }
-        #endregion
+        /// <summary>
+        /// Limpia el contenido de un control TextBox estableciendo su texto a una cadena vacía.
+        /// </summary>
+        /// <param name="text">Control TextBox cuyo texto se va a limpiar.</param>
+        public static void LimpiarTexto(TextBox text)
+        {
+            text.Text = string.Empty;
+        }
+            #endregion
 
-    }
+        }
 }

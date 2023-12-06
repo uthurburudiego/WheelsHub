@@ -33,14 +33,11 @@ namespace Interfaces
         #region Botones
         protected virtual void btnGuardar_Click(object sender, EventArgs e)
         {
-
-            if (RecuperarInformacion(this.nuevaMoto))
+            if (RecuperarInformacion(this.nuevaMoto, this.esModificacion))
             {
-                   
                 datos.AltaModificacionVehiculo(this.nuevaMoto, "INSERT");
                 this.Close();
             }
-               
          }
         private void btnExaminar_Click_1(object sender, EventArgs e)
         {
@@ -74,20 +71,22 @@ namespace Interfaces
         /// </remarks>
         /// <seealso cref="Funciones.validarNumero"/>
         /// <seealso cref="Funciones.ValidarRango"/>
-        protected override bool RecuperarInformacion( Vehiculo vehiculo)
+        protected override bool RecuperarInformacion( Vehiculo vehiculo, bool esModificacion)
         {
             bool retorno = false;
-            base.RecuperarInformacion(vehiculo);
-            int cilindrada = 0;
-          
-            this.nuevaMoto.Marca = (eMarcasMotos)cboMarca.SelectedItem;
-            this.nuevaMoto.FrenosABS = (eTipoDeFrenos)cboABS.SelectedItem;
-            this.nuevaMoto.TipoVehiculo = eTipoVehiculo.Moto;
-
-            if (funciones.validarNumero(txtCilindrada.Text, out cilindrada) && 
-                Funciones.ValidarRango(cilindrada, "Rango valido (50-3000), se guardara como valor por defecto 0", "Cinlindrada", 50, 3000))
+            if (base.RecuperarInformacion(vehiculo, esModificacion))
             {
-                this.nuevaMoto.Cilindrada = cilindrada;
+                int cilindrada = 0;
+
+                this.nuevaMoto.Marca = (eMarcasMotos)cboMarca.SelectedItem;
+                this.nuevaMoto.FrenosABS = (eTipoDeFrenos)cboABS.SelectedItem;
+                this.nuevaMoto.TipoVehiculo = eTipoVehiculo.Moto;
+                retorno = true;
+                if (funciones.validarNumero(txtCilindrada.Text, out cilindrada) &&
+                    Funciones.ValidarRango(cilindrada, "Rango valido (50-3000), se guardara como valor por defecto 0", "Cinlindrada", 50, 3000))
+                {
+                    this.nuevaMoto.Cilindrada = cilindrada;
+                }
             }
             return retorno; 
         }

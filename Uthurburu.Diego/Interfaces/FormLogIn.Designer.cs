@@ -34,12 +34,13 @@
             btnCancelar = new Button();
             label1 = new Label();
             chkVer = new CheckBox();
+            lblHora = new Label();
             SuspendLayout();
             // 
             // txtUsuario
             // 
             txtUsuario.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point);
-            txtUsuario.Location = new Point(304, 182);
+            txtUsuario.Location = new Point(166, 232);
             txtUsuario.Name = "txtUsuario";
             txtUsuario.PlaceholderText = "Ingrese usuario";
             txtUsuario.Size = new Size(182, 33);
@@ -49,7 +50,7 @@
             // txtContraseña
             // 
             txtContraseña.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point);
-            txtContraseña.Location = new Point(304, 251);
+            txtContraseña.Location = new Point(166, 301);
             txtContraseña.Name = "txtContraseña";
             txtContraseña.PlaceholderText = "Ingrese contraseña";
             txtContraseña.Size = new Size(182, 33);
@@ -61,7 +62,7 @@
             // 
             btnAceptar.FlatStyle = FlatStyle.Flat;
             btnAceptar.ForeColor = Color.Snow;
-            btnAceptar.Location = new Point(304, 313);
+            btnAceptar.Location = new Point(166, 363);
             btnAceptar.Name = "btnAceptar";
             btnAceptar.Size = new Size(81, 27);
             btnAceptar.TabIndex = 0;
@@ -73,7 +74,7 @@
             // 
             btnCancelar.FlatStyle = FlatStyle.Flat;
             btnCancelar.ForeColor = SystemColors.ButtonFace;
-            btnCancelar.Location = new Point(405, 313);
+            btnCancelar.Location = new Point(267, 363);
             btnCancelar.Name = "btnCancelar";
             btnCancelar.Size = new Size(81, 27);
             btnCancelar.TabIndex = 1;
@@ -86,7 +87,7 @@
             label1.AutoSize = true;
             label1.Font = new Font("Segoe UI", 44.25F, FontStyle.Regular, GraphicsUnit.Point);
             label1.ForeColor = Color.Snow;
-            label1.Location = new Point(259, 58);
+            label1.Location = new Point(91, 108);
             label1.Name = "label1";
             label1.Size = new Size(332, 78);
             label1.TabIndex = 0;
@@ -96,7 +97,7 @@
             // 
             chkVer.AutoSize = true;
             chkVer.ForeColor = SystemColors.ButtonHighlight;
-            chkVer.Location = new Point(492, 261);
+            chkVer.Location = new Point(354, 311);
             chkVer.Name = "chkVer";
             chkVer.Size = new Size(42, 19);
             chkVer.TabIndex = 4;
@@ -104,13 +105,25 @@
             chkVer.UseVisualStyleBackColor = true;
             chkVer.CheckedChanged += chkVer_CheckedChanged;
             // 
+            // lblHora
+            // 
+            lblHora.AutoSize = true;
+            lblHora.Font = new Font("Microsoft Sans Serif", 14.25F, FontStyle.Bold, GraphicsUnit.Point);
+            lblHora.ForeColor = Color.White;
+            lblHora.Location = new Point(220, 33);
+            lblHora.Name = "lblHora";
+            lblHora.Size = new Size(55, 24);
+            lblHora.TabIndex = 5;
+            lblHora.Text = "Hora";
+            // 
             // FormLogIn
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.ActiveCaptionText;
-            ClientSize = new Size(800, 450);
+            ClientSize = new Size(505, 470);
             ControlBox = false;
+            Controls.Add(lblHora);
             Controls.Add(chkVer);
             Controls.Add(label1);
             Controls.Add(btnCancelar);
@@ -133,5 +146,6 @@
         private Button btnCancelar;
         private Label label1;
         private CheckBox chkVer;
+        private Label lblHora;
     }
 }

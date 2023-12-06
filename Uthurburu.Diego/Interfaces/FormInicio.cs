@@ -35,7 +35,7 @@ namespace Interfaces
         {
             InitializeComponent();
             this.datos = new AccesoDatos();
-            this.funciones = new Funciones();    
+            this.funciones = new Funciones();
             CambiarImagenDeFondo();
 
             IniciarCambioAutomatico();
@@ -49,10 +49,11 @@ namespace Interfaces
             todosToolStripMenuItem_Click(sender, e);
             dtgVehiculos.AutoSize = true;
             dtgVehiculos.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
-           
+            dtgVehiculos.Columns[5].Visible = false;
+
             this.BackgroundImage = Properties.Resources.fondo1;
 
-           
+
             switch (this.logIn.Usuario.Perfil)
             {
                 case "administrador":
@@ -185,6 +186,21 @@ namespace Interfaces
             FormMostrar mostrar = new FormMostrar(listaVehiculos.Find(v => v.NumeroChasis == this.numeroChasis));
             mostrar.ShowDialog();
         }
+        private void chkOrdenar_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chkOrdenar.Checked)
+            {
+                chkOrdenar.Text = "Menor Precio";
+                this.listaVehiculos = OrdenarLista(this.listaVehiculos, true);
+                dtgVehiculos.DataSource = this.listaVehiculos;
+            }
+            else 
+            {
+                chkOrdenar.Text = "Mayor Precio";
+                this.listaVehiculos = OrdenarLista(this.listaVehiculos, false);
+                dtgVehiculos.DataSource = this.listaVehiculos;
+            }
+        }
         #endregion
 
         #region Metodos
@@ -194,7 +210,6 @@ namespace Interfaces
         private void IniciarSesion()
         {
             DateTime currentDate = DateTime.Now;
-
             try
             {
                 this.logIn.ShowDialog();
@@ -204,6 +219,7 @@ namespace Interfaces
             }
             catch (Exception)
             {
+
             }
         }
         /// <summary>
@@ -248,6 +264,25 @@ namespace Interfaces
                 CambiarImagenDeFondo();
             }
         }
+
+        private List<Vehiculo> OrdenarLista(List<Vehiculo> listaVehiculos, bool orden)
+        {
+            List<Vehiculo> listaOrdenada = new List<Vehiculo>();
+
+            if (orden)
+            {
+                listaOrdenada = listaVehiculos.OrderBy(v => v.Costo).ThenBy(v => v.Modelo).ToList();
+
+            }
+            else
+            {
+                listaOrdenada = listaVehiculos.OrderByDescending(v => v.Costo).ThenByDescending(v => v.Modelo).ToList();
+            }
+
+            return listaOrdenada;
+        }
         #endregion
+
+
     }
 }
